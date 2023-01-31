@@ -1,0 +1,106 @@
+{% load static %}
+<header class="header header_small">
+    <div class="container container-header">
+        <div class="logo header__logo">
+            <a href="{% url 'home' %}" class="logo__link">
+                <img
+                    src="{% static 'img/logo_qualitas_leather.svg' %}"
+                    alt="Логотип qualitas leather"
+                    class="logo__img"
+                />
+            </a>
+        </div>
+        <div class="burger">
+            <span class="burger__span"></span>
+        </div>
+        <nav class="nav nav__display-none">
+            <div class="close-button"></div>
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="{% url 'home' %}" class="nav__item-link">Главная</a>
+                    <span class="title-underline nav-title-underline"></span>
+                </li>
+                <li class="nav__item">
+                    <div class="nav-link__container">
+                        <a href="#" class="nav__item-link">Каталог</a>
+                        <div class="triangle"></div>
+                    </div>
+                    <span class="title-underline nav-title-underline"></span>
+                    <ul class="sub-nav__list sub-nav__list-none">
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link">Ремни</a>
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link"
+                                >Ремешки для часов</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link"
+                                >Картхолдеры</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link"
+                                >Обложки для паспорта</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link"
+                                >Чехлы для ручек</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link"
+                                >Зажимы для денег</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link"
+                                >Аксессуары</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'category' %}" class="sub-nav__item-link">Другое</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'blog' %}" class="nav__item-link">Блог</a>
+                    <span class="title-underline nav-title-underline"></span>
+                </li>
+                <li class="nav__item">
+                    <div class="nav-link__container">
+                        <a href="#" class="nav__item-link">Информация</a>
+                        <div class="triangle"></div>
+                    </div>
+                    <span class="title-underline nav-title-underline"></span>
+                    <ul class="sub-nav__list sub-nav__list-none">
+                        <li class="sub-nav__item">
+                            <a href="{% url 'delivery' %}" class="sub-nav__item-link"
+                                >Способы доставки</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'payment' %}" class="sub-nav__item-link"
+                                >Способы оплаты</a
+                            >
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'aboutus' %}" class="sub-nav__item-link">О нас</a>
+                        </li>
+                        <li class="sub-nav__item">
+                            <a href="{% url 'help' %}" class="sub-nav__item-link"
+                                >Часто задаваемые вопросы</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'contacts' %}" class="nav__item-link">Контакты</a>
+                    <span class="title-underline nav-title-underline"></span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

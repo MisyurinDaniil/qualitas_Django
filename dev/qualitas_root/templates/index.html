@@ -1,0 +1,288 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %}
+
+{% block mainContent %}
+    <style>
+        .h1_yellow {
+            color: #d78e36;
+        }
+        .header_background {
+            background-image: url({% static 'img/manufacturing_process_320x568.jpg' %});
+        }
+        @media (min-width: 576px) {
+            .header_background {
+                background-image: url({% static 'img/manufacturing_process_576x568.jpg' %});
+            }
+        }
+        @media (min-width: 768px) {
+            .header_background {
+                background-image: url({% static 'img/manufacturing_process_768x550.jpg' %});
+            }
+        }
+        @media (min-width: 1200px) {
+            .header_background {
+                background: url({% static 'img/header_shadow.png' %}) 0 0 repeat-x,
+                    url({% static 'img/manufacturing_process_1200x760.jpg' %}) center/cover no-repeat;
+            }
+        }
+    </style>
+    {% include 'includes/header_big.html' %}
+    <section class="main">
+        <div class="container">
+            <div class="catalog">
+                <div class="h2">
+                    <h2 class="h2__title">Каталог</h2>
+                    <span class="title-underline"></span>
+                </div>
+                <ul class="catalog__list">
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img src="{% static 'img/belts.jpg' %}" alt="Ремни" class="catalog-item__img" />
+                            <p class="catalog-item__p">Ремни</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img
+                                src="{% static 'img/watch_strap.jpg' %}"
+                                alt="Ремешки для часов"
+                                class="catalog-item__img"
+                            />
+                            <p class="catalog-item__p">Ремешки для часов</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img
+                                src="{% static 'img/cardholders.jpg' %}"
+                                alt="Картхолдеры"
+                                class="catalog-item__img"
+                            />
+                            <p class="catalog-item__p">Картхолдеры</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img src="{% static 'img/wallets.jpg' %}" alt="Кошельки" class="catalog-item__img" />
+                            <p class="catalog-item__p">Кошельки</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img
+                                src="{% static 'img/document_covers.jpg' %}"
+                                alt="Чехлы для ручек"
+                                class="catalog-item__img"
+                            />
+                            <p class="catalog-item__p">Обложки для паспорта</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img
+                                src="{% static 'img/covers_for_pens.jpg' %}"
+                                alt="Чехлы для ручек"
+                                class="catalog-item__img"
+                            />
+                            <p class="catalog-item__p">Чехлы для ручек</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img
+                                src="{% static 'img/money_clips.jpg' %}"
+                                alt="Зажимы для денег"
+                                class="catalog-item__img"
+                            />
+                            <p class="catalog-item__p">Зажимы для денег</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img src="{% static 'img/bags.jpg' %}" alt="Сумки" class="catalog-item__img" />
+                            <p class="catalog-item__p">Сумки</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img src="{% static 'img/accessories.jpg' %}" alt="Аксессуары" class="catalog-item__img" />
+                            <p class="catalog-item__p">Аксессуары</p>
+                        </a>
+                    </li>
+                    <li class="catalog-item">
+                        <a href="{% url 'category' %}" class="catalog-item__link">
+                            <img src="{% static 'img/other.jpg' %}" alt="Другое" class="catalog-item__img" />
+                            <p class="catalog-item__p">Другое</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="philosophy">
+                <div class="h2">
+                    <h2 class="h2__title">Наша философия</h2>
+                    <span class="title-underline"></span>
+                </div>
+                <div class="philosophy__list">
+                    <div class="philosophy__item">
+                        <img src="{% static 'img/tradition.jpg' %}" alt="" class="philosophy__item-img" />
+                        <div class="philosophy__item-text-wrap">
+                            <h3 class="philosophy__item-title">Стремление к совершенству</h3>
+                            <p class="philosophy__item-p">
+                                Мы постоянно работаем над улучшением качества наших изделий.
+                                Разрабатываем новый дизайн, используем современные и качественные
+                                материалы
+                            </p>
+                        </div>
+                    </div>
+                    <div class="philosophy__item">
+                        <img src="{% static 'img/attention_to_detail.jpg' %}" alt="" class="philosophy__item-img" />
+                        <div class="philosophy__item-text-wrap">
+                            <h3 class="philosophy__item-title">Профессионализм</h3>
+                            <p class="philosophy__item-p">
+                                Отточенное годами мастерство ручной работы и любовь к процессу от
+                                первого до последнего стежка - всё это позволяет нам создавать
+                                утонченные, элегантные и обладающие характером аксессуары из кожи.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="philosophy__item">
+                        <img src="{% static 'img/professionalism.jpg' %}" alt="" class="philosophy__item-img" />
+                        <div class="philosophy__item-text-wrap">
+                            <h3 class="philosophy__item-title">Ценовая политика</h3>
+                            <p class="philosophy__item-p">
+                                Мы убрали все накрутки за бренд,узнаваемость и сделали цены на наши
+                                изделия более приятными.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="services">
+                <div class="h2">
+                    <h2 class="h2__title">Дополнительные услуги</h2>
+                    <span class="title-underline"></span>
+                </div>
+                <div class="services__list">
+                    <div class="services__item">
+                        <picture>
+                            <source
+                                media="(max-width: 576px)"
+                                srcset="{% static 'img/choice_leather_and_accessories_1200px.jpg' %}"
+                            />
+                            <source
+                                media="(min-width: 1200px)"
+                                srcset="{% static 'img/choice_leather_and_accessories_1200px.jpg' %}"
+                            />
+                            <source
+                                media="(min-width: 768px)"
+                                srcset="{% static 'img/choice_leather_and_accessories_1200px.jpg' %}"
+                            />
+                            <img
+                                src="{% static 'img/choice_leather_and_accessories.jpg' %}"
+                                alt="Выбор кожи и фурнитуры"
+                                class="services__item-img"
+                            />
+                        </picture>
+
+                        <p class="services__item-p">Выбор кожи и фурнитуры</p>
+                    </div>
+                    <div class="services__item">
+                        <picture>
+                            <source
+                                media="(max-width: 576px)"
+                                srcset="{% static 'img/drawing_picture_1200px.jpg' %}"
+                            />
+                            <source
+                                media="(min-width: 1200px)"
+                                srcset="{% static 'img/drawing_picture_1200px.jpg' %}"
+                            />
+                            <source
+                                media="(min-width: 768px)"
+                                srcset="{% static 'img/drawing_picture_1200px.jpg' %}"
+                            />
+                            <img
+                                src="{% static 'img/drawing_picture.jpg' %}"
+                                alt="Нанесение рисунка"
+                                class="services__item-img"
+                            />
+                        </picture>
+                        <p class="services__item-p">Нанесение рисунка</p>
+                    </div>
+                    <div class="services__item">
+                        <picture>
+                            <source
+                                media="(max-width: 576px)"
+                                srcset="{% static 'img/personalization_1200px.jpg' %}"
+                            />
+                            <source
+                                media="(min-width: 1200px)"
+                                srcset="{% static 'img/personalization_1200px.jpg' %}"
+                            />
+                            <source
+                                media="(min-width: 768px)"
+                                srcset="{% static 'img/personalization_1200px.jpg' %}"
+                            />
+                            <img
+                                src="{% static 'img/personalization.jpg' %}"
+                                alt="Персонализация"
+                                class="services__item-img"
+                            />
+                        </picture>
+
+                        <p class="services__item-p">Персонализация</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advantages">
+                <div class="h2">
+                    <h2 class="h2__title">Наши преимущества</h2>
+                    <span class="title-underline"></span>
+                </div>
+                <ul class="advantages__list">
+                    <li class="advantages__item">
+                        <img src="{% static 'img/handmade.svg' %}" alt="Ручная работа" class="advantages__item-img" />
+                        <p class="advantages__item-p">Ручная работа</p>
+                    </li>
+                    <li class="advantages__item">
+                        <img
+                            src="{% static 'img/genuine_leather.svg' %}"
+                            alt="Только натуральная кожа"
+                            class="advantages__item-img"
+                        />
+                        <p class="advantages__item-p">Только натуральная кожа</p>
+                    </li>
+                    <!-- <li class="advantages__item">
+                                <img
+                                    src="img/individual_approach.svg"
+                                    alt="Индивидуальный подход"
+                                    class="advantages__item-img"
+                                />
+                                <p class="advantages__item-p">
+                                    Индивидуальный подход
+                                </p>
+                            </li> -->
+                    <li class="advantages__item">
+                        <img
+                            src="{% static 'img/great_experience.svg' %}"
+                            alt="Большой опыт работы с кожей"
+                            class="advantages__item-img"
+                        />
+                        <p class="advantages__item-p">Большой опыт работы с кожей</p>
+                    </li>
+                    <li class="advantages__item">
+                        <img
+                            src="{% static 'img/delivery.svg' %}"
+                            alt="Доставка в любую точку"
+                            class="advantages__item-img"
+                        />
+                        <p class="advantages__item-p">Доставка в любую точку</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}

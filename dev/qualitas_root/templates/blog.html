@@ -1,0 +1,225 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %}
+
+{% block mainContent %}
+    <style>
+        .header_background {
+            background-image: url({% static 'img/blog_320x568_2.jpg' %});
+        }
+        @media (min-width: 576px) {
+            .header_background  {
+                background-image: url({% static 'img/blog_576x568_2.jpg' %});
+            }
+        }
+        @media (min-width: 768px) {
+            .header_background {
+                background-image: url({% static 'img/blog_768x550_2.jpg' %});
+            }
+
+        }
+        @media (min-width: 1200px) {
+            .header_background{
+                background: url({% static 'img/img/header_shadow.png' %}) 0 0 repeat-x,
+                    url({% static 'img/blog_1200x760_2.jpg' %}') center/cover no-repeat;
+            }
+        }
+    </style>
+    {% include 'includes/header_big.html' %}
+    <section class="main">
+        <div class="container">
+            <div class="blog-items">
+                <div class="h2">
+                    <h2 class="h2__title">Статьи о кожаных изделиях</h2>
+                    <span class="title-underline"></span>
+                </div>
+                <div class="blog-wraper">
+                    <ul class="blog-list">
+                        <li class="blog-item">
+                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
+                                <div class="blog-item__img-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-item (1).jpg' %}"
+                                        alt="Выбор кожи и фуринтуры"
+                                        class="blog-item__img"
+                                    />
+                                </div>
+                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
+                                <p class="product-item__aticle">
+                                    Имеется спорная точка зрения, гласящая примерно следующее:
+                                    тщательные исследования конкурентов освещают чрезвычайно
+                                    интересные особенности картины в целом...
+                                </p>
+                                <div class="blog-item__author-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-author.png' %}"
+                                        alt=""
+                                        class="blog-item__author-img"
+                                    />
+                                    <div class="blog-item__author-txt-wrap">
+                                        <p class="blog-item__author-name">
+                                            Скрипников Владислав
+                                        </p>
+                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="blog-item">
+                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
+                                <div class="blog-item__img-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-item (2).jpg' %}"
+                                        alt="Выбор кожи и фуринтуры"
+                                        class="blog-item__img"
+                                    />
+                                </div>
+                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
+                                <p class="product-item__aticle">
+                                    Имеется спорная точка зрения, гласящая примерно следующее:
+                                    тщательные исследования конкурентов освещают чрезвычайно
+                                    интересные особенности картины в целом...
+                                </p>
+                                <div class="blog-item__author-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-author.png' %}"
+                                        alt=""
+                                        class="blog-item__author-img"
+                                    />
+                                    <div class="blog-item__author-txt-wrap">
+                                        <p class="blog-item__author-name">
+                                            Скрипников Владислав
+                                        </p>
+                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="blog-item">
+                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
+                                <div class="blog-item__img-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-item (3).jpg' %}"
+                                        alt="Выбор кожи и фуринтуры"
+                                        class="blog-item__img"
+                                    />
+                                </div>
+                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
+                                <p class="product-item__aticle">
+                                    Имеется спорная точка зрения, гласящая примерно следующее:
+                                    тщательные исследования конкурентов освещают чрезвычайно
+                                    интересные особенности картины в целом...
+                                </p>
+                                <div class="blog-item__author-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-author.png' %}"
+                                        alt=""
+                                        class="blog-item__author-img"
+                                    />
+                                    <div class="blog-item__author-txt-wrap">
+                                        <p class="blog-item__author-name">
+                                            Скрипников Владислав
+                                        </p>
+                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="blog-item">
+                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
+                                <div class="blog-item__img-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-item (4).jpg' %}"
+                                        alt="Выбор кожи и фуринтуры"
+                                        class="blog-item__img"
+                                    />
+                                </div>
+                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
+                                <p class="product-item__aticle">
+                                    Имеется спорная точка зрения, гласящая примерно следующее:
+                                    тщательные исследования конкурентов освещают чрезвычайно
+                                    интересные особенности картины в целом...
+                                </p>
+                                <div class="blog-item__author-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-author.png' %}"
+                                        alt=""
+                                        class="blog-item__author-img"
+                                    />
+                                    <div class="blog-item__author-txt-wrap">
+                                        <p class="blog-item__author-name">
+                                            Скрипников Владислав
+                                        </p>
+                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="blog-item">
+                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
+                                <div class="blog-item__img-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-item (5).jpg' %}"
+                                        alt="Выбор кожи и фуринтуры"
+                                        class="blog-item__img"
+                                    />
+                                </div>
+                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
+                                <p class="product-item__aticle">
+                                    Имеется спорная точка зрения, гласящая примерно следующее:
+                                    тщательные исследования конкурентов освещают чрезвычайно
+                                    интересные особенности картины в целом...
+                                </p>
+                                <div class="blog-item__author-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-author.png' %}"
+                                        alt=""
+                                        class="blog-item__author-img"
+                                    />
+                                    <div class="blog-item__author-txt-wrap">
+                                        <p class="blog-item__author-name">
+                                            Скрипников Владислав
+                                        </p>
+                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="blog-item">
+                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
+                                <div class="blog-item__img-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-item (6).jpg' %}"
+                                        alt="Выбор кожи и фуринтуры"
+                                        class="blog-item__img"
+                                    />
+                                </div>
+                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
+                                <p class="product-item__aticle">
+                                    Имеется спорная точка зрения, гласящая примерно следующее:
+                                    тщательные исследования конкурентов освещают чрезвычайно
+                                    интересные особенности картины в целом...
+                                </p>
+                                <div class="blog-item__author-wrap">
+                                    <img
+                                        src="{% static 'img/blog/blog-author.png' %}"
+                                        alt=""
+                                        class="blog-item__author-img"
+                                    />
+                                    <div class="blog-item__author-txt-wrap">
+                                        <p class="blog-item__author-name">
+                                            Скрипников Владислав
+                                        </p>
+                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

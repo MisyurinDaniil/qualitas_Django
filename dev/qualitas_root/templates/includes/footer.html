@@ -1,0 +1,48 @@
+{% load static %}
+<footer class="footer">
+    <div class="container container-footer">
+        <div class="logo footer__logo">
+            <a href="{% url 'home' %}" class="logo__link">
+                <img
+                    src="{% static 'img/logo_qualitas_leather.svg' %}"
+                    alt="Логотип qualitas leather"
+                    class="logo__img"
+                />
+            </a>
+        </div>
+        <div class="gray-line"></div>
+        <div class="contacts">
+            <ul class="contacts__list">
+                <li class="contacts__item">
+                    <a href="tel:+79896307755" class="contacts__item-link">
+                        <img src="{% static 'img/call.svg' %}" alt="Звонок" class="contacts__item-img" />
+                        <p class="contacts__item-p">Звонок</p>
+                        <p class="contacts__item-p">+ 7 (977) 012-90-15</p>
+                    </a>
+                </li>
+                <li class="contacts__item">
+                    <a href="https://t.me/+79896307755" class="contacts__item-link">
+                        <img src="{% static 'img/telegram.svg' %}" alt="Telegram" class="contacts__item-img" />
+                        <p class="contacts__item-p">Telegram</p>
+                        <p class="contacts__item-p">+ 7 (977) 012-90-15</p>
+                    </a>
+                </li>
+                <li class="contacts__item">
+                    <a
+                        href="https://www.instagram.com/qualitas_leather/"
+                        class="contacts__item-link"
+                    >
+                        <img src="{% static 'img/instagram.svg' %}" alt="Instagram" class="contacts__item-img" />
+                        <p class="contacts__item-p">Instagram</p>
+                        <p class="contacts__item-p">#qualitas_leather</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="gray-line"></div>
+        <div class="all-rights-reserved">
+            <p class="all-rights-reserved__p">© 2020 QualitasLeather. All rights reserved.</p>
+            <p class="all-rights-reserved__p">Designed by Daniil Misyurin</p>
+        </div>
+    </div>
+</footer>

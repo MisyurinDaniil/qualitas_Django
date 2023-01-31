@@ -16,6 +16,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+from .settings import DEBUG
+from django.views.generic.base import TemplateView
+
+from getPages import views as getPage
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', getPage.home_page, name='home'),
+    path('category', getPage.category_page, name='category'),
+    path('aboutus', getPage.aboutus_page, name='aboutus'),
+    path('blog', getPage.blog_page, name='blog'),
+    path('contacts', getPage.contacts_page, name='contacts'),
+    path('delivery', getPage.delivery_page, name='delivery'),
+    path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
+    path('payment', getPage.payment_page, name='payment'),
+    path('product', getPage.product_page, name='product'),
+    path('help', getPage.help_page, name='help'),
+    path('admin', admin.site.urls),
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 ]
+# Если включен DEBUG, меняем путь то статических файлов
+if DEBUG: 
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = getPage.page_not_found

@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %} 
+
+{% block mainContent %}
+    {% include 'includes/header_small.html' %}
+    <section class="main main_small-header">
+        <div class="container">
+            <div class="information">
+                <div class="h1 h1_end-product">
+                    <h1 class="h1__title h1-title_end-product">Способы доставки</h1>
+                </div>
+                <div class="information_wrap">
+                    <div class="info-img-block">
+                        <img src="{% static 'img/delivery.jpg' %}" alt="Способы доставки" class="info-img-block__image" />
+                    </div>
+                    <div class="info-text-block">
+                        <div class="info-text-block__item">
+                            <p class="info-text-block__p">Основные способы доставки:</p>
+                            <ul class="delivery__list">
+                                <li class="delivery__item">транспортная компания СДЭК;</li>
+                                <li class="delivery__item">транспортная компания Boxberry;</li>
+                                <li class="delivery__item">транспортная компания DPD;</li>
+                                <li class="delivery__item">почта России.</li>
+                            </ul>
+                        </div>
+                        <div class="info-text-block__item">
+                            <p class="info-text-block__p">
+                                Стоимость и сроки доставки рассчитываются индивидуально до
+                                каждого города в зависимости от габаритов изделия и веса
+                            </p>
+                        </div>
+                        <div class="info-text-block__item">
+                            <p class="info-text-block__p">Доставка при заказе от 10000 рублей осуществляется бесплатно</p>
+                        </div>
+                        <div class="info-text-block__item">
+                            <p class="info-text-block__p">Доставка по городу Ростов-на-Дону бесплатно.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %}
+
+{% block mainContent %}
+    <style>
+        .header_background {
+            background-image: url({% static 'img/belt_category_320x568.jpg' %});
+        }
+        @media (min-width: 576px) {
+            .header_background {
+                background-image: url({% static 'img/belt_category_576x568.jpg' %});
+            }
+        }
+        @media (min-width: 768px) {
+            .header_background {
+                background-image: url({% static 'img/belt_category_768x550.jpg' %});
+            }
+        }
+        @media (min-width: 1200px) {
+            .header_background  {
+                background: url({% static 'img/header_shadow.png' %}) 0 0 repeat-x,
+                    url({% static 'img/belt_category_1200x760.jpg' %}) center/cover no-repeat;
+            }
+        }
+    </style>
+    {% include 'includes/header_big.html' %}
+    <section class="main">
+        <div class="container">
+            <div class="category-items">
+                <div class="h2">
+                    <h2 class="h2__title">Каталог кожаных ремней ручной рыботы</h2>
+                    <span class="title-underline"></span>
+                </div>
+                <div class="products-wraper">
+                    <ul class="products-list">
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (1).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (2).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета ремень из кожи
+                                    буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (3).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (4).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета ремень из кожи
+                                    буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (5).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (6).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (7).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (8).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="{% url 'product' %}" class="pruduct__link">
+                                <div class="product__img-wrap">
+                                    <img
+                                        src="{% static 'img/product/belt (9).jpg' %}"
+                                        alt="Ремень из кожи буйвола коричневого цвета"
+                                        class="product__img"
+                                    />
+                                </div>
+                                <p class="product__text product__title">
+                                    Ремень из кожи буйвола коричневого цвета
+                                </p>
+                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

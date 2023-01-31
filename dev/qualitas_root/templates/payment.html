@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %} 
+
+{% block mainContent %}
+    {% include 'includes/header_small.html' %}
+    <section class="main main_small-header">
+        <div class="container">
+            <div class="information">
+                <div class="h1 h1_end-product">
+                    <h1 class="h1__title h1-title_end-product">Способы оплаты</h1>
+                </div>
+                <div class="information_wrap">
+                    <div class="info-img-block">
+                        <img src="{% static 'img/payment.jpg' %}" alt="Способы оплаты" class="info-img-block__image" />
+                    </div>
+                    <div class="info-text-block">
+                        <div class="info-text-block__item">
+                            <p class="info-text-block__p">
+                                Переводом на банковскую карту Сбербанк, Тинькофф <br>(по номеру
+                                счета или телефона)
+                            </p>
+                        </div>
+                        <div class="info-text-block__item">
+                            <p class="info-text-block__p">
+                                Переводом на расчетный счет <br>(для юридических лиц и ИП)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

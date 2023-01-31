@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %} 
+
+{% block mainContent %}
+    {% include 'includes/header_small.html' %}
+        <section class="main main_small-header">
+            <div class="container">
+                <div class="information">
+                    <div class="h1 h1_end-product">
+                        <h1 class="h1__title h1-title_end-product">Наши контакты</h1>
+                    </div>
+                    <div class="information_wrap">
+                        <div class="info-img-block">
+                            <img src="{% static 'img/contacts.jpg' %}" alt="Наши контакты" class="info-img-block__image" />
+                        </div>
+                        <div class="info-text-block">
+                            <ul class="contacts-list">
+                                <li class="cotacts-item">
+                                    <p class="cotacts-item__title">Телефон для звонков:</p>
+                                    <p class="cotacts-item__text">
+                                        <a href="tel:+79770129015" class="cotacts-item__link"
+                                            >+7 (977) 012-90-15</a
+                                        >
+                                    </p>
+                                </li>
+                                <li class="cotacts-item">
+                                    <p class="cotacts-item__title">WhatsApp / Telegram:</p>
+                                    <p class="cotacts-item__text">
+                                        <a
+                                            href="https://telegram.im/@qualitas_store"
+                                            class="cotacts-item__link"
+                                            >+7 (977) 012-90-15 (@qualitas_store)</a
+                                        >
+                                    </p>
+                                </li>
+                                <li class="cotacts-item">
+                                    <p class="cotacts-item__title">Email:</p>
+                                    <p class="cotacts-item__text">
+                                        <a
+                                            href="mailto:qualitas.store@yandex.ru"
+                                            class="cotacts-item__link"
+                                            >qualitas.store@yandex.ru</a
+                                        >
+                                    </p>
+                                </li>
+                                <li class="cotacts-item">
+                                    <p class="cotacts-item__title">Instagram:</p>
+                                    <p class="cotacts-item__text">
+                                        <a
+                                            href="https://www.instagram.com/qualitas_leather/"
+                                            class="cotacts-item__link"
+                                            >#qualitas_leather</a
+                                        >
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
