@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class GetpagesConfig(AppConfig):
+class AppproductitemConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'getPages'
+    name = 'appProductItem'

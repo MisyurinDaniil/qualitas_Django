@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from .settings import DEBUG
 from django.views.generic.base import TemplateView
 
-from getPages import views as getPage
+from appGetPages import views as getPage
 
 urlpatterns = [
     path('', getPage.home_page, name='home'),

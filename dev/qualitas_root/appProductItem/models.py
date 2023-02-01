@@ -1,0 +1,175 @@
+from django.db import models
+
+# Create your models here.
+
+from django.urls import reverse
+
+# Create your models here.
+
+# Формирование модели "Категория товара" (сумки, кошельки и тд)
+class ProductCategory(models.Model):
+    # product_category_name - имя поля таблицы с типом CharField
+    # max_length - максимальное количество симоволо
+    # verbose_name - имя поля отображаемого в админ панеле
+    product_category_name = models.CharField(max_length=255, verbose_name='Категория товара')
+    product_category_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
+    product_category_is_published = models.BooleanField(default=True, verbose_name='Разрешить публикацию категории')
+    product_category_title= models.CharField(verbose_name='Заголовок страницы браузера (<title>)', max_length=80)
+    product_category_description = models.TextField(verbose_name='Описание страницы SEO (description)', max_length=200)
+    product_category_keywords = models.CharField(verbose_name='Ключевые слова SEO (keywordss)', max_length=255)
+    product_category_h1 = models.CharField(verbose_name='Большой заголовок H1', max_length=255)
+    product_category_h2 = models.CharField(verbose_name='Маленький заголовок H2', max_length=255)
+    product_category_img_main = models.ImageField(upload_to='category_img/', verbose_name='Маленькая картинка для меню категории 208х139')
+    product_category_img_mobile = models.ImageField(upload_to='category_img/', verbose_name='Картинка для стр. категории - мобльная версия 576х568')
+    product_category_img_mobile_horizontal = models.ImageField(upload_to='category_img/', verbose_name='Картинка для стр. категории - мобльная версия 768х568')
+    product_category_img_tablet = models.ImageField(upload_to='category_img/', verbose_name='Картинка для стр. категории - планшетная версия 1200х550')
+    product_category_img_desktop = models.ImageField(upload_to='category_img/', verbose_name='Картинка для стр. категории - дексктопная версия 1440х760')
+
+    # Измененеие отображения имени объекта. __str__ - это строковое представление объекта
+    # Получим корректное отображение имени объекта в админ паненле
+    def __str__(self):
+        return self.product_category_name
+    # get_absolute_url - позволяет получить канонический URL обьекта, при условии что этот метод определён.
+    # Генерируем динамическую ссылку для категории товара
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'productCategorySlug': self.product_category_slug})
+
+    # Изменение отображения имени класса, в единственном и множественном числе
+    class Meta:
+        verbose_name = "Категория товара"
+        verbose_name_plural = "7. Категории товаров"
+
+
+class ProductGroup(models.Model):
+    # product_group_name - имя поля таблицы с типом CharField
+    # max_length - максимальное количество симоволо
+    # verbose_name - имя поля отображаемого в админ панеле
+    product_group_name = models.CharField(max_length=255, verbose_name='Группа товара')
+    product_group_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
+    product_group_is_published = models.BooleanField(default=True, verbose_name='Разрешить публикацию группы на главной странице')
+    product_group_short_name = models.CharField(max_length=255, default='sale', verbose_name='Короткое имя (sale, hot, new...)')
+
+    # Измененеие отображения имени объекта. __str__ - это строковое представление объекта
+    # Получим корректное отображение имени объекта в админ паненле
+    def __str__(self):
+        return self.product_group_name
+
+    # Изменение отображения имени класса, в единственном и множественном числе
+    class Meta:
+        verbose_name = "Группа товара"
+        verbose_name_plural = "8. Группы товаров"
+
+# Создаем класс (модел) для таблицы цвета
+class ProductColor(models.Model):
+    # color - имя поля таблицы с типом CharField
+    # max_length - максимальное количество симоволо
+    # verbose_name - имя поля отображаемого в админ панеле
+    colorName = models.CharField(max_length=255, verbose_name='Цвет')
+
+    # Измененеие отображения имени объекта. __str__ - это строковое представление объекта
+    # Получим корректное отображение имени объекта в админ паненле
+    def __str__(self):
+        return self.color
+
+    # Изменение отображения имени класса, в единственном и множественном числе
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "3. Цвета"
+
+# Создаем класс (модел) для таблицы Материалы
+class ProductMaterial(models.Model):
+    materialName = models.CharField(max_length=255, verbose_name='Материал')
+
+    def __str__(self):
+        return self.material
+
+    class Meta:
+        verbose_name = "Материал"
+        verbose_name_plural = "4. Материалы"
+
+# Создаем класс (модел) для таблицы Фурнитура
+class ProductFitting(models.Model):
+    fittingName = models.CharField(max_length=255, verbose_name='Фурнитура')
+
+    def __str__(self):
+        return self.fitting
+
+    class Meta:
+        verbose_name = "Фурнитура"
+        verbose_name_plural = "5. Фурнитруа"  
+
+# Создаем класс (модел) для таблицы Время изготовления
+class ProductMakeTime(models.Model):
+    make_time = models.CharField(max_length=255, verbose_name='Время изготовления')
+
+    def __str__(self):
+        return self.make_time
+
+    class Meta:
+        verbose_name = "Время изготовления"
+        verbose_name_plural = "6. Время изготовления"  
+
+# Создаем класс (модел) для таблицы Товар
+class ProductItem(models.Model):
+    product_name = models.CharField(max_length=255, verbose_name='Наименование')
+    product_is_published = models.BooleanField(default=True, verbose_name='Разрешить публикацию')
+    product_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
+    
+    product_page_title= models.CharField(verbose_name='Заголовок страницы браузера (<title>)', max_length=80)
+    product_page_description = models.TextField(verbose_name='Описание страницы SEO (description)', max_length=200)
+    product_page_keywords = models.CharField(verbose_name='Ключевые слова SEO (keywordss)', max_length=255)
+    
+    product_category = models.ForeignKey(ProductCategory, on_delete=models.PROTECT, verbose_name='Категория')
+    product_group = models.ForeignKey(ProductGroup, on_delete=models.PROTECT, verbose_name='Группа')
+    product_price = models.CharField(max_length=255, verbose_name='Цена')
+    product_old_price = models.CharField(max_length=255, default=None,  verbose_name='Старая цена', blank=True)
+    product_color = models.ForeignKey(ProductColor, on_delete=models.PROTECT, verbose_name='Цвет')
+    product_material = models.ForeignKey(ProductMaterial, on_delete=models.PROTECT, verbose_name='Материал')
+    # Связываем таблицы через тип поля ForeignKey, вторым параметром указывается что делать при
+    # удалении поля (on_delete=models.PROTECT - запрещает удалять поля при удалении родителя)
+    # blank - для пустоты в админ панели django
+    product_fitting = models.ForeignKey(ProductFitting, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Фурнитура')
+    product_make_time = models.ForeignKey(ProductMakeTime, on_delete=models.PROTECT, verbose_name='Время изготовления')
+    product_size = models.CharField(max_length=255, verbose_name='Размер')
+    product_description = models.TextField(verbose_name='Описание')
+    product_img_main = models.ImageField(upload_to='product_item_img/', verbose_name='Картинка для группы товаров 360х240')
+    product_img_main_alt = models.CharField(verbose_name='Атрибут alt картинки', max_length=80)
+    product_img_main_title = models.CharField(verbose_name='Атрибут title картинки', max_length=80)
+    product_time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    product_time_update = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
+
+    def __str__(self):
+        return self.product_name
+
+    # Генерируем динамическую ссылку для товара
+    def get_absolute_url(self):
+        return reverse('product', kwargs={'productItemSlug': self.product_slug})
+
+    class Meta:
+        verbose_name = "Товар"
+        verbose_name_plural = "1. Товары"
+
+# Создаем класс (модел) для таблицы Картинки товара
+class ProductImg(models.Model):
+    # Связываем таблицы через тип поля ForeignKey
+    # on_delete=models.CASCADE - при удалении родителя (товара) удалиться связанная с ним таблица (картинки)
+    img_binding = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
+
+    # img_small = models.ImageField(upload_to='product_item_img/', verbose_name='Маленькая картинка 170х113')
+    # alt_small = models.CharField(verbose_name='Атрибут alt маленькой картинки', max_length=80)
+    # title_small = models.CharField(verbose_name='Атрибут title маленькой картинки', max_length=80)
+
+    product_img = models.ImageField(upload_to='product_item_img/', verbose_name='Средняя картинка 570х380')
+    product_img_alt = models.CharField(verbose_name='Атрибут alt средней картинки', max_length=80)
+    product_img_title = models.CharField(verbose_name='Атрибут title средней картинки', max_length=80)
+
+    product_img_big = models.ImageField(upload_to='product_item_img/', verbose_name='Большая картинка 1280х853')
+    product_img_big_alt = models.CharField(verbose_name='Атрибут alt большой картинки', max_length=80)
+    product_img_big_title = models.CharField(verbose_name='Атрибут title большой картинки', max_length=80)
+
+    def __str__(self):
+        return self.alt_small
+
+    class Meta:
+        verbose_name = "Картинки для конечной страницы товара"
+        verbose_name_plural = "2. Картинки для конечной страницы товара"
