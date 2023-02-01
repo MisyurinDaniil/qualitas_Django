@@ -2,7 +2,22 @@
 
 {% load static %} 
 
-{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %} 
+{% block title %}  
+    {{prodItem.product_name}} | Мастерская ручной работы "Qualitas"
+{% endblock %} 
+
+{% block meta_tags %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content="{{ prodItem.product_page_description }}">
+    <meta name="keywords" content="{{ prodItem.product_page_keywords }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content='{{prodItem.product_name}} | Мастерская ручной работы "Qualitas"'/>
+    <meta property="og:description" content="{{ prodItem.product_page_description }}"/>
+    <meta property="og:url" content="https://qualitas.store/product/{{prodItem.product_slug}}" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:image" content="https://qualitas.store{{prodImages.first.product_img_big.url}}"/>
+    <meta property="og:image:type" content="image/jpg">
+{% endblock %}
 
 {% block mainContent %}
     {% include 'includes/header_small.html' %}
@@ -12,13 +27,22 @@
             <div class="end-product">
                 <div class="h1 h1_end-product">
                     <h1 class="h1__title h1-title_end-product">
-                        Ремень из кожи буйвола коричневого цвета
+                        {{prodItem.product_name}}
                     </h1>
                 </div>
                 <div class="end-product_wrap">
                     <div class="end-product-img">
                         <div id="mainCarousel" class="carousel">
-                            <div
+                            {% for image in prodImages %}
+                                <div
+                                    class="carousel__slide"
+                                    data-src="{{image.product_img_big.url}}"
+                                    data-fancybox="gallery"
+                                >
+                                    <img src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
+                                </div>
+                            {% endfor %}
+                            {% comment %} <div
                                 class="carousel__slide"
                                 data-src="{% static 'img/product/end-prod-big-1.jpg' %}"
                                 data-fancybox="gallery"
@@ -38,48 +62,35 @@
                                 data-fancybox="gallery"
                             >
                                 <img src="{% static 'img/product/end-prod-main-3.jpg' %}" alt="" title="" />
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                         <div id="thumbCarousel" class="carousel">
-                            <div class="carousel__slide">
+                            {% for image in prodImages %}
+                                <div class="carousel__slide">
+                                    <img class="panzoom__content" src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
+                                </div>
+                            {% endfor %}
+                            {% comment %} <div class="carousel__slide">
                                 <img class="panzoom__content" src="{% static 'img/product/end-prod-main-1.jpg' %}" alt="" title="" />
-                                {% comment %} <img
-                                    class="panzoom__content"
-                                    src="{% static 'img/product/end-prod-small-1.jpg' %}"
-                                    alt=""
-                                    title=""
-                                /> {% endcomment %}
                             </div>
                             <div class="carousel__slide">
                                 <img class="panzoom__content" src="{% static 'img/product/end-prod-main-2.jpg' %}" alt="" title="" />
-                                {% comment %} <img
-                                    class="panzoom__content"
-                                    src="{% static 'img/product/end-prod-small-2.jpg' %}"
-                                    alt=""
-                                    title=""
-                                /> {% endcomment %}
                             </div>
                             <div class="carousel__slide">
                                 <img class="panzoom__content" src="{% static 'img/product/end-prod-main-2.jpg' %}" alt="" title="" />
-                                {% comment %} <img
-                                    class="panzoom__content"
-                                    src="{% static 'img/product/end-prod-small-3.jpg' %}"
-                                    alt=""
-                                    title=""
-                                /> {% endcomment %}
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
                     <div class="end-product-spec">
                         <ul class="end-product-spec__list">
                             <li class="end-product-spec__item end-product-spec__price">
-                                Цена: 3 577 &#8381;
+                                {{prodItem.product_price}} &#8381;
                             </li>
-                            <li class="end-product-spec__item">Цвет: черный</li>
-                            <li class="end-product-spec__item">Материал: кожа бизона</li>
-                            <li class="end-product-spec__item">Размер: 1500х500х400</li>
-                            <li class="end-product-spec__item">Срок изготоления: 7дней</li>
-                            <li class="end-product-spec__item">Фурнитура: латунь (Германия)</li>
+                            <li class="end-product-spec__item">Цвет: {{prodItem.product_color.colorName}}</li>
+                            <li class="end-product-spec__item">Материал: {{prodItem.product_material.materialName}}</li>
+                            <li class="end-product-spec__item">Размер: {{prodItem.product_size}}</li>
+                            <li class="end-product-spec__item">Срок изготоления: {{prodItem.product_make_time.make_time}}</li>
+                            <li class="end-product-spec__item">Фурнитура: {{prodItem.product_fitting.fittingName}}</li>
                             <li class="end-product-spec__item">
                                 Упаковка: упаковывается в крафтовую бумагу повязанную ващеной
                                 нитью
@@ -87,10 +98,7 @@
                             <li class="end-product-spec__item end-product-spec__description">
                                 <span class="">Описание товара:</span>
                                 <p class="end-product-spec__description_p">
-                                    Бумажник из неокрашенной немецкой кожи растительного
-                                    дубления, вмещающий в себя купюры, визитки и пластиковые
-                                    карты. Может быть окрашен в любой цвет по вашему желанию.
-                                    При покупке этого изделия вы получите монетницу в подарок.
+                                    {{prodItem.product_description}}
                                 </p>
                             </li>
                         </ul>
@@ -100,105 +108,102 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="modal-window" class="modal-window">
-            <div class="modal-window__content">
-                <p class="modal-window__text">
-                    Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
+            <div id="modal-window" class="modal-window">
+                <div class="modal-window__content">
+                    <p class="modal-window__text">
+                        Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
+                        <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                    </p>
+                    <form action="#" method="POST" class="modal-window__form"> 
+                    {% comment %} <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form"> {% endcomment %}
+                        <!-- {% csrf_token %} -->
+                        <ul class="modal-window__list">
+                            <li class="modal-window__list-item">
+                                <span class="modal-window__input_title">Изделие:</span>
+                                <span class="modal-window__input_title">
+                                    {{prodItem.product_name}}
+                                </span>
+                                <!-- <input class="display-none" type="text" value="{{request.get_full_path}}" name="get_full_path">
+                                <input class="display-none" type="text" value="{{prodItem.id}}" name="product_id"> -->
+                                <img
+                                    class='modal-window__image'
+                                    src="{{prodItem.product_img_main.url}}"
+                                    alt="{{prodItem.product_img_main_alt}}"
+                                />
+                            </li>
+                            <li class="modal-window__list-item">
+                                <label class="modal-window__input_title" for="input-name"
+                                    >Как вас зовут:</label
+                                >
+                                <input
+                                    type="text"
+                                    name="customer_name"
+                                    class="modal-window__input"
+                                    placeholder="Имя"
+                                    id="input-name"
+                                    maxlength="200"
+                                    required=""
+                                    tabindex="0"
+                                />
+                            </li>
+                            <li class="modal-window__list-item">
+                                <label class="modal-window__input_title" for="input-telephone"
+                                    >Контактный телефон:</label
+                                >
+                                <input
+                                    type="text"
+                                    name="customer_telephone"
+                                    class="modal-window__input"
+                                    placeholder="Номер телефона"
+                                    id="input-telephone"
+                                    maxlength="200"
+                                    required=""
+                                    tabindex="0"
+                                />
+                            </li>
+                            <li class="modal-window__list-item">
+                                <label class="modal-window__input_title" for="input-commet"
+                                    >Комментарий к заказу:</label
+                                >
+                                <textarea
+                                    name="customer_comment"
+                                    cols="20"
+                                    rows="5"
+                                    class="modal-window__input"
+                                    placeholder="Комментарий"
+                                    id="input-commet"
+                                ></textarea>
+                            </li>
+                            <li class="modal-window__list-item">
+                                <input
+                                    class="main-button main-button__submit-modal"
+                                    type="submit"
+                                    value="Отправить"
+                                />product_img_main
+                </div>
+                <div class="modal-window__order-true display-none">
+                    <br />
+                    Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
+                    Вы также можете написать нам в социальных сетях.<br />
+                </div>
+                <div class="modal-window__order-false display-none">
+                    <br />
+                    Приносим извинения за временные неполадки. <br />
+                    Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                </div>
+                <!-- <div class="modal-window__order-true">
+                    <br />
+                    Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
+                    Вы также можете написать нам в социальных сетях.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
-                </p>
-                <form action="#" method="POST" class="modal-window__form"> 
-                {% comment %} <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form"> {% endcomment %}
-                    <!-- {% csrf_token %} -->
-                    <ul class="modal-window__list">
-                        <li class="modal-window__list-item">
-                            <span class="modal-window__input_title">Изделие:</span>
-                            <span class="modal-window__input_title"
-                                >Ремень из кожи буйвола коричневого цвета</span
-                            >
-
-                            <!-- <input class="display-none" type="text" value="{{request.get_full_path}}" name="get_full_path">
-                            <input class="display-none" type="text" value="{{prodItem.id}}" name="product_id"> -->
-                            <img
-                                src="{% static 'img/product/end-prod-small-1.jpg' %}"
-                                alt="маленькое изображение черной кожанной сумки"
-                            />
-                        </li>
-                        <li class="modal-window__list-item">
-                            <label class="modal-window__input_title" for="input-name"
-                                >Как вас зовут:</label
-                            >
-                            <input
-                                type="text"
-                                name="customer_name"
-                                class="modal-window__input"
-                                placeholder="Имя"
-                                id="input-name"
-                                maxlength="200"
-                                required=""
-                                tabindex="0"
-                            />
-                        </li>
-                        <li class="modal-window__list-item">
-                            <label class="modal-window__input_title" for="input-telephone"
-                                >Контактный телефон:</label
-                            >
-                            <input
-                                type="text"
-                                name="customer_telephone"
-                                class="modal-window__input"
-                                placeholder="Номер телефона"
-                                id="input-telephone"
-                                maxlength="200"
-                                required=""
-                                tabindex="0"
-                            />
-                        </li>
-                        <li class="modal-window__list-item">
-                            <label class="modal-window__input_title" for="input-commet"
-                                >Комментарий к заказу:</label
-                            >
-                            <textarea
-                                name="customer_comment"
-                                cols="20"
-                                rows="5"
-                                class="modal-window__input"
-                                placeholder="Комментарий"
-                                id="input-commet"
-                            ></textarea>
-                        </li>
-                        <li class="modal-window__list-item">
-                            <input
-                                class="main-button main-button__submit-modal"
-                                type="submit"
-                                value="Отправить"
-                            />
-                        </li>
-                    </ul>
-                </form>
+                </div>
+                <div class="modal-window__order-false">
+                    <br />
+                    Приносим извинения за временные неполадки. <br />
+                    Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                    <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                </div> -->
             </div>
-            <div class="modal-window__order-true display-none">
-                <br />
-                Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
-                Вы также можете написать нам в социальных сетях.<br />
-            </div>
-            <div class="modal-window__order-false display-none">
-                <br />
-                Приносим извинения за временные неполадки. <br />
-                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
-            </div>
-            <!-- <div class="modal-window__order-true">
-                <br />
-                Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
-                Вы также можете написать нам в социальных сетях.<br />
-                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
-            </div>
-            <div class="modal-window__order-false">
-                <br />
-                Приносим извинения за временные неполадки. <br />
-                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
-                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
-            </div> -->
         </div>
     </section>
 {% endblock %}

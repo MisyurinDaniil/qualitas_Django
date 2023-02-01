@@ -25,17 +25,18 @@ from appGetPages import views as getPage
 
 urlpatterns = [
     path('', getPage.home_page, name='home'),
+    # path('product', getPage.product_page, name='product'),   
+    path('product/<slug:productItemSlug>', getPage.product_page, name='product'),   
     path('category', getPage.category_page, name='category'),
-    path('aboutus', getPage.aboutus_page, name='aboutus'),
     path('blog', getPage.blog_page, name='blog'),
+    path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
+    path('aboutus', getPage.aboutus_page, name='aboutus'),
     path('contacts', getPage.contacts_page, name='contacts'),
     path('delivery', getPage.delivery_page, name='delivery'),
-    path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
     path('payment', getPage.payment_page, name='payment'),
-    path('product', getPage.product_page, name='product'),
     path('help', getPage.help_page, name='help'),
     path('admin', admin.site.urls),
-    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 ]
 # Если включен DEBUG, меняем путь то статических файлов
 if DEBUG: 

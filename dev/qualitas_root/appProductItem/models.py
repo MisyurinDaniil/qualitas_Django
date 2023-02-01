@@ -69,7 +69,7 @@ class ProductColor(models.Model):
     # Измененеие отображения имени объекта. __str__ - это строковое представление объекта
     # Получим корректное отображение имени объекта в админ паненле
     def __str__(self):
-        return self.color
+        return self.colorName
 
     # Изменение отображения имени класса, в единственном и множественном числе
     class Meta:
@@ -81,7 +81,7 @@ class ProductMaterial(models.Model):
     materialName = models.CharField(max_length=255, verbose_name='Материал')
 
     def __str__(self):
-        return self.material
+        return self.materialName
 
     class Meta:
         verbose_name = "Материал"
@@ -92,7 +92,7 @@ class ProductFitting(models.Model):
     fittingName = models.CharField(max_length=255, verbose_name='Фурнитура')
 
     def __str__(self):
-        return self.fitting
+        return self.fittingName
 
     class Meta:
         verbose_name = "Фурнитура"
@@ -168,7 +168,7 @@ class ProductImg(models.Model):
     product_img_big_title = models.CharField(verbose_name='Атрибут title большой картинки', max_length=80)
 
     def __str__(self):
-        return self.alt_small
+        return self.product_img_alt
 
     class Meta:
         verbose_name = "Картинки для конечной страницы товара"

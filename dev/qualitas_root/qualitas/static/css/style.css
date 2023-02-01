@@ -1161,7 +1161,7 @@ ul {
     margin-top: 10px;
 }
 #thumbCarousel .carousel__slide {
-    opacity: 0.5;
+    opacity: 0.3;
     padding: 0;
     margin: 0.25rem;
     width: 96px;
@@ -1222,6 +1222,9 @@ ul {
     padding-top: 10px;
     margin: 0;
 }
+.modal-window__image {
+    width: 200px;
+}
 .modal-window__input_title {
     display: block;
     margin-bottom: 5px;
@@ -1246,7 +1249,7 @@ ul {
 }
 .fancybox__backdrop {
     background-color: #191919;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 .fancybox__slide {
     padding-top: 8px;
