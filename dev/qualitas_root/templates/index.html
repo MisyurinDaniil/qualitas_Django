@@ -4,6 +4,8 @@
 
 {% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %}
 
+
+
 {% block mainContent %}
     <style>
         .h1_yellow {
@@ -30,6 +32,10 @@
         }
     </style>
     {% include 'includes/header_big.html' %}
+
+    {% load get_categorys_tag %}
+    {% getProductsCategorys as  productCategoryList %}
+
     <section class="main">
         <div class="container">
             <div class="catalog">
@@ -38,86 +44,15 @@
                     <span class="title-underline"></span>
                 </div>
                 <ul class="catalog__list">
+                    {% for productCategory in productCategoryList %}
                     <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img src="{% static 'img/belts.jpg' %}" alt="Ремни" class="catalog-item__img" />
-                            <p class="catalog-item__p">Ремни</p>
+                        <a href="{{ productCategory.get_absolute_url }}" class="catalog-item__link">
+                            <img src="{{productCategory.product_category_img_main.url}}" alt="Ремни" class="catalog-item__img" />
+                            <p class="catalog-item__p">{{productCategory.product_category_name}}</p>
                         </a>
                     </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img
-                                src="{% static 'img/watch_strap.jpg' %}"
-                                alt="Ремешки для часов"
-                                class="catalog-item__img"
-                            />
-                            <p class="catalog-item__p">Ремешки для часов</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img
-                                src="{% static 'img/cardholders.jpg' %}"
-                                alt="Картхолдеры"
-                                class="catalog-item__img"
-                            />
-                            <p class="catalog-item__p">Картхолдеры</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img src="{% static 'img/wallets.jpg' %}" alt="Кошельки" class="catalog-item__img" />
-                            <p class="catalog-item__p">Кошельки</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img
-                                src="{% static 'img/document_covers.jpg' %}"
-                                alt="Чехлы для ручек"
-                                class="catalog-item__img"
-                            />
-                            <p class="catalog-item__p">Обложки для паспорта</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img
-                                src="{% static 'img/covers_for_pens.jpg' %}"
-                                alt="Чехлы для ручек"
-                                class="catalog-item__img"
-                            />
-                            <p class="catalog-item__p">Чехлы для ручек</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img
-                                src="{% static 'img/money_clips.jpg' %}"
-                                alt="Зажимы для денег"
-                                class="catalog-item__img"
-                            />
-                            <p class="catalog-item__p">Зажимы для денег</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img src="{% static 'img/bags.jpg' %}" alt="Сумки" class="catalog-item__img" />
-                            <p class="catalog-item__p">Сумки</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img src="{% static 'img/accessories.jpg' %}" alt="Аксессуары" class="catalog-item__img" />
-                            <p class="catalog-item__p">Аксессуары</p>
-                        </a>
-                    </li>
-                    <li class="catalog-item">
-                        <a href="{% url 'category' %}" class="catalog-item__link">
-                            <img src="{% static 'img/other.jpg' %}" alt="Другое" class="catalog-item__img" />
-                            <p class="catalog-item__p">Другое</p>
-                        </a>
-                    </li>
+
+                    {% endfor %}
                 </ul>
             </div>
             <div class="philosophy">

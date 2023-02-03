@@ -25,9 +25,8 @@ from appGetPages import views as getPage
 
 urlpatterns = [
     path('', getPage.home_page, name='home'),
-    # path('product', getPage.product_page, name='product'),   
     path('product/<slug:productItemSlug>', getPage.product_page, name='product'),   
-    path('category', getPage.category_page, name='category'),
+    path('category/<slug:productCategorySlug>', getPage.category_page, name='category'),
     path('blog', getPage.blog_page, name='blog'),
     path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
     path('aboutus', getPage.aboutus_page, name='aboutus'),

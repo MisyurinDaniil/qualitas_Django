@@ -5,7 +5,14 @@ from appProductItem.views import getProdItemsByCategory, getProdItemBySlug, getP
 # Create your views here.
 
 def home_page(request):
-    return render(request, './index.html')
+    # Получаем товары в соответствующих категориях
+    prodItemsInGroups = getProdItemsInGroups()
+    productGroupList = getProductsGroups()
+    # Отрисовываем полученные данные на странице
+    return render(request, './index.html', {
+        'prodItemsInGroups' : prodItemsInGroups,
+        'productGroupList' : productGroupList,
+    })
 
 def product_page(request, productItemSlug):
     # Получаем товар по productItemSlug товара 
@@ -17,9 +24,6 @@ def product_page(request, productItemSlug):
         'prodItem' : prodItem,
         'prodImages' : prodImages,
     })
-
-# def product_page(request):
-#     return render(request, './product.html', {})
 
 def category_page(request):
     return render(request, './category.html')

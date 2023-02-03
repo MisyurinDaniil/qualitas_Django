@@ -1,4 +1,7 @@
 {% load static %}
+{% load get_categorys_tag %}
+{% getProductsCategorys as  productCategoryList %}
+
 <header class="header header_big header_background">
     <div class="container container-header">
         <div class="logo header__logo">
@@ -21,13 +24,18 @@
                     <span class="title-underline nav-title-underline"></span>
                 </li>
                 <li class="nav__item">
-                    <div class="nav-link__container">
+                   <div class="nav-link__container">
                         <a href="#" class="nav__item-link">Каталог</a>
                         <div class="triangle"></div>
                     </div>
                     <span class="title-underline nav-title-underline"></span>
                     <ul class="sub-nav__list sub-nav__list-none">
-                        <li class="sub-nav__item">
+                        {% for productCategory in productCategoryList %}
+                            <li class="sub-nav__item">
+                                <a href="{{ productCategory.get_absolute_url }}" class="sub-nav__item-link">{{productCategory.product_category_name}}</a>
+                            </li>
+                        {% endfor %}
+                        {% comment %} <li class="sub-nav__item">
                             <a href="{% url 'category' %}" class="sub-nav__item-link">Ремни</a>
                         </li>
                         <li class="sub-nav__item">
@@ -62,7 +70,7 @@
                         </li>
                         <li class="sub-nav__item">
                             <a href="{% url 'category' %}" class="sub-nav__item-link">Другое</a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
                 <li class="nav__item">
