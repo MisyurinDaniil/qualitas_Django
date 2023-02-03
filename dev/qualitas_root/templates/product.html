@@ -42,27 +42,7 @@
                                     <img src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
                                 </div>
                             {% endfor %}
-                            {% comment %} <div
-                                class="carousel__slide"
-                                data-src="{% static 'img/product/end-prod-big-1.jpg' %}"
-                                data-fancybox="gallery"
-                            >
-                                <img src="{% static 'img/product/end-prod-main-1.jpg' %}" alt="" title="" />
-                            </div>
-                            <div
-                                class="carousel__slide"
-                                data-src="{% static 'img/product/end-prod-big-2.jpg' %}"
-                                data-fancybox="gallery"
-                            >
-                                <img src="{% static 'img/product/end-prod-main-2.jpg' %}" alt="" title="" />
-                            </div>
-                            <div
-                                class="carousel__slide"
-                                data-src="{% static 'img/product/end-prod-big-3.jpg' %}"
-                                data-fancybox="gallery"
-                            >
-                                <img src="{% static 'img/product/end-prod-main-3.jpg' %}" alt="" title="" />
-                            </div> {% endcomment %}
+
                         </div>
                         <div id="thumbCarousel" class="carousel">
                             {% for image in prodImages %}
@@ -70,15 +50,7 @@
                                     <img class="panzoom__content" src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
                                 </div>
                             {% endfor %}
-                            {% comment %} <div class="carousel__slide">
-                                <img class="panzoom__content" src="{% static 'img/product/end-prod-main-1.jpg' %}" alt="" title="" />
-                            </div>
-                            <div class="carousel__slide">
-                                <img class="panzoom__content" src="{% static 'img/product/end-prod-main-2.jpg' %}" alt="" title="" />
-                            </div>
-                            <div class="carousel__slide">
-                                <img class="panzoom__content" src="{% static 'img/product/end-prod-main-2.jpg' %}" alt="" title="" />
-                            </div> {% endcomment %}
+
                         </div>
                     </div>
                     <div class="end-product-spec">
@@ -179,7 +151,7 @@
                                     class="main-button main-button__submit-modal"
                                     type="submit"
                                     value="Отправить"
-                                />product_img_main
+                                />
                 </div>
                 <div class="modal-window__order-true display-none">
                     <br />

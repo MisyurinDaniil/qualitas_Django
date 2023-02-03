@@ -7,22 +7,22 @@
 {% block mainContent %}
     <style>
         .header_background {
-            background-image: url({% static 'img/belt_category_320x568.jpg' %});
+            background-image: url({{prodCategory.product_category_img_mobile.url}});
         }
         @media (min-width: 576px) {
             .header_background {
-                background-image: url({% static 'img/belt_category_576x568.jpg' %});
+                background-image: url({{prodCategory.product_category_img_mobile_horizontal.url}});
             }
         }
         @media (min-width: 768px) {
             .header_background {
-                background-image: url({% static 'img/belt_category_768x550.jpg' %});
+                background-image: url({{prodCategory.product_category_img_tablet.url}});
             }
         }
         @media (min-width: 1200px) {
             .header_background  {
                 background: url({% static 'img/header_shadow.png' %}) 0 0 repeat-x,
-                    url({% static 'img/belt_category_1200x760.jpg' %}) center/cover no-repeat;
+                    url({{prodCategory.product_category_img_desktop.url}}) center/cover no-repeat;
             }
         }
     </style>
@@ -36,143 +36,24 @@
                 </div>
                 <div class="products-wraper">
                     <ul class="products-list">
+                        {% for prodItem in prodItemsByCategory %}
                         <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
+                            <a href="{{ prodItem.get_absolute_url }}" class="pruduct__link">
                                 <div class="product__img-wrap">
                                     <img
-                                        src="{% static 'img/product/belt (1).jpg' %}"
+                                        src="{{ prodItem.product_img_main.url }}"
                                         alt="Ремень из кожи буйвола коричневого цвета"
                                         class="product__img"
                                     />
                                 </div>
                                 <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
+                                    {{ prodItem.product_name }}
                                 </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
+                                <p class="product__text roduct__price">{{ prodItem.product_price }} &#8381;</p>
                             </a>
                         </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (2).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета ремень из кожи
-                                    буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (3).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (4).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета ремень из кожи
-                                    буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (5).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (6).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (7).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (8).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
-                        <li class="product">
-                            <a href="{% url 'product' %}" class="pruduct__link">
-                                <div class="product__img-wrap">
-                                    <img
-                                        src="{% static 'img/product/belt (9).jpg' %}"
-                                        alt="Ремень из кожи буйвола коричневого цвета"
-                                        class="product__img"
-                                    />
-                                </div>
-                                <p class="product__text product__title">
-                                    Ремень из кожи буйвола коричневого цвета
-                                </p>
-                                <p class="product__text roduct__price">3 300 &#8381;</p>
-                            </a>
-                        </li>
+                        {% endfor %}
+
                     </ul>
                 </div>
             </div>

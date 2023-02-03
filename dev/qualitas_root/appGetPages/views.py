@@ -1,18 +1,11 @@
 from django.shortcuts import render
 
-from appProductItem.views import getProdItemsByCategory, getProdItemBySlug, getProdImagesByProdSlug, getProdItemsInGroups, getProductsCategoryBySlug, getProductsGroups
+from appProductItem.views import getProdItemsByCategory, getProdItemBySlug, getProdImagesByProdSlug, getProductsCategoryBySlug
 
 # Create your views here.
 
 def home_page(request):
-    # Получаем товары в соответствующих категориях
-    prodItemsInGroups = getProdItemsInGroups()
-    productGroupList = getProductsGroups()
-    # Отрисовываем полученные данные на странице
-    return render(request, './index.html', {
-        'prodItemsInGroups' : prodItemsInGroups,
-        'productGroupList' : productGroupList,
-    })
+    return render(request, './index.html')
 
 def product_page(request, productItemSlug):
     # Получаем товар по productItemSlug товара 
@@ -25,8 +18,19 @@ def product_page(request, productItemSlug):
         'prodImages' : prodImages,
     })
 
-def category_page(request):
-    return render(request, './category.html')
+def category_page(request, productCategorySlug):
+    # Получаем список товаров определенной категории по Slug категории
+    prodItemsByCategory = getProdItemsByCategory(productCategorySlug)
+    # Получаем категорию товара по Slug категории, для вывода загаловков и картинки хедера
+    prodCategory = getProductsCategoryBySlug(productCategorySlug)
+    # Отрисовываем полученные данные на странице 
+    return render(request, './category.html', {
+        'prodItemsByCategory' : prodItemsByCategory,
+        'prodCategory' : prodCategory,
+    })
+
+# def category_page(request):
+#     return render(request, './category.html')
 
 def blog_page(request):
     return render(request, './blog.html')
