@@ -18,19 +18,18 @@
     <meta property="og:image:type" content="image/jpg">
 {% endblock %}
 {% block mainContent %}
+
     <style>
         .header_background {
             background: 
                 url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
                 url({{prodCategory.product_category_img_mobile.url}}) center/cover no-repeat;
-                {% comment %} background-image: url({{prodCategory.product_category_img_mobile.url}}); {% endcomment %}
         }
         @media (min-width: 576px) {
             .header_background {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
                     url({{prodCategory.product_category_img_mobile_horizontal.url}}) center/cover no-repeat;
-                {% comment %} background-image: url({{prodCategory.product_category_img_mobile_horizontal.url}}); {% endcomment %}
             }
         }
         @media (min-width: 768px) {
@@ -38,7 +37,6 @@
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
                     url({{prodCategory.product_category_img_tablet.url}}) center/cover no-repeat;
-                    {% comment %} background-image: url({{prodCategory.product_category_img_tablet.url}}); {% endcomment %}
             }
         }
         @media (min-width: 1200px) {
@@ -50,11 +48,17 @@
         }
     </style>
     {% include 'includes/header_big.html' %}
+    
+    <script>
+        let h1 = document.getElementById('header-title');
+        h1.textContent = '{{prodCategory.product_category_h1}}';
+    </script>
+
     <section class="main">
         <div class="container">
             <div class="category-items">
                 <div class="h2">
-                    <h2 class="h2__title">Каталог кожаных ремней ручной рыботы</h2>
+                    <h2 class="h2__title">{{prodCategory.product_category_h2}}</h2>
                     <span class="title-underline"></span>
                 </div>
                 <div class="products-wraper">
@@ -76,7 +80,6 @@
                             </a>
                         </li>
                         {% endfor %}
-
                     </ul>
                 </div>
             </div>

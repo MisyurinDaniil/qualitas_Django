@@ -37,10 +37,10 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li class="nav__item">
+                {% comment %} <li class="nav__item">
                     <a href="{% url 'blog' %}" class="nav__item-link">Блог</a>
                     <span class="title-underline nav-title-underline"></span>
-                </li>
+                </li> {% endcomment %}
                 <li class="nav__item">
                     <div class="nav-link__container">
                         <a href="#" class="nav__item-link">Информация</a>
@@ -58,14 +58,14 @@
                                 >Способы оплаты</a
                             >
                         </li>
-                        <li class="sub-nav__item">
+                        {% comment %} <li class="sub-nav__item">
                             <a href="{% url 'aboutus' %}" class="sub-nav__item-link">О нас</a>
                         </li>
                         <li class="sub-nav__item">
                             <a href="{% url 'help' %}" class="sub-nav__item-link"
                                 >Часто задаваемые вопросы</a
                             >
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
                 <li class="nav__item">
@@ -77,8 +77,8 @@
     </div>
     <div class="container">
         <div class="h1 h1_yellow h1_top-margin">
-            <h1 class="h1__title">
-                Мастерская кожаных изделий ручной работы
+            <h1 class="h1__title" id="header-title">
+                    Мастерская кожаных изделий ручной работы
             </h1>
         </div>
     </div>

@@ -661,6 +661,7 @@ ul {
     }
     .h1__title {
         font-size: 64px;
+        text-align: right;
     }
     .h1-title_home {
         width: 80%;
@@ -668,6 +669,9 @@ ul {
     .h1 {
         display: flex;
         justify-content: flex-end;
+    }
+    .h1_top-margin {
+        margin-top: 400px;
     }
     .burger {
         display: none;
