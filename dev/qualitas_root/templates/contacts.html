@@ -2,7 +2,19 @@
 
 {% load static %} 
 
-{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %} 
+{% block title %} 
+    Наши контакты | Мастерская кожаных изделий ручной работы "Qualitas"
+{% endblock %} 
+{% block meta_tags %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content='Контакты мастерской по производству кожаных аксессуаров "Qualitas"'>
+    <meta name="keywords" content="наши контакты, телефон, почта, email, telegram, whatsapp">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content='Наши контакты | Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:description" content='Контакты мастерской по производству кожаных аксессуаров "Qualitas"'/>
+    <meta property="og:url" content="https://qualitas.store/contacts" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
+{% endblock %}
 
 {% block mainContent %}
     {% include 'includes/header_small.html' %}

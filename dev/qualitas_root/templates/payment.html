@@ -2,8 +2,19 @@
 
 {% load static %} 
 
-{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %} 
-
+{% block title %} 
+    Способы оплаты | Мастерская кожаных изделий ручной работы "Qualitas" 
+{% endblock %} 
+{% block meta_tags %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content='Способы оплаты в мастерской по производству кожаных аксессуаров "Qualitas"'>
+    <meta name="keywords" content="способы оплаты, платежные системы, перевод денег">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content='Способы оплаты | Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:description" content='Способы оплаты в мастерской по производству кожаных аксессуаров "Qualitas"'/>
+    <meta property="og:url" content="https://qualitas.store/payment" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
+{% endblock %}
 {% block mainContent %}
     {% include 'includes/header_small.html' %}
     <section class="main main_small-header">

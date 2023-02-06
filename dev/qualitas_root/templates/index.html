@@ -4,29 +4,34 @@
 
 {% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %}
 
-
-
 {% block mainContent %}
     <style>
         .h1_yellow {
             color: #d78e36;
         }
         .header_background {
-            background-image: url({% static 'img/manufacturing_process_320x568.jpg' %});
+            background: 
+                url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
+                url({% static 'img/manufacturing_process_320x568.jpg' %}) center/cover no-repeat;
         }
         @media (min-width: 576px) {
             .header_background {
-                background-image: url({% static 'img/manufacturing_process_576x568.jpg' %});
+                background: 
+                    url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
+                    url({% static 'img/manufacturing_process_576x568.jpg' %}) center/cover no-repeat;
             }
         }
         @media (min-width: 768px) {
             .header_background {
-                background-image: url({% static 'img/manufacturing_process_768x550.jpg' %});
+                background: 
+                    url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
+                    url({% static 'img/manufacturing_process_768x550.jpg' %}) center/cover no-repeat;
             }
         }
         @media (min-width: 1200px) {
             .header_background {
-                background: url({% static 'img/header_shadow.png' %}) 0 0 repeat-x,
+                background: 
+                    url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
                     url({% static 'img/manufacturing_process_1200x760.jpg' %}) center/cover no-repeat;
             }
         }

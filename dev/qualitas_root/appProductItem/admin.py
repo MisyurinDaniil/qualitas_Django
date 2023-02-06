@@ -44,7 +44,7 @@ class CustomizeProductItem(admin.ModelAdmin):
     # Определяем поля, которые можно отредактировать, не переходя на отдельный товар
     list_editable = ('product_is_published', )
     # Указжем поля отображаемые на карточке товара
-    fields = ('product_name', 'product_is_published', 'product_slug', 'product_page_title', 'product_page_description', 
+    fields = ('product_name', 'product_is_published', 'product_slug', 'product_page_description', 
         'product_page_keywords', 'product_category', 'product_group', 'product_price', 'product_old_price',
         'product_color', 'product_material', 'product_fitting', 'product_make_time', 'product_size', 
         'product_description', 'product_img_main', 'get_img', 'product_img_main_alt', 'product_img_main_title', 

@@ -2,26 +2,49 @@
 
 {% load static %} 
 
-{% block title %} Мастерская кожаных изделий ручной работы "Qualitas" {% endblock %}
-
+{% block title %} 
+    {{prodCategory.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" 
+{% endblock %}
+{% block meta_tags %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content="{{ prodCategory.product_category_description }}">
+    <meta name="keywords" content="{{ prodCategory.product_category_keywords }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{prodCategory.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" "/>
+    <meta property="og:description" content="{{ prodCategory.product_category_description }}"/>
+    <meta property="og:url" content="https://qualitas.store/category/{{ prodCategory.product_category_slug }}" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:image" content="https://qualitas.store{{prodCategory.product_category_img_main.url}}"/>
+    <meta property="og:image:type" content="image/jpg">
+{% endblock %}
 {% block mainContent %}
     <style>
         .header_background {
-            background-image: url({{prodCategory.product_category_img_mobile.url}});
+            background: 
+                url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
+                url({{prodCategory.product_category_img_mobile.url}}) center/cover no-repeat;
+                {% comment %} background-image: url({{prodCategory.product_category_img_mobile.url}}); {% endcomment %}
         }
         @media (min-width: 576px) {
             .header_background {
-                background-image: url({{prodCategory.product_category_img_mobile_horizontal.url}});
+                background: 
+                    url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
+                    url({{prodCategory.product_category_img_mobile_horizontal.url}}) center/cover no-repeat;
+                {% comment %} background-image: url({{prodCategory.product_category_img_mobile_horizontal.url}}); {% endcomment %}
             }
         }
         @media (min-width: 768px) {
             .header_background {
-                background-image: url({{prodCategory.product_category_img_tablet.url}});
+                background: 
+                    url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
+                    url({{prodCategory.product_category_img_tablet.url}}) center/cover no-repeat;
+                    {% comment %} background-image: url({{prodCategory.product_category_img_tablet.url}}); {% endcomment %}
             }
         }
         @media (min-width: 1200px) {
             .header_background  {
-                background: url({% static 'img/header_shadow.png' %}) 0 0 repeat-x,
+                background: 
+                    url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
                     url({{prodCategory.product_category_img_desktop.url}}) center/cover no-repeat;
             }
         }
