@@ -1,15 +1,33 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}
-    qualitas.store - Страница не найдена
-{% endblock %}
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} 
+    404 | Мастерская кожаных изделий ручной работы "Qualitas"
+{% endblock %} 
+
 {% block meta_tags %}
     <meta name="robots" content="NONE,NOARCHIVE">
+    <meta name="description" content='404 - Страница не найдена| Мастерская кожаных изделий ручной работы "Qualitas"'>
+    <meta name="keywords" content="404 - Страница не найдена">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content='404 - Страница не найдена| Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:description" content='404 - Страница не найдена| Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:url" content="https://qualitas.store" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
 {% endblock %}
-{% block mainContent %}
-    <div class="main-content">
-        <h1>Ошибка 404 - Страница не найдена</h1>
-        <h3>Страница, которые вы хотите просмотреть удалена или временно недоступна.</h3>
 
-    </div>
+{% block mainContent %}
+    {% include 'includes/header_small.html' %}
+        <section class="main main_small-header">
+            <div class="container">
+                <div class="404">
+                    <div class="h1 h1_end-product">
+                        <h1 class="h1__title h1-title_end-product">Ошибка 404 - Страница не найдена <br>
+                            Страница, которые вы хотите просмотреть удалена или временно недоступна.
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </section>
 {% endblock %}

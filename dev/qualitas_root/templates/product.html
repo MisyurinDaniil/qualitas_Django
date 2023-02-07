@@ -74,7 +74,7 @@
                                 </p>
                             </li>
                         </ul>
-                        <button data-fancybox="" data-src="#modal-window" class="main-button">
+                        <button data-fancybox="" data-src="#modal-window" class="main-button main-button-modal">
                             Оформить заказ
                         </button>
                     </div>
@@ -86,17 +86,18 @@
                         Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                     </p>
-                    <form action="#" method="POST" class="modal-window__form"> 
-                    {% comment %} <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form"> {% endcomment %}
-                        <!-- {% csrf_token %} -->
+                    {% comment %} <form action="#" method="POST" class="modal-window__form">  {% endcomment %}
+                    <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form">
+                        {% csrf_token %}
                         <ul class="modal-window__list">
                             <li class="modal-window__list-item">
                                 <span class="modal-window__input_title">Изделие:</span>
                                 <span class="modal-window__input_title">
                                     {{prodItem.product_name}}
                                 </span>
-                                <!-- <input class="display-none" type="text" value="{{request.get_full_path}}" name="get_full_path">
-                                <input class="display-none" type="text" value="{{prodItem.id}}" name="product_id"> -->
+                                {% comment %} <input class="display-none" type="text" value="{{request.get_full_path}}" name="get_full_path"> {% endcomment %}
+                                <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path">
+                                <input class="display-none" type="text" value="{{prodItem.id}}" name="product_id">
                                 <img
                                     class='modal-window__image'
                                     src="{{prodItem.product_img_main.url}}"
@@ -153,7 +154,7 @@
                                     value="Отправить"
                                 />
                 </div>
-                <div class="modal-window__order-true display-none">
+                {% comment %} <div class="modal-window__order-true display-none">
                     <br />
                     Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
                     Вы также можете написать нам в социальных сетях.<br />
@@ -162,19 +163,19 @@
                     <br />
                     Приносим извинения за временные неполадки. <br />
                     Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
-                </div>
-                <!-- <div class="modal-window__order-true">
+                </div> {% endcomment %}
+                <div class="modal-window__order-true display-none">
                     <br />
                     Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
                     Вы также можете написать нам в социальных сетях.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                 </div>
-                <div class="modal-window__order-false">
+                <div class="modal-window__order-false display-none">
                     <br />
                     Приносим извинения за временные неполадки. <br />
                     Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
-                </div> -->
+                </div>
             </div>
         </div>
     </section>

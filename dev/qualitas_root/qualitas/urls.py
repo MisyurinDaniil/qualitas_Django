@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .settings import DEBUG
 from django.views.generic.base import TemplateView
-
+from appOrders.views import makeorder
 from appGetPages import views as getPage
 
 urlpatterns = [
@@ -34,6 +34,7 @@ urlpatterns = [
     path('delivery', getPage.delivery_page, name='delivery'),
     path('payment', getPage.payment_page, name='payment'),
     path('help', getPage.help_page, name='help'),
+    path('makeorder/', makeorder, name='makeorder'),
     path('admin', admin.site.urls),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 ]

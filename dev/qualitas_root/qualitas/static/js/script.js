@@ -110,9 +110,58 @@ closeButton.addEventListener('click', function () {
     }
 });
 
+    /********************************************/
+    /*************Отправка формы заказа *********/
+    /********************************************/
 
-// let url = window.location.href;
-// url = url.split('/');
-// url = url[url.length - 1];
-// console.log(url);
+    let url = window.location.href;
+    document.getElementById('page_full_url').value = url
+    // console.log(url);
 
+    if (document.querySelector("form")) {
+        
+        mainButtonModal = document.querySelector('.main-button-modal');
+        if (mainButtonModal) {
+            mainButtonModal.addEventListener('click', () => {
+                document.querySelector(".modal-window__content").classList.remove('display-none');
+                document.querySelector(".modal-window__order-true").classList.add('display-none');
+                document.querySelector(".modal-window__order-false").classList.add('display-none');
+            })
+        }
+        const ajaxSend = async (formData, url) => {
+            const response = await fetch(url, {
+                method: "POST",
+                body: formData
+            });
+            if (!response.ok) {
+                throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response.status}`);
+            }
+            return await response.text();
+        };
+
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                let url = this.attributes.action.nodeValue;
+                ajaxSend(formData, url)
+                    .then((response) => {
+                        console.log(response);
+                        // form.reset(); // очищаем поля формы
+                        if (mainButtonModal) {
+                            document.querySelector(".modal-window__content").classList.add('display-none')
+                            document.querySelector(".modal-window__order-true").classList.remove('display-none')
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        if (mainButtonModal) {
+                            document.querySelector(".modal-window__content").classList.add('display-none')
+                            document.querySelector(".modal-window__order-false").classList.remove('display-none')
+                        }
+                    });
+            });
+        });
+    }
