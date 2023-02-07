@@ -114,12 +114,13 @@ closeButton.addEventListener('click', function () {
     /*************Отправка формы заказа *********/
     /********************************************/
 
-    let url = window.location.href;
-    document.getElementById('page_full_url').value = url
-    // console.log(url);
+
 
     if (document.querySelector("form")) {
         
+        let url = window.location.href;
+        document.getElementById('page_full_url').value = url
+
         mainButtonModal = document.querySelector('.main-button-modal');
         if (mainButtonModal) {
             mainButtonModal.addEventListener('click', () => {
