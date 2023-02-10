@@ -38,7 +38,8 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 ]
-# Если включен DEBUG, меняем путь то статических файлов
+# Если включен DEBUG, меняем путь до статических файлов загруженных через админ панель
+# (путь до файлов в папке media с включенным режимом DEBUG)
 if DEBUG: 
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

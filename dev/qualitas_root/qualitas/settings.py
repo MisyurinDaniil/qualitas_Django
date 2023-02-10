@@ -109,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
+# Перевод админ панели на русский язык
 LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -121,16 +122,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# URL для использования при обращении пользователей к статическим файлам
+# {% load static %} url({% static 'img/header_shadows.png' %})
+STATIC_URL = 'static/'
+# Список директорий из которых нужно собирать или искать в режиме dev нашу статику
+# По умолчанию только директория static внутри созданного приложения (app)
 STATICFILES_DIRS = [
     BASE_DIR / "qualitas/static/"
 ]
-# ! URL для использования при обращении к статическим файлам, расположенным в STATIC_ROOT
-STATIC_URL = 'static/'
-# ! Директория сбора статических файлов в одном месте для production
+# Директория сбора статических файлов в одном месте для production 
+# после запуска команды collectstatic - django соберет их в эту папку
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# ! URL, который обрабатывает медиа, обслуживаемые из MEDIA_ROOT
+
+
+# аналогично STATIC_URL, это URL-адрес, по которому пользователи могут получить доступ к медиафайлам.
 MEDIA_URL = 'media/'
-# ! Директория для сбора статических файлов в одном месте для production
+# Директория для сбора статических файлов в одном месте для production
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -140,3 +147,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH = False
+
+
+# Настройка статики из папки static в корне проекта
+# информация из https://www.youtube.com/watch?v=WTXPLwrK398&list=PLF-NY6ldwAWrb6nQcPL21XX_-AmivFAYq&index=8&ab_channel=DjangoSchool
+# STATIC_URL = '/static/'
+# STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [STATIC_DIR]

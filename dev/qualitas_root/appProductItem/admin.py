@@ -5,6 +5,10 @@ from django.utils.safestring import mark_safe
 
 from .models import *
 
+# Изменим title и заголовок h1 страницы администратора
+admin.site.site_title = 'Мастерская кожаных изделий ручной работы "Qualitas"'
+admin.site.site_header = 'Мастерская кожаных изделий ручной работы "Qualitas"'
+
 # Register your models here.
 class ShowImagesInProduct(admin.StackedInline):
     # Указываем обязательный атрибут - модель к которой относится данный класс
@@ -38,7 +42,7 @@ class ShowImagesInProduct(admin.StackedInline):
 
 class CustomizeProductItem(admin.ModelAdmin):
     # Кортеж с именами полей, который хотим отобразит в админ панеле на этапе просмотра всего перечня товаров
-    list_display = ('id', 'product_name', 'get_img', 'product_is_published')
+    list_display = ('id', 'product_name', 'product_category', 'get_img', 'product_is_published')
     # Отмечаем поля по нажатию на которые можно перейти на страницу товара
     list_display_links = ('id', 'product_name', 'get_img')
     # Определяем поля, которые можно отредактировать, не переходя на отдельный товар
@@ -49,10 +53,17 @@ class CustomizeProductItem(admin.ModelAdmin):
         'product_color', 'product_material', 'product_fitting', 'product_make_time', 'product_size', 
         'product_description', 'product_img_main', 'get_img', 'product_img_main_alt', 'product_img_main_title', 
         'product_time_create', 'product_time_update')
+    # Укажим поля по которым разрешена фильтрация товаров на этапе просмотра всего перечная
+    # товаров
+    list_filter = ('product_category','product_is_published')
+    # Укажим поля по которым разрешен поиск на этапе просмотра всего перечная товаров
+    search_fields = ('product_name', 'product_category__product_category_name')
     # Укажем поля только для чтения, чтобы django не вывалилвался в ошибку
     readonly_fields = ('get_img', 'product_time_create', 'product_time_update')
     # Укажем сколько строк на одной странице
     list_per_page = 10
+    # Дублируем кнопки сохранения изменений на верху окна
+    save_on_top = True
     # Укажем максимальное количество полей при выводе всех
     list_max_show_all = 100
     # Передадим класс ProductImages для отображения полей добавления картинок на странице добавления товара
@@ -88,7 +99,7 @@ class CustomProductCategory(admin.ModelAdmin):
         else:
             return 'нет картинки'
     # Строковое представление функции get_img
-    get_img.short_description = 'Миниатюра 208х139'
+    get_img.short_description = 'Миниатюра 210х140'
 
 # Настраиваем отображение в админ панеле
 class CustomizeProductGroup(admin.ModelAdmin):
