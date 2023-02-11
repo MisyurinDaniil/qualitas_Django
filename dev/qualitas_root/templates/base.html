@@ -7,10 +7,15 @@
             Мастерская кожаных изделий ручной работы "Qualitas"
         {% endblock %}
     </title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="msapplication-TileColor" content="#da532c">
+    
+    <!--Meta for favicon-->
+    <meta name="msapplication-TileColor" content="#603cba">
     <meta name="theme-color" content="#ffffff">
+    <!--END Meta for favicon-->
+    
     {% block meta_tags %}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
         <meta name="description" content="Купить изделия ручной работы из натуральной кожи или заказать индивидуальный дизайн вы можете в мастерской “Qualitas”">
@@ -21,13 +26,15 @@
         <meta property="og:url" content="https://qualitas.store/" />
         <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
     {% endblock %}
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favico/apple-touch-icon.png' %}">
+    
+    <!--link for favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favico/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favico/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favico/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'img/favico/site.webmanifest' %}">
-    <link rel="mask-icon" href="{% static 'img/favico/safari-pinned-tab.svg' %}" color="#5bbad5">
-    <!-- <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}"> -->
-    <!-- <link rel="stylesheet" href="{% static 'css/normalize.css' %}"> -->
+    <link rel="mask-icon" href="{% static 'img/favico/safari-pinned-tab.svg' %}" color="#555555">
+    <!--END link for favicon-->
+   
     <link rel="stylesheet" href="{% static 'css/fancybox4/fancybox4.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 

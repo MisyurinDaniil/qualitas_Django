@@ -52,8 +52,8 @@
                     {% for productCategory in productCategoryList %}
                     <li class="catalog-item">
                         <a href="{{ productCategory.get_absolute_url }}" class="catalog-item__link">
-                            <img src="{{productCategory.product_category_img_main.url}}" alt="Ремни" class="catalog-item__img" />
-                            <p class="catalog-item__p">{{productCategory.product_category_name}}</p>
+                            <img src="{{ productCategory.product_category_img_main.url }}" alt="{{ productCategory.product_category_img_main_alt }}" title="{{ productCategory.product_category_img_main_title }}" class="catalog-item__img" />
+                            <p class="catalog-item__p">{{ productCategory.product_category_name }}</p>
                         </a>
                     </li>
 
