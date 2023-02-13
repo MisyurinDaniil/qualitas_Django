@@ -16,17 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from .settings import DEBUG
 from django.conf import settings
 from django.conf.urls.static import static
-from .settings import DEBUG
 from django.views.generic.base import TemplateView
 from appOrders.views import makeorder
 from appGetPages import views as getPage
+from appProductItem import views as product
 
 urlpatterns = [
     path('', getPage.home_page, name='home'),
-    path('product/<slug:productItemSlug>', getPage.product_page, name='product'),   
-    path('category/<slug:productCategorySlug>', getPage.category_page, name='category'),
+    path('product/<slug:productItemSlug>', product.ProductView.as_view(), name='product'),
+    path('category/<slug:productCategorySlug>', product.ProductsCategoryView.as_view(), name='category'),
     path('blog', getPage.blog_page, name='blog'),
     path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
     path('aboutus', getPage.aboutus_page, name='aboutus'),
