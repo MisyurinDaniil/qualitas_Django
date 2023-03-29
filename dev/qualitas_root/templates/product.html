@@ -3,19 +3,19 @@
 {% load static %} 
 
 {% block title %}  
-    {{prodItem.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"
+    {{product.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"
 {% endblock %} 
 
 {% block meta_tags %}
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="description" content="{{ prodItem.product_page_description }}">
-    <meta name="keywords" content="{{ prodItem.product_page_keywords }}">
+    <meta name="description" content="{{ product.product_page_description }}">
+    <meta name="keywords" content="{{ product.product_page_keywords }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content='{{prodItem.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"'/>
-    <meta property="og:description" content="{{ prodItem.product_page_description }}"/>
-    <meta property="og:url" content="https://qualitas.store/product/{{prodItem.product_slug}}" />
+    <meta property="og:title" content='{{product.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:description" content="{{ product.product_page_description }}"/>
+    <meta property="og:url" content="https://qualitas.store/product/{{product.product_slug}}" />
     <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
-    <meta property="og:image" content="https://qualitas.store{{prodImages.first.product_img_big.url}}"/>
+    <meta property="og:image" content="https://qualitas.store{{prodImages.0.product_img_big.url}}"/>
     <meta property="og:image:type" content="image/jpg">
 {% endblock %}
 
@@ -27,13 +27,13 @@
             <div class="end-product">
                 <div class="h1 h1_end-product">
                     <h1 class="h1__title h1-title_end-product">
-                        {{prodItem.product_name}}
+                        {{product.product_name}}
                     </h1>
                 </div>
                 <div class="end-product_wrap">
                     <div class="end-product-img">
                         <div id="mainCarousel" class="carousel">
-                            {% for image in prodImages %}
+                            {% for image in product.productimg_set.all %}
                                 <div
                                     class="carousel__slide"
                                     data-src="{{image.product_img_big.url}}"
@@ -45,7 +45,7 @@
 
                         </div>
                         <div id="thumbCarousel" class="carousel">
-                            {% for image in prodImages %}
+                            {% for image in product.productimg_set.all %}
                                 <div class="carousel__slide">
                                     <img class="panzoom__content" src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
                                 </div>
@@ -56,13 +56,13 @@
                     <div class="end-product-spec">
                         <ul class="end-product-spec__list">
                             <li class="end-product-spec__item end-product-spec__price">
-                                {{prodItem.product_price}} &#8381;
+                                {{product.product_price}} &#8381;
                             </li>
-                            <li class="end-product-spec__item">Цвет: {{prodItem.product_color.colorName}}</li>
-                            <li class="end-product-spec__item">Материал: {{prodItem.product_material.materialName}}</li>
-                            <li class="end-product-spec__item">Размер: {{prodItem.product_size}}</li>
-                            <li class="end-product-spec__item">Срок изготоления: {{prodItem.product_make_time.make_time}}</li>
-                            <li class="end-product-spec__item">Фурнитура: {{prodItem.product_fitting.fittingName}}</li>
+                            <li class="end-product-spec__item">Цвет: {{product.product_color.colorName}}</li>
+                            <li class="end-product-spec__item">Материал: {{product.product_material.materialName}}</li>
+                            <li class="end-product-spec__item">Размер: {{product.product_size}}</li>
+                            <li class="end-product-spec__item">Срок изготоления: {{product.product_make_time.make_time}}</li>
+                            <li class="end-product-spec__item">Фурнитура: {{product.product_fitting.fittingName}}</li>
                             <li class="end-product-spec__item">
                                 Упаковка: упаковывается в крафтовую бумагу повязанную ващеной
                                 нитью
@@ -70,7 +70,7 @@
                             <li class="end-product-spec__item end-product-spec__description">
                                 <span class="">Описание товара:</span>
                                 <p class="end-product-spec__description_p">
-                                    {{prodItem.product_description}}
+                                    {{product.product_description}}
                                 </p>
                             </li>
                         </ul>
@@ -93,15 +93,15 @@
                             <li class="modal-window__list-item">
                                 <span class="modal-window__input_title">Изделие:</span>
                                 <span class="modal-window__input_title">
-                                    {{prodItem.product_name}}
+                                    {{product.product_name}}
                                 </span>
                                 {% comment %} <input class="display-none" type="text" value="{{request.get_full_path}}" name="get_full_path"> {% endcomment %}
                                 <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path">
-                                <input class="display-none" type="text" value="{{prodItem.id}}" name="product_id">
+                                <input class="display-none" type="text" value="{{product.id}}" name="product_id">
                                 <img
                                     class='modal-window__image'
-                                    src="{{prodItem.product_img_main.url}}"
-                                    alt="{{prodItem.product_img_main_alt}}"
+                                    src="{{product.product_img_main.url}}"
+                                    alt="{{product.product_img_main_alt}}"
                                 />
                             </li>
                             <li class="modal-window__list-item">

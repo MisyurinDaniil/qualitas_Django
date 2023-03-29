@@ -3,18 +3,18 @@
 {% load static %} 
 
 {% block title %} 
-    {{prodCategory.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" 
+    {{category.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" 
 {% endblock %}
 {% block meta_tags %}
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="description" content="{{ prodCategory.product_category_description }}">
-    <meta name="keywords" content="{{ prodCategory.product_category_keywords }}">
+    <meta name="description" content="{{ products.0.product_category.product_category_description }}">
+    <meta name="keywords" content="{{ products.0.product_category.product_category_keywords }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{prodCategory.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" "/>
-    <meta property="og:description" content="{{ prodCategory.product_category_description }}"/>
-    <meta property="og:url" content="https://qualitas.store/category/{{ prodCategory.product_category_slug }}" />
+    <meta property="og:title" content="{{products.0.product_category.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" "/>
+    <meta property="og:description" content="{{ products.0.product_category.product_category_description }}"/>
+    <meta property="og:url" content="https://qualitas.store/category/{{ products.0.product_category.product_category_slug }}" />
     <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
-    <meta property="og:image" content="https://qualitas.store{{prodCategory.product_category_img_main.url}}"/>
+    <meta property="og:image" content="https://qualitas.store{{products.0.product_category.product_category_img_main.url}}"/>
     <meta property="og:image:type" content="image/jpg">
 {% endblock %}
 {% block mainContent %}
@@ -23,27 +23,27 @@
         .header_background {
             background: 
                 url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                url({{prodCategory.product_category_img_mobile.url}}) center/cover no-repeat;
+                url({{products.0.product_category.product_category_img_mobile.url}}) center/cover no-repeat;
         }
         @media (min-width: 576px) {
             .header_background {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                    url({{prodCategory.product_category_img_mobile_horizontal.url}}) center/cover no-repeat;
+                    url({{products.0.product_category.product_category_img_mobile_horizontal.url}}) center/cover no-repeat;
             }
         }
         @media (min-width: 768px) {
             .header_background {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                    url({{prodCategory.product_category_img_tablet.url}}) center/cover no-repeat;
+                    url({{products.0.product_category.product_category_img_tablet.url}}) center/cover no-repeat;
             }
         }
         @media (min-width: 1200px) {
             .header_background  {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                    url({{prodCategory.product_category_img_desktop.url}}) center/cover no-repeat;
+                    url({{products.0.product_category.product_category_img_desktop.url}}) center/cover no-repeat;
             }
         }
     </style>
@@ -51,19 +51,19 @@
     
     <script>
         let h1 = document.getElementById('header-title');
-        h1.textContent = '{{prodCategory.product_category_h1}}';
+        h1.textContent = '{{products.0.product_category.product_category_h1}}';
     </script>
 
     <section class="main">
         <div class="container">
             <div class="category-items">
                 <div class="h2">
-                    <h2 class="h2__title">{{prodCategory.product_category_h2}}</h2>
+                    <h2 class="h2__title">{{products.0.product_category.product_category_h2}}</h2>
                     <span class="title-underline"></span>
                 </div>
                 <div class="products-wraper">
                     <ul class="products-list">
-                        {% for prodItem in prodItemsByCategory %}
+                        {% for prodItem in products %}
                         <li class="product">
                             <a href="{{ prodItem.get_absolute_url }}" class="pruduct__link">
                                 <div class="product__img-wrap">
