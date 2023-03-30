@@ -661,10 +661,11 @@ ul {
     }
     .h1__title {
         font-size: 64px;
-        text-align: right;
+        
     }
     .h1-title_home {
-        width: 80%;
+        /* width: 80%; */
+        text-align: right;
     }
     .h1 {
         display: flex;

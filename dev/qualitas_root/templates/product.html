@@ -62,10 +62,11 @@
                             <li class="end-product-spec__item">Материал: {{product.product_material.materialName}}</li>
                             <li class="end-product-spec__item">Размер: {{product.product_size}}</li>
                             <li class="end-product-spec__item">Срок изготоления: {{product.product_make_time.make_time}}</li>
-                            <li class="end-product-spec__item">Фурнитура: {{product.product_fitting.fittingName}}</li>
+                            {% if product.product_fitting.fittingName %}
+                                <li class="end-product-spec__item">Фурнитура: {{product.product_fitting.fittingName}}</li>
+                            {% endif %}
                             <li class="end-product-spec__item">
-                                Упаковка: упаковывается в крафтовую бумагу повязанную ващеной
-                                нитью
+                                Упаковка: упаковывается в тканевый мешок с логотипом. Подарочная коробка +500р к стоимости.
                             </li>
                             <li class="end-product-spec__item end-product-spec__description">
                                 <span class="">Описание товара:</span>
