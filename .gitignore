@@ -4,9 +4,9 @@ __pycache__/
 telegram_token.txt
 telegramToken.py
 deploy/
-prod/
+#prod/
 # # dotenv
-.env
+#.env
 
 
 # .idea/
