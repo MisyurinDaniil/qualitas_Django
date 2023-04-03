@@ -146,8 +146,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-APPEND_SLASH = False
-
+# APPEND_SLASH = False
+APPEND_SLASH = FalseAPPEND_SLASH = False
 
 # Настройка статики из папки static в корне проекта
 # информация из https://www.youtube.com/watch?v=WTXPLwrK398&list=PLF-NY6ldwAWrb6nQcPL21XX_-AmivFAYq&index=8&ab_channel=DjangoSchool

@@ -4,7 +4,7 @@
 <head>
     <title>
         {% block title %}
-            Мастерская кожаных изделий ручной работы "Qualitas"
+            Мастерская кожаных изделий ручной работы "Qualitas leather"
         {% endblock %}
     </title>
 
@@ -21,13 +21,15 @@
         <meta name="yandex-verification" content="f2afe232ffc47d31" />
         <!--Meta for yandex webmaster-->
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-        <meta name="description" content="Купить изделия ручной работы из натуральной кожи или заказать индивидуальный дизайн вы можете в мастерской “Qualitas”">
+        <meta name="description" content="Купить изделия ручной работы из натуральной кожи или заказать индивидуальный дизайн вы можете в мастерской “Qualitas leather”. Долговечные изделия, которые подойдут на подарок. Доставка по всей России.">
         <meta name="keywords" content="кошельки из кожи ручной работы, кожаные кошельки, сумки из натуральной кожи, мужские сумки, кожаные ремни, кожаные портмоне, кожаные рюкзаки, кожаные ключницы, подарки, подарок мужу, подарок парню, подарок жене">
         <meta property="og:type" content="website">
-        <meta property="og:title" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
-        <meta property="og:description" content='Купить изделия ручной работы из натуральной кожи или заказать индивидуальный дизайн вы можете в мастерской "Qualitas"'/>
+        <meta property="og:title" content='Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+        <meta property="og:description" content='Купить изделия ручной работы из натуральной кожи или заказать индивидуальный дизайн вы можете в мастерской "Qualitas leather"'/>
         <meta property="og:url" content="https://qualitas.store/" />
-        <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
+        <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+        <meta property="og:image" content="{% static 'img/home/main_image_open_graph.jpg' %}"/>
+        <meta property="og:image:type" content="image/jpg">
     {% endblock %}
     
     <!--link for favicon-->
@@ -44,9 +46,9 @@
 </head>
 
 <body>
-    
+
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
+    {% comment %} <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -60,7 +62,7 @@
             webvisor:true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/93019309" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/93019309" style="position:absolute; left:-9999px;" alt="" /></div></noscript> {% endcomment %}
     <!-- /Yandex.Metrika counter -->
 
     {% block mainContent %}

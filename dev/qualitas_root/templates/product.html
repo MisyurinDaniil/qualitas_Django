@@ -3,7 +3,7 @@
 {% load static %} 
 
 {% block title %}  
-    {{product.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"
+    {{product.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas leather"
 {% endblock %} 
 
 {% block meta_tags %}
@@ -11,11 +11,11 @@
     <meta name="description" content="{{ product.product_page_description }}">
     <meta name="keywords" content="{{ product.product_page_keywords }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content='{{product.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"'/>
+    <meta property="og:title" content='{{ product.product_name }} | Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
     <meta property="og:description" content="{{ product.product_page_description }}"/>
-    <meta property="og:url" content="https://qualitas.store/product/{{product.product_slug}}" />
-    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas"'/>
-    <meta property="og:image" content="https://qualitas.store{{prodImages.0.product_img_big.url}}"/>
+    <meta property="og:url" content="{{ product.get_absolute_url }}" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+    <meta property="og:image" content="{{ product.productimg_set.all.first.product_img_big.url }}"/>
     <meta property="og:image:type" content="image/jpg">
 {% endblock %}
 
