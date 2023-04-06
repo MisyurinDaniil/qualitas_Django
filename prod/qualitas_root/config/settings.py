@@ -166,7 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Без нее не работает авторизация в админ панеле (ругается на csrf атаку) на production server
 CSRF_TRUSTED_ORIGINS=['https://qualitas.store']
 
-APPEND_SLASH = FalseAPPEND_SLASH = False
+sAPPEND_SLASH = False
 
 # Настройка статики из папки static в корне проекта
 # информация из https://www.youtube.com/watch?v=WTXPLwrK398&list=PLF-NY6ldwAWrb6nQcPL21XX_-AmivFAYq&index=8&ab_channel=DjangoSchool
