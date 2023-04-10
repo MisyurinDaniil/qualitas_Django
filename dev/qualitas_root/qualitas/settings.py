@@ -57,6 +57,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'qualitas.urls'
 
+# DIRS
+# По умолчанию: [] (Пустой список)
+# Каталоги, в которых движок должен искать исходные файлы шаблонов, в порядке поиска.
+
+# APP_DIRS
+# По умолчанию: False
+# Должен ли движок искать исходные файлы шаблонов внутри установленных приложений.
+# По умолчанию файл settings.py, созданный django-admin startproject, устанавливает 'APP_DIRS': True.
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

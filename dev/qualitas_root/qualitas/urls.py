@@ -26,8 +26,8 @@ from appProductItem import views as product
 
 urlpatterns = [
     path('', getPage.home_page, name='home'),
-    path('product/<slug:productItemSlug>', product.ProductView.as_view(), name='product'),
-    path('category/<slug:productCategorySlug>', product.ProductsCategoryView.as_view(), name='category'),
+    path('product/<slug:productItemSlug>', product.ProductDetail.as_view(), name='product'),
+    path('category/<slug:productCategorySlug>', product.ProductsInCategoryList.as_view(), name='category'),
     # path('blog', getPage.blog_page, name='blog'),
     # path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
     # path('aboutus', getPage.aboutus_page, name='aboutus'),
