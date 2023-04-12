@@ -6,10 +6,13 @@ from django.utils.safestring import mark_safe
 from .models import *
 
 # Изменим title и заголовок h1 страницы администратора
-admin.site.site_title = 'Мастерская кожаных изделий ручной работы "Qualitas"'
-admin.site.site_header = 'Мастерская кожаных изделий ручной работы "Qualitas"'
+admin.site.site_title = 'Мастерская кожаных изделий ручной работы "Qualitas Leather"'
+admin.site.site_header = 'Мастерская кожаных изделий ручной работы "Qualitas Leather"'
 
 # Register your models here.
+
+# classs admin.StackedInline - позволяет отображать в админ панеле на странице одной модели
+# зависимые данные из другой модели
 class ShowImagesInProduct(admin.StackedInline):
     # Указываем обязательный атрибут - модель к которой относится данный класс
     model = ProductImg
@@ -35,11 +38,11 @@ class ShowImagesInProduct(admin.StackedInline):
     get_product_img.short_description = 'Миниатюра 570х380'
     get_product_img_big.short_description = 'Миниатюра 1280х853'
 
-    # Задаим одно поле ввода для модели Comment = 1, если указать 0 - необходимо нажимать зеленый плюс
-    # для отображения поля комментария
+    # Задаим одно поле ввода для модели ProductImg = 1, если указать 0 - необходимо нажимать зеленый плюс
+    # для отображения полей ввода новых значений.
     extra = 0
 
-
+# classs admin.ModelAdmin - позволяет задать дополнительные настройки для админ панелеи определенной модели
 class CustomizeProductItem(admin.ModelAdmin):
     # Кортеж с именами полей, который хотим отобразит в админ панеле на этапе просмотра всего перечня товаров
     list_display = ('id', 'product_name', 'product_category', 'get_img', 'product_is_published')
@@ -47,7 +50,7 @@ class CustomizeProductItem(admin.ModelAdmin):
     list_display_links = ('id', 'product_name', 'get_img')
     # Определяем поля, которые можно отредактировать, не переходя на отдельный товар
     list_editable = ('product_is_published', )
-    # Указжем поля отображаемые на карточке товара
+    # Указжем поля отображаемые на карточке товара админ панели
     fields = ('product_name', 'product_is_published', 'product_slug', 'product_page_description', 
         'product_page_keywords', 'product_category', 'product_group', 'product_price', 'product_old_price',
         'product_color', 'product_material', 'product_fitting', 'product_make_time', 'product_size', 
@@ -133,6 +136,7 @@ class CustomizeProductImg(admin.ModelAdmin):
             return mark_safe(f'<img src="{obj.product_img.url}" width="80px"')
         else:
             return 'нет картинки'
+            
     def get_product_img_big(self, obj):
         if obj.product_img_big:
             return mark_safe(f'<img src="{obj.product_img_big.url}" width="80px"')
