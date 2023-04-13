@@ -14,15 +14,9 @@ class ProductsInCategoryList(ListView):
         По умолчанию, данные из модели ProductItem, указанной в классе представлений, помещаются в коллекцию object_list,
             которая предается в шаблон template/appProductItem/productitem_list.html. Чтобы поменять имя коллекциия
             используем переменную context_object_name = 'products'
-        Для передачи шаблону таких статичных данных, можно использовать специальный словарь extra_context 
-            extra_context = {'title': 'Главная страница'}. этот словарь можно использовать именно 
-            для статичных (не изменяемых) данных, такие как строки, числа. Если же мы собираемся передавать 
-            динамические данные, вроде списков, то для этого уже нужно переопределять метод get_context_data базового класса.
         Генерировать исключение 404 если список статей пуст allow_empty = False
         Шаблон в который передается контекст и возвращается пользователю находится по пути <имя приложения>/<имя модели>_list.html 
             или используется атрибут template_name = 'appProductItem/productitem_list.html'
-        Для получения данных из модели для передачи в контекст используется переменная queryset = ProductItem.objects.all() или
-            метод получения записей get_queryset()
     """
     model = ProductItem
     context_object_name = 'products'
@@ -30,10 +24,26 @@ class ProductsInCategoryList(ListView):
     # template_name = 'appProductItem/productitem_list.html'
 
     def get_queryset(self):
+        """
+            Для получения данных из модели для передачи в контекст используется переменная queryset = ProductItem.objects.all() или
+            метод получения записей get_queryset()
+        """
         return (ProductItem.objects.select_related('product_category')
             .filter(Q(product_category__product_category_is_published = True)
             & Q(product_category__product_category_slug = self.kwargs['productCategorySlug'])
             & Q(product_is_published = True)))
+    
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     """
+    #         Для передачи шаблону таких статичных данных, можно использовать специальный словарь extra_context 
+    #         extra_context = {'title': 'Главная страница'}. этот словарь можно использовать именно 
+    #         для статичных (не изменяемых) данных, такие как строки, числа. Если же мы собираемся передавать 
+    #         динамические данные, вроде списков, то для этого уже нужно переопределять метод get_context_data базового класса.
+    #     """
+    #     from qualitas.settings import DEBUG
+    #     context = super().get_context_data(**kwargs)
+    #     context['debug'] = DEBUG
+    #     return context
     
 class ProductDetail(DetailView):
     """
