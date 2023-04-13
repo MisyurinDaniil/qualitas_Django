@@ -1,5 +1,15 @@
 {% load static %}
-{% load static %}
+
+{% comment %}
+    Использование Simple Tags
+    {% load get_categorys_tag %} - Подключаем наш simple tag "get_categorys_tag"
+        из директории appProductItem/templatetags.
+        get_categorys_tag - название директории, есть название тега.
+    {% getProductsCategorys as  productCategoryList %} - вызываем функцию getProductsCategorys
+        и помещаем результат работы функции в переменную productCategoryList
+
+    Имеется еще один вид тегов в Django - Inclusion tags. Умеет рендерить шаблон.
+{% endcomment %}
 {% load get_categorys_tag %}
 {% getProductsCategorys as  productCategoryList %}
 
