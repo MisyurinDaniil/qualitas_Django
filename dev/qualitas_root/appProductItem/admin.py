@@ -11,6 +11,25 @@ admin.site.site_header = 'Мастерская кожаных изделий р�
 
 # Register your models here.
 
+# Подключаем CKEditor для редактирования описания товара
+from .models import ProductItem
+from django import forms
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+class ProductItemCKEditorForm(forms.ModelForm):
+    """
+        product_description - поле модели ProductItem к которому будем применен widget CKEditor
+        НЕ забываем подключить ProductItemCKEditor в классе CustomizeProductItem, для этого добавляем 
+            поле form = ProductItemCKEditorForm
+        abel="Описание товара" - название поля в админ панеле
+    """
+    product_description = forms.CharField(label="Описание товара", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = ProductItem
+        fields = '__all__'
+
+
 # classs admin.StackedInline - позволяет отображать в админ панеле на странице одной модели
 # зависимые данные из другой модели
 class ShowImagesInProduct(admin.StackedInline):
@@ -63,6 +82,8 @@ class CustomizeProductItem(admin.ModelAdmin):
     search_fields = ('product_name', 'product_category__product_category_name')
     # Укажем поля только для чтения, чтобы django не вывалилвался в ошибку
     readonly_fields = ('get_img', 'product_time_create', 'product_time_update')
+    # Подключаем CKEditor, для этого в атрибуте form указываем класс виджета CKEditor описанный выше
+    form = ProductItemCKEditorForm
     # Укажем сколько строк на одной странице
     list_per_page = 10
     # Дублируем кнопки сохранения изменений на верху окна

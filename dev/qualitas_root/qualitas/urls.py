@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from .settings import DEBUG
 from django.conf import settings
@@ -37,6 +37,7 @@ urlpatterns = [
     path('payment', getPage.payment_page, name='payment'),
     path('makeorder/', makeorder, name='makeorder'),
     path('admin', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 ]
 # Если включен DEBUG, меняем путь до статических файлов загруженных через админ панель
