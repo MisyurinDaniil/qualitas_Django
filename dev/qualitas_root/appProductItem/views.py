@@ -9,18 +9,19 @@ from django.views.generic import ListView, DetailView
 class ProductsInCategoryList(ListView):
     """
         https://proproprogs.ru/django/klassy-predstavleniy-listview-detailview-createview
-        model сслылка на модель данных. Получает в контекст все элементы модели ProductItem
-            и эквивалента записи ProductItem.objects.all(), если не указвать def get_queryset() или queryset
+        model - сслылка на модель данных. 
+        По умолчанию в контекст попадают все элементы модели ProductItem,
+            эквивалента записи ProductItem.objects.all(), если не указвать def get_queryset() или queryset
         allow_empty = False - генерирует исключение 404 если список статей пуст 
-        template_name = 'appProductItem/productitem_list.html' - Шаблон в который передается контекст и 
-            возвращается пользователю, по умолчанию (если не указывать template_name) находится 
-            по пути <имя приложения>/<имя модели>_list.html 
+        template_name = 'appProductItem/productitem_list.html' - Шаблон в который передается контекст,
+            по умолчанию (если не указывать template_name) находится по пути <имя приложения>/<имя модели>_list.html 
         context - это данные которые передаются в шаблон. Представляет собой словарь.
             В словаре имеются два поля (значения), к этим полям можно обращатся напрямую из шаблона.
             Поля имеют следующие имена: 
                 'view' - экзкмпляр нашего класа представления, в данном случае "ProductsInCategoryList"
                 'object_list' или знчение из переменной context_object_name - это queryset объект полученный из модели данных,
-                    путем выполнения запроса из self.get_queryset() или self.queryset
+                    путем выполнения запроса из self.get_queryset() или self.queryset. Queryset - это последовательность в которой
+                    содержится результат выполнения запроса к БД, т.е. экземпляры класса model (ProductItem)
         Для передачи доплнительных данных в шаблон можно использовать следующие подходы, помимо get_queryset:
             1. Класс с методами, методы возвращают данные (например queryset). 
                 затем этот класс подмешивается (mixin) к нашему представлению 
@@ -77,19 +78,6 @@ class ProductDetail(DetailView):
     context_object_name = 'product'
     slug_url_kwarg = 'productItemSlug'
     slug_field = 'product_slug'
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
-        print(context['object'].__dict__)
-        for key, items in context['object'].__dict__.items():
-            print(key, " : ", items, '\n')
-        print ('@' * 80)
-        print(list(context['object'].productimg_set.all()))
-        print(list(context['object'].productimg_set.all())[0].__dict__)
-        print(context['object'].productimg_set.all().first())
-        print ('@' * 80)
-        return self.render_to_response(context)
 
     def get_object(self):
         try:
