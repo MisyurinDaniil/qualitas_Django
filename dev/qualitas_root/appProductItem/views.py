@@ -1,6 +1,6 @@
 # Create your views here.
 
-from .models import ProductItem
+from .models import ProductItem, ProductCategory
 from django.db.models import Q
 
 from django.views.generic import ListView, DetailView
@@ -34,6 +34,7 @@ class ProductsInCategoryList(ListView):
     model = ProductItem
     context_object_name = 'products'
     allow_empty = False
+    paginate_by = 1
     # template_name = 'appProductItem/productitem_list.html'
 
     def get_queryset(self):
@@ -46,17 +47,18 @@ class ProductsInCategoryList(ListView):
             & Q(product_category__product_category_slug = self.kwargs['productCategorySlug'])
             & Q(product_is_published = True)))
     
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     """
-    #         Для передачи шаблону таких статичных данных, можно использовать специальный словарь extra_context 
-    #         extra_context = {'title': 'Главная страница'}. этот словарь можно использовать именно 
-    #         для статичных (не изменяемых) данных, такие как строки, числа. Если же мы собираемся передавать 
-    #         динамические данные, вроде списков, то для этого уже нужно переопределять метод get_context_data базового класса.
-    #     """
-    #     from qualitas.settings import DEBUG
-    #     context = super().get_context_data(**kwargs)
-    #     context['debug'] = DEBUG
-    #     return context
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """
+            Метод для передачи дополнительных данных в контекст.
+            Через переменную category в шаблоне доступен объект нужной категории.
+        """
+        context = super().get_context_data(**kwargs)
+        context['category'] = ProductCategory.objects.get(product_category_slug = self.kwargs['productCategorySlug'])
+        # print(context)    
+        print(context['paginator'].__dict__)
+        print('$' * 80)       
+        print(context['page_obj'].__dict__)
+        return context
     
 class ProductDetail(DetailView):
     """

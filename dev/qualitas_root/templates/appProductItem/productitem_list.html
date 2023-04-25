@@ -3,18 +3,18 @@
 {% load static %} 
 
 {% block title %} 
-    {{ products.first.product_category.product_category_h1 }} | Мастерская кожаных изделий ручной работы "Qualitas leather" 
+    {{ category.product_category_h1 }} | Мастерская кожаных изделий ручной работы "Qualitas leather" 
 {% endblock %}
 {% block meta_tags %}
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="description" content="{{ products.first.product_category.product_category_description }}">
-    <meta name="keywords" content="{{ products.first.product_category.product_category_keywords }}">
+    <meta name="description" content="{{ category.product_category_description }}">
+    <meta name="keywords" content="{{ category.product_category_keywords }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ products.first.product_category.product_category_h1 }} | Мастерская кожаных изделий ручной работы "Qualitas leather" "/>
-    <meta property="og:description" content="{{ products.first.product_category.product_category_description }}"/>
-    <meta property="og:url" content="{{ products.first.product_category.get_absolute_url }}" />
+    <meta property="og:title" content="{{ category.product_category_h1 }} | Мастерская кожаных изделий ручной работы "Qualitas leather" "/>
+    <meta property="og:description" content="{{ category.product_category_description }}"/>
+    <meta property="og:url" content="{{ category.get_absolute_url }}" />
     <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
-    <meta property="og:image" content="{{ products.first.product_category.product_category_img_main.url }}"/>
+    <meta property="og:image" content="{{ category.product_category_img_main.url }}"/>
     <meta property="og:image:type" content="image/jpg">
 {% endblock %}
 {% block mainContent %}
@@ -23,27 +23,27 @@
         .header_background {
             background: 
                 url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                url({{products.first.product_category.product_category_img_mobile.url}}) center/cover no-repeat;
+                url({{category.product_category_img_mobile.url}}) center/cover no-repeat;
         }
         @media (min-width: 576px) {
             .header_background {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                    url({{products.first.product_category.product_category_img_mobile_horizontal.url}}) center/cover no-repeat;
+                    url({{category.product_category_img_mobile_horizontal.url}}) center/cover no-repeat;
             }
         }
         @media (min-width: 768px) {
             .header_background {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                    url({{products.first.product_category.product_category_img_tablet.url}}) center/cover no-repeat;
+                    url({{category.product_category_img_tablet.url}}) center/cover no-repeat;
             }
         }
         @media (min-width: 1200px) {
             .header_background  {
                 background: 
                     url({% static 'img/header_shadows.png' %}) 0 0 repeat-x,
-                    url({{products.first.product_category.product_category_img_desktop.url}}) center/cover no-repeat;
+                    url({{category.product_category_img_desktop.url}}) center/cover no-repeat;
             }
         }
     </style>
@@ -51,14 +51,14 @@
     
     <script>
         let h1 = document.getElementById('header-title');
-        h1.textContent = '{{products.first.product_category.product_category_h1}}';
+        h1.textContent = '{{category.product_category_h1}}';
     </script>
 
     <section class="main">
         <div class="container">
             <div class="category-items">
                 <div class="h2">
-                    <h2 class="h2__title">{{products.first.product_category.product_category_h2}}</h2>
+                    <h2 class="h2__title">{{category.product_category_h2}}</h2>
                     <span class="title-underline"></span>
                 </div>
                 <div class="products-wraper">
@@ -84,6 +84,79 @@
                     </ul>
                 </div>
             </div>
+            {% comment %} <nav class="list-pages">
+                <ul>
+                    {% if page_obj.has_other_pages %}
+                        {% if page_obj.has_previous %}
+                            <li class="page-num">
+                                        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                            </li>
+                        {% endif %}
+                        {% for p in paginator.page_range %}
+                            {% if page_obj.number == p %}
+                                <li class="page-num">
+                                    {{ p }}
+                                </li>
+                            {% elif p >= page_obj.number|add:-3 and p <= page_obj.number|add:3  %}
+                                <li class="page-num">
+                                    <a href="?page={{ p }}">{{ p }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-num">
+                                    <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </nav> {% endcomment %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    {% if page_obj.number|add:'-3' > 1 %}
+                        <li class="pagination__item">
+                            <a href="?page=1">1</a>
+                        </li>
+                    {% endif %}
+                    {% if page_obj.number|add:'-3' >= 3 %}
+                        <li class="pagination__item pagination__item--dots">
+                                <a href="?page={{ page_obj.previous_page_number|add:'-3' }}">
+                            <span class="pagination__link">• • •</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                {% if paginator.page_range|length > 1 %}
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="pagination__item active">
+                                <a class="pagination__link" href="#">{{ i }}</a>
+                            </li>
+                        {% elif i > page_obj.number|add:'-4' and i < page_obj.number|add:'4' %}
+                            <li class="pagination__item">
+                                    <a class="pagination__link" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if page_obj.has_next %}
+                    {% if page_obj.number|add:'4' < page_obj.paginator.num_pages %}
+                        <li class="pagination__item pagination__item--dots">
+                                <a href="?page={{ page_obj.next_page_number|add:'3' }}">
+                            <span class="pagination__link">• • •</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if page_obj.number|add:'3' < page_obj.paginator.num_pages %}
+                        <li class="pagination__item">
+                                <a class="pagination__link" href="?page={{ page_obj.paginator.num_pages }}">
+                                    {{ page_obj.paginator.num_pages }}
+                                </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            
         </div>
     </section>
 {% endblock %}
