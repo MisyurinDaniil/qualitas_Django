@@ -29,12 +29,12 @@ class ProductsInCategoryList(ListView):
             2. Использовать get_context_data использование расписано ниже в классе
             3. Использовать simple tags (django_movie_shots  - 15)
             4. Определить метод в модели (django_movie_shots  - 10)
-        
+        paginate_by включает пагинацию 
     """
     model = ProductItem
     context_object_name = 'products'
     allow_empty = False
-    paginate_by = 1
+    # paginate_by = 1
     # template_name = 'appProductItem/productitem_list.html'
 
     def get_queryset(self):
@@ -54,10 +54,6 @@ class ProductsInCategoryList(ListView):
         """
         context = super().get_context_data(**kwargs)
         context['category'] = ProductCategory.objects.get(product_category_slug = self.kwargs['productCategorySlug'])
-        # print(context)    
-        print(context['paginator'].__dict__)
-        print('$' * 80)       
-        print(context['page_obj'].__dict__)
         return context
     
 class ProductDetail(DetailView):

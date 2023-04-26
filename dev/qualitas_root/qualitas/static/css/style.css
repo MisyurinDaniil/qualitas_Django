@@ -1689,7 +1689,11 @@ ul {
         width: 35px;
     }
 }
-/* Pagination */
+
+
+/********************************
+************ Pagination ************
+*********************************/
 .pagination {
     width: auto;
     margin: 0 auto
@@ -1717,18 +1721,18 @@ ul {
     transition: all .2s ease-in-out;
     font-family: Roboto, sans-serif;
     font-size: 16px;
-    color: #6163b9
+    color: #fff
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .pagination__link {
         font-size: 15px
     }
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1200px) {
     .pagination a.pagination__link:hover {
-        background: rgba(102, 88, 175, .15)
+        background: rgb(215, 142, 54, .15)
     }
 }
 
@@ -1750,7 +1754,7 @@ ul {
     align-items: center
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .pagination__item {
         margin: 0 2px;
         width: 33px;
@@ -1766,28 +1770,30 @@ ul {
     margin-right: 0
 }
 
-@media only screen and (max-width: 1023px) {
+/* @media only screen and (max-width: 1200px) {
     .pagination__item:nth-child(3),
     .pagination__item:nth-child(9) {
         display: none
     }
-}
+} */
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1200px) {
     .pagination__item.active:hover
     .pagination__link {
         color: #fff;
-        background: #6658af
+        background: #d78e36
     }
 }
 
 .pagination__item.active .pagination__link {
     color: #fff;
-    background: #6658af
+    background: #d78e36
 }
 
 .pagination__item--dots .pagination__link {
-    color: #bfc0f1
+    color: #fff
 }
-
+.pagination__item.pagination__item--dots a{
+    text-decoration: none;
+}
 /* --/Pagination */
