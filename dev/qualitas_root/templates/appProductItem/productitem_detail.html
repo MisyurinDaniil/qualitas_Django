@@ -88,7 +88,7 @@
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                     </p>
                     {% comment %} <form action="#" method="POST" class="modal-window__form">  {% endcomment %}
-                    <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form">
+                    {% comment %} <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form">
                         {% csrf_token %}
                         <ul class="modal-window__list">
                             <li class="modal-window__list-item">
@@ -96,7 +96,6 @@
                                 <span class="modal-window__input_title">
                                     {{product.product_name}}
                                 </span>
-                                {% comment %} <input class="display-none" type="text" value="{{request.get_full_path}}" name="get_full_path"> {% endcomment %}
                                 <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path">
                                 <input class="display-none" type="text" value="{{product.id}}" name="product_id">
                                 <img
@@ -154,17 +153,57 @@
                                     type="submit"
                                     value="Отправить"
                                 />
+                            </li>
+                        </ul>
+                    </form> {% endcomment %}
+                    <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form">
+                        {% csrf_token %}
+                        <ul class="modal-window__list">
+                            <li class="modal-window__list-item">
+                                <span class="modal-window__input_title">Изделие:</span>
+                                <span class="modal-window__input_title">
+                                    {{ product.product_name }}
+                                </span>
+                                <img
+                                    class='modal-window__image'
+                                    src="{{ product.product_img_main.url }}"
+                                    alt="{{ product.product_img_main_alt }}"
+                                />
+                                <input class="display-none" type="text" value="{{ product.id }}" name="product_id">
+                                <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path">
+                            </li>
+                            <li class="modal-window__list-item">
+                                {{ form.order_customer_name.errors }}
+                                <label class="modal-window__input_title" for="{{ form.order_customer_name.id_for_label  }}"
+                                    >Как вас зовут:</label
+                                >
+                                {{ form.order_customer_name }}
+                            </li>
+                            <li class="modal-window__list-item">
+                                {{ form.order_customer_telephone.errors }}
+                                <label class="modal-window__input_title" for="{{ form.order_customer_telephone.id_for_label  }}"
+                                    >Контактный телефон:
+                                </label>
+                                {{ form.order_customer_telephone }}
+                                
+                            </li>
+                            <li class="modal-window__list-item">
+                                {{ form.order_customer_comment.errors }}
+                                <label class="modal-window__input_title" for="{{ form.order_customer_comment.id_for_label  }}"
+                                    >Комментарий к заказу:</label
+                                >
+                                {{ form.order_customer_comment }}
+                            </li>
+                            <li class="modal-window__list-item">
+                                <input
+                                    class="main-button main-button__submit-modal"
+                                    type="submit"
+                                    value="Отправить"
+                                />
+                            </li>
+                        </ul>
+                    </form>
                 </div>
-                {% comment %} <div class="modal-window__order-true display-none">
-                    <br />
-                    Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
-                    Вы также можете написать нам в социальных сетях.<br />
-                </div>
-                <div class="modal-window__order-false display-none">
-                    <br />
-                    Приносим извинения за временные неполадки. <br />
-                    Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
-                </div> {% endcomment %}
                 <div class="modal-window__order-true display-none">
                     <br />
                     Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />

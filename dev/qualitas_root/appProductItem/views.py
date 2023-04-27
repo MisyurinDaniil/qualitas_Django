@@ -4,6 +4,7 @@ from .models import ProductItem, ProductCategory
 from django.db.models import Q
 
 from django.views.generic import ListView, DetailView
+from appOrders.form import ReviewForm 
 
 ############ CBV test ############# 
 class ProductsInCategoryList(ListView):
@@ -90,3 +91,12 @@ class ProductDetail(DetailView):
         except(ProductItem.DoesNotExist):
             from django.http import Http404
             raise Http404()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """
+            Метод для передачи дополнительных данных в контекст.
+            Через переменную category в шаблоне доступен объект нужной категории.
+        """
+        context = super().get_context_data(**kwargs)
+        context['form'] = ReviewForm()
+        return context
