@@ -8,7 +8,7 @@ from appProductItem.models import ProductItem
 
 class Order(models.Model):
     order_binding = models.ForeignKey(ProductItem, on_delete=models.PROTECT, verbose_name='Ссылка на покупаемый товар')
-    order_product_url = models.CharField(max_length=255, verbose_name='URL товара')
+    order_product_url = models.URLField(max_length=255, verbose_name='URL товара')
     order_date = models.DateTimeField(auto_now=True, verbose_name='Дата заказа')
     order_customer_name = models.CharField(max_length=255, verbose_name='Имя заказчика')
     order_customer_telephone= models.CharField(max_length=255, verbose_name='Телефон заказчика')
