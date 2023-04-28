@@ -12,11 +12,23 @@ class ReviewForm(forms.ModelForm):
             super(ReviewForm, self).__init__(*args, **kwargs)
             self.fields['order_customer_name'].widget.attrs['class'] = 
     """
+    # order_binding = forms.IntegerField(
+    #     widget=forms.NumberInput(attrs={'class': 'display-none'})
+    # )
 
     class Meta:
         model = Order
-        fields = ("order_binding", "order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment")
+        fields = ("order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment")
+        # labels = {
+        #     'order_customer_name': 'Как вас зовут', 
+        #     'order_customer_telephone': 'Контактный телефон',
+        #     'order_customer_comment': 'Комментарий к заказу'
+        #     }
         widgets = {
+            'order_product_url': forms.URLInput(attrs =
+                {
+                    'class': 'display-none',
+                }),
             'order_customer_name': forms.TextInput(attrs =
                 {
                     'class': 'modal-window__input',

@@ -156,7 +156,8 @@
                             </li>
                         </ul>
                     </form> {% endcomment %}
-                    <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form">
+                    <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form">
+                        {{ form.non_field_errors }}
                         {% csrf_token %}
                         <ul class="modal-window__list">
                             <li class="modal-window__list-item">
@@ -169,8 +170,11 @@
                                     src="{{ product.product_img_main.url }}"
                                     alt="{{ product.product_img_main_alt }}"
                                 />
-                                <input class="display-none" type="text" value="{{ product.id }}" name="product_id">
-                                <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path">
+                                
+                                {{ form.order_product_url.errors }}
+                                {{ form.order_product_url }}
+                                {% comment %} <input class="display-none" type="text" value="{{ product.id }}" name="product_id">
+                                <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path"> {% endcomment %}
                             </li>
                             <li class="modal-window__list-item">
                                 {{ form.order_customer_name.errors }}

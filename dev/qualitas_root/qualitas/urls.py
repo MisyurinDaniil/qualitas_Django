@@ -20,7 +20,7 @@ from .settings import DEBUG
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
-from appOrders.views import makeorder
+from appOrders.views import Makeorder
 from appGetPages import views as getPage
 from appProductItem import views as product
 
@@ -35,7 +35,7 @@ urlpatterns = [
     path('contacts', getPage.contacts_page, name='contacts'),
     path('delivery', getPage.delivery_page, name='delivery'),
     path('payment', getPage.payment_page, name='payment'),
-    path('makeorder/', makeorder, name='makeorder'),
+    path('makeorder/<int:pk>', Makeorder.as_view(), name='makeorder'),
     path('admin', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
