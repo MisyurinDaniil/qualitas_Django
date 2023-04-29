@@ -13,7 +13,7 @@ class CustomizeOrder(admin.ModelAdmin):
     # Указжем поля отображаемые на карточке заказа
     fields = ('id', 'order_binding', 'order_date', 'order_customer_name', 'order_customer_telephone', 'order_customer_comment', 'order_product_url')
     # Если не задать параметр readonly_fields? django выдаст ошибку, т.к. поле order_date и id не изменяемые
-    readonly_fields = ('id', 'order_binding', 'order_date', 'order_product_url')
+    readonly_fields = ('id', 'order_binding', 'order_date', 'order_product_url', 'order_customer_name', 'order_customer_telephone')
     # Укажем сколько строк на одной странице
     list_per_page = 10
     # Укажем максимальное количество полей при выводе всех

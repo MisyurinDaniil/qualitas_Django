@@ -87,75 +87,6 @@
                         Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                     </p>
-                    {% comment %} <form action="#" method="POST" class="modal-window__form">  {% endcomment %}
-                    {% comment %} <form action="{% url 'makeorder' %}" method="POST" class="modal-window__form">
-                        {% csrf_token %}
-                        <ul class="modal-window__list">
-                            <li class="modal-window__list-item">
-                                <span class="modal-window__input_title">Изделие:</span>
-                                <span class="modal-window__input_title">
-                                    {{product.product_name}}
-                                </span>
-                                <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path">
-                                <input class="display-none" type="text" value="{{product.id}}" name="product_id">
-                                <img
-                                    class='modal-window__image'
-                                    src="{{product.product_img_main.url}}"
-                                    alt="{{product.product_img_main_alt}}"
-                                />
-                            </li>
-                            <li class="modal-window__list-item">
-                                <label class="modal-window__input_title" for="input-name"
-                                    >Как вас зовут:</label
-                                >
-                                <input
-                                    type="text"
-                                    name="customer_name"
-                                    class="modal-window__input"
-                                    placeholder="Имя"
-                                    id="input-name"
-                                    maxlength="200"
-                                    required=""
-                                    tabindex="0"
-                                />
-                            </li>
-                            <li class="modal-window__list-item">
-                                <label class="modal-window__input_title" for="input-telephone"
-                                    >Контактный телефон:</label
-                                >
-                                <input
-                                    type="text"
-                                    name="customer_telephone"
-                                    class="modal-window__input"
-                                    placeholder="Номер телефона"
-                                    id="input-telephone"
-                                    maxlength="200"
-                                    required=""
-                                    tabindex="0"
-                                />
-                            </li>
-                            <li class="modal-window__list-item">
-                                <label class="modal-window__input_title" for="input-commet"
-                                    >Комментарий к заказу:</label
-                                >
-                                <textarea
-                                    name="customer_comment"
-                                    cols="20"
-                                    rows="5"
-                                    class="modal-window__input"
-                                    placeholder="Комментарий"
-                                    id="input-commet"
-                                ></textarea>
-                            </li>
-                            <li class="modal-window__list-item">
-                                <input
-                                    class="main-button main-button__submit-modal"
-                                    type="submit"
-                                    value="Отправить"
-                                />
-                            </li>
-                        </ul>
-                    </form> {% endcomment %}
                     <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form">
                         {{ form.non_field_errors }}
                         {% csrf_token %}
@@ -173,8 +104,8 @@
                                 
                                 {{ form.order_product_url.errors }}
                                 {{ form.order_product_url }}
-                                {% comment %} <input class="display-none" type="text" value="{{ product.id }}" name="product_id">
-                                <input class="display-none" id="page_full_url" type="text" value="" name="get_full_path"> {% endcomment %}
+
+                                {{ form.captcha }}
                             </li>
                             <li class="modal-window__list-item">
                                 {{ form.order_customer_name.errors }}

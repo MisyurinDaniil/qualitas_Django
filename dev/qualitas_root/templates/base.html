@@ -4,7 +4,14 @@
     meta property="og:image" content="{% static 'img/home/main_image_open_graph.jpg' %}"/> - 
         {% static подставит нужный путь из файла settings.py для статических файлов.
 {% endcomment %}
+
 {% load static %}
+
+{% comment %} 
+    Подключаем recaptcha3
+{% endcomment %}
+
+{% load recaptcha3 %}
 
 {% comment %}
     Использование Simple Tags
@@ -62,6 +69,12 @@
     <link rel="stylesheet" href="{% static 'css/fancybox4/fancybox4.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    {% comment %} 
+        Подключаем recaptcha3
+    {% endcomment %}
+    
+    {% recaptcha_init %}
+    {% recaptcha_ready action_name='homepage' %}
 </head>
 
 <body>

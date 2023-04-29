@@ -1,7 +1,13 @@
 from django import forms
-
 from .models import Order
 
+# Для корректной работы recaptcha3 необходимо в файле 
+# /venv/lib/python3.10/site-packages/snowpenguin/django/recaptcha3/fields.py
+# заменить
+# from django.utils.translation import ugettext_lazy as _
+# to:
+# from django.utils.translation import gettext_lazy as _
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 class ReviewForm(forms.ModelForm):
     """
@@ -12,13 +18,11 @@ class ReviewForm(forms.ModelForm):
             super(ReviewForm, self).__init__(*args, **kwargs)
             self.fields['order_customer_name'].widget.attrs['class'] = 
     """
-    # order_binding = forms.IntegerField(
-    #     widget=forms.NumberInput(attrs={'class': 'display-none'})
-    # )
-
+    captcha = ReCaptchaField()
+    
     class Meta:
         model = Order
-        fields = ("order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment")
+        fields = ("order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment", "captcha")
         # labels = {
         #     'order_customer_name': 'Как вас зовут', 
         #     'order_customer_telephone': 'Контактный телефон',
