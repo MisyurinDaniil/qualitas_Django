@@ -1,6 +1,10 @@
 from django import forms
 from .models import Order
 
+# Проект recapcha на github
+# Там же находится мануал
+# https://github.com/kbytesys/django-recaptcha3
+
 # Для корректной работы recaptcha3 необходимо в файле 
 # /venv/lib/python3.10/site-packages/snowpenguin/django/recaptcha3/fields.py
 # заменить

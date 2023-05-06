@@ -4,6 +4,7 @@ __pycache__/
 telegram_token.txt
 telegramToken.py
 deploy/
+dev/qualitas_root/static
 #prod/
 # # dotenv
 #.env
