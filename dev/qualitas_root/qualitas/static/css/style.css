@@ -1796,4 +1796,13 @@ ul {
 .pagination__item.pagination__item--dots a{
     text-decoration: none;
 }
-/* --/Pagination */
+
+
+
+/********************************
+************ Recaptcha ************
+********************************/
+
+.grecaptcha-badge {
+    visibility: hidden
+}

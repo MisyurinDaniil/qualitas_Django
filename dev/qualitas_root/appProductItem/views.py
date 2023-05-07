@@ -35,7 +35,8 @@ class ProductsInCategoryList(ListView):
     model = ProductItem
     context_object_name = 'products'
     allow_empty = False
-    paginate_by = 3
+    # Отключаем пагинацию
+    # paginate_by = 3
     # template_name = 'appProductItem/productitem_list.html'
 
     def get_queryset(self):
