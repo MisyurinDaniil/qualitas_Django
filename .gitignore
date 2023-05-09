@@ -1,8 +1,6 @@
 venv310/
 venv/
 __pycache__/
-telegram_token.txt
-telegramToken.py
 deploy/
 dev/qualitas_root/static
 #prod/

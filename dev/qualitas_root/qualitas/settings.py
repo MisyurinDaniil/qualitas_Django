@@ -142,6 +142,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "qualitas/static/"
 ]
+# Для production server
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "config/static/"),
+# ]
 # Директория сбора статических файлов в одном месте для production 
 # после запуска команды collectstatic - django соберет их в эту папку
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

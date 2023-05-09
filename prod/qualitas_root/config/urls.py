@@ -14,29 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from .settings import DEBUG
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
-from appOrders.views import makeorder
+from appOrders.views import Makeorder
 from appGetPages import views as getPage
 from appProductItem import views as product
 
 urlpatterns = [
     path('', getPage.home_page, name='home'),
-    path('product/<slug:productItemSlug>', product.ProductView.as_view(), name='product'),
-    path('category/<slug:productCategorySlug>', product.ProductsCategoryView.as_view(), name='category'),
-    path('blog', getPage.blog_page, name='blog'),
-    path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
-    path('aboutus', getPage.aboutus_page, name='aboutus'),
+    path('product/<slug:productItemSlug>', product.ProductDetail.as_view(), name='product'),
+    path('category/<slug:productCategorySlug>', product.ProductsInCategoryList.as_view(), name='category'),
+    # path('blog', getPage.blog_page, name='blog'),
+    # path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
+    # path('aboutus', getPage.aboutus_page, name='aboutus'),
+    # path('help', getPage.help_page, name='help'),
     path('contacts', getPage.contacts_page, name='contacts'),
     path('delivery', getPage.delivery_page, name='delivery'),
     path('payment', getPage.payment_page, name='payment'),
-    path('help', getPage.help_page, name='help'),
-    path('makeorder/', makeorder, name='makeorder'),
+    path('makeorder/<int:pk>', Makeorder.as_view(), name='makeorder'),
     path('admin', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 ]
 # Если включен DEBUG, меняем путь до статических файлов загруженных через админ панель
