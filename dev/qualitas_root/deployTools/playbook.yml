@@ -1,0 +1,16 @@
+---
+
+- name: Deploy Django project to remote server
+  hosts: all
+  become: yes
+
+  vars:
+      host: "{{ inventory_hostname }}"
+      ansible_user: "ak"
+  tasks:
+
+    # Устанавливаем python3.9 + python3.9-venv, git, nginx, gunicorn
+    - name: Deadsnakes PPA to get Python 3.9
+      become: yes
+      apt_repository:
+        repo='ppa:deadsnakes/ppa'
