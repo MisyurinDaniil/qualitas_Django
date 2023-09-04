@@ -1,0 +1,113 @@
+---
+
+- name: Deploy Django project to remote server
+  hosts: all
+  vars:
+      python_version: 3.10.13
+      short_python_version: "3.10"
+      # host: "{{ inventory_hostname }}"
+      site_name: "staging_qualitas_store"
+      # ansible_user: "ak"
+  
+  tasks:
+    # Обновляем кеш репозитория
+    - name: Update apt-get repo and cache
+      tags: python
+      become: yes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: Check alt python version
+      tags: python
+      shell: /usr/local/bin/python3.10 --version
+      register: cur_python3_version
+      ignore_errors: yes  # If not installed
+
+
+    - name: Download, compile and install the correct version of Python
+      tags: python
+      block:
+    # Устанавливаем непобходимые пакеты для компиляции Python
+      - name: Install required packages to compile Python-{{ python_version }} source code
+        become: yes
+        apt:
+          pkg:
+            - wget
+            - build-essential
+            - libncursesw5-dev
+            - libssl-dev
+            - libsqlite3-dev
+            - tk-dev
+            - libgdbm-dev
+            - libc6-dev
+            - libbz2-dev
+            - libffi-dev
+            - zlib1g-dev
+          state: latest
+
+      # Скачиваем Python нужной версии
+      - name: Download Python-{{ python_version }}.tgz
+        get_url:
+          url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
+          dest: /home/{{ ansible_ssh_user }}/Python-{{ python_version }}.tgz
+          mode: '0770'
+
+      # Извлекаем из архива Python
+      - name: Extract Python-{{ python_version }}.tgz
+        unarchive:
+          src: /home/{{ ansible_ssh_user }}/Python-{{ python_version }}.tgz
+          dest: /home/{{ ansible_ssh_user }}/
+          remote_src: yes
+
+      # Конфигурируем Python
+      # - name: Compiling Python source code
+      #   shell: cd /home/{{ ansible_ssh_user }}/Python-3.10.13/; ./configure --enable-optimizations
+      
+      - name: Configure Python-{{ python_version }} build"
+        command: ./configure
+        args:
+          chdir: /home/{{ ansible_ssh_user }}/Python-{{ python_version }}
+          creates: /home/{{ ansible_ssh_user }}/Python-{{ python_version }}/Makefile"
+
+      # Устанавливаем Python
+      - name: Run install Python-{{ python_version }}
+        become: yes
+        make:
+          chdir: "/home/{{ ansible_ssh_user }}/Python-{{ python_version }}"
+          target: altinstall
+      when: cur_python3_version['stderr'] != ""
+
+
+    # Устанавливаем nginx и git
+    - name: Install nginx and git
+      become: yes
+      apt: 
+        pkg:
+          - nginx
+          - git
+        state: present
+      tags:
+        - simple
+
+    # Скачиваем код проекта из гитхаба
+    - name: Download project code from Github
+      git:
+        repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
+        dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
+      tags:
+        - simple
+
+    # Создаем виртуальное окружение и устанавливаем зависимости
+    - name: Create Python-{{ python_version }} venv and install requirements
+      pip: 
+        requirements: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/dev/requirements.txt
+        virtualenv: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/dev/venv
+        virtualenv_command: /usr/local/bin/python{{ short_python_version }} -m venv
+      tags:
+        - simple
+
+    # Прогоняем миграции
+    - name: Run migrations
+      django_manage:
+        command: migrate
+        project_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
+        virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
