@@ -99,8 +99,8 @@
     # Создаем виртуальное окружение и устанавливаем зависимости
     - name: Create Python-{{ python_version }} venv and install requirements
       pip: 
-        requirements: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/dev/requirements.txt
-        virtualenv: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/dev/venv
+        requirements: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/requirements.txt
+        virtualenv: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv
         virtualenv_command: /usr/local/bin/python{{ short_python_version }} -m venv
       tags:
         - simple
@@ -109,5 +109,7 @@
     - name: Run migrations
       django_manage:
         command: migrate
-        project_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
+        app_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
         virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
+      tags:
+        - migrate
