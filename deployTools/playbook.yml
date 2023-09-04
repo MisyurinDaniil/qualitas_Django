@@ -4,28 +4,28 @@
   hosts: all
   vars:
       python_version: 3.10.13
-      short_python_version: 3.10
+      short_python_version: "3.10"
       # host: "{{ inventory_hostname }}"
-      host: "qualitas_store"
+      site_name: "staging_qualitas_store"
       # ansible_user: "ak"
   
   tasks:
     # Обновляем кеш репозитория
     - name: Update apt-get repo and cache
+      tags: python
       become: yes
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
     - name: Check alt python version
+      tags: python
       shell: /usr/local/bin/python3.10 --version
-      register: python3_version
+      register: cur_python3_version
       ignore_errors: yes  # If not installed
 
-    # - debug:
-    #     var: python3_version
-    #   tags:
-    #     - simple
 
-    - block:
+    - name: Download, compile and install the correct version of Python
+      tags: python
+      block:
     # Устанавливаем непобходимые пакеты для компиляции Python
       - name: Install required packages to compile Python-{{ python_version }} source code
         become: yes
@@ -67,7 +67,6 @@
         args:
           chdir: /home/{{ ansible_ssh_user }}/Python-{{ python_version }}
           creates: /home/{{ ansible_ssh_user }}/Python-{{ python_version }}/Makefile"
-        tags: test
 
       # Устанавливаем Python
       - name: Run install Python-{{ python_version }}
@@ -75,8 +74,8 @@
         make:
           chdir: "/home/{{ ansible_ssh_user }}/Python-{{ python_version }}"
           target: altinstall
-        tags: test
-      when: python3_version['stdout'] != 'Python {{ python_version }}' 
+      when: cur_python3_version['stderr'] != ""
+
 
     # Устанавливаем nginx и git
     - name: Install nginx and git
@@ -86,20 +85,29 @@
           - nginx
           - git
         state: present
+      tags:
+        - simple
 
     # Скачиваем код проекта из гитхаба
     - name: Download project code from Github
       git:
         repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
-        dest: /home/{{ ansible_ssh_user }}/sites/{{ host }}
+        dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
       tags:
         - simple
 
     # Создаем виртуальное окружение и устанавливаем зависимости
     - name: Create Python-{{ python_version }} venv and install requirements
       pip: 
-        requirements: /home/{{ ansible_ssh_user }}/sites/{{ host }}/dev/requirements.txt
-        virtualenv: /home/{{ ansible_ssh_user }}/sites/{{ host }}/dev/venv
+        requirements: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/dev/requirements.txt
+        virtualenv: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/dev/venv
         virtualenv_command: /usr/local/bin/python{{ short_python_version }} -m venv
       tags:
         - simple
+
+    # Прогоняем миграции
+    - name: Run migrations
+      django_manage:
+        command: migrate
+        project_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
+        virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
