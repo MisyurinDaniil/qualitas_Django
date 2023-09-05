@@ -58,10 +58,7 @@
           dest: /home/{{ ansible_ssh_user }}/
           remote_src: yes
 
-      # Конфигурируем Python
-      # - name: Compiling Python source code
-      #   shell: cd /home/{{ ansible_ssh_user }}/Python-3.10.13/; ./configure --enable-optimizations
-      
+      # Конфигурируем Python    
       - name: Configure Python-{{ python_version }} build"
         command: ./configure
         args:
@@ -76,7 +73,6 @@
           target: altinstall
       when: cur_python3_version['stderr'] != ""
 
-
     # Устанавливаем nginx и git
     - name: Install nginx and git
       become: yes
@@ -86,7 +82,7 @@
           - git
         state: present
       tags:
-        - simple
+        - git
 
     # Скачиваем код проекта из гитхаба
     - name: Download project code from Github
@@ -94,7 +90,7 @@
         repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
       tags:
-        - simple
+        - git
 
     # Создаем виртуальное окружение и устанавливаем зависимости
     - name: Create Python-{{ python_version }} venv and install requirements
@@ -103,7 +99,17 @@
         virtualenv: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv
         virtualenv_command: /usr/local/bin/python{{ short_python_version }} -m venv
       tags:
-        - simple
+        - django
+
+    # Устраняет баг в названии библиотеки
+    - name: Сhange a str - from django.utils.translation import gettext_lazy as _
+      lineinfile: 
+        dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv/lib/python3.10/site-packages/snowpenguin/django/recaptcha3/fields.py
+        regexp: '^from django.utils.translation import'
+        insertbefore: BOF
+        line: 'from django.utils.translation import gettext_lazy as _'
+      tags:
+        - django
 
     # Прогоняем миграции
     - name: Run migrations
@@ -112,4 +118,80 @@
         app_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
         virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
       tags:
-        - migrate
+        - django
+    
+    - name: Collect Django Static Files
+      django_manage:
+        command: collectstatic --noinput
+        app_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
+        virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
+      tags:
+        - django
+
+    # Создаем файл конфигурации в sites-available
+    - name: Add nginx config to sites-available
+      become: yes
+      template: 
+        # src: ./nginx-sites-available-test.j2
+        src: ./nginx-sites-available.j2
+        dest: /etc/nginx/sites-available/{{ site_name }}
+      notify:
+        - Restart nginx
+      tags:
+        - nginx
+
+    # Подключить конфигурацию в sites-enabled --> [Перезапустить Nginx]
+    - name: Add symlink in nginx sites-enabled
+      become: yes
+      file:
+          src: /etc/nginx/sites-available/{{ site_name }}
+          dest: /etc/nginx/sites-enabled/{{ site_name }}
+          state: link
+      notify:
+          - Restart nginx
+      tags:
+        - nginx
+
+    # Создаем файл .env с переменными
+    - name: Create .env file
+      template: 
+        src: ./dotenv.j2
+        dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/.env
+      tags:
+        - dotenv
+
+    # Настраиваем gunicorn --> [Перезапустить gunicorn]
+    - name: Write gunicorn service script
+      become: yes
+      template: 
+        src: ./gunicorn.j2
+        dest: /etc/systemd/system/gunicorn_{{ site_name }}.service
+      # notify:
+      #   - Restart gunicorn
+      tags:
+        - gunicorn
+
+    - name: Restart gunicorn
+      become: yes
+      systemd:
+        name: gunicorn_{{ site_name }}
+        daemon_reload: yes
+        enabled: yes
+        state: restarted
+      tags:
+        - gunicorn
+
+  handlers:   
+    - name: Restart nginx
+      become: yes
+      service:
+        name: nginx
+        state: restarted
+
+    # - name: Restart gunicorn
+    #   become: yes
+    #   systemd:
+    #     name: gunicorn_{{ site_name }}
+    #     daemon_reload: yes
+    #     enabled: yes
+    #     state: restarted

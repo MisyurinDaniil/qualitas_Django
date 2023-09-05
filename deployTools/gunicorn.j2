@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn server for {{ site_name }}
+
+[Service]
+Restart=on-failure
+User={{ ansible_ssh_user }}
+WorkingDirectory=/home/{{ ansible_ssh_user }}/sites/{{ site_name }}
+EnvironmentFile=/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/.env
+
+ExecStart=/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv/bin/gunicorn \
+    --bind unix:/tmp/{{ site_name }}.socket \
+    qualitas.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
