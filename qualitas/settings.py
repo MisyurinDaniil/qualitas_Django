@@ -14,19 +14,32 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
+    DEBUG = False
+    BASE_DIR =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+    ALLOWED_HOSTS = [os.environ['SITENAME']]
+else:
+    DEBUG = True
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    SECRET_KEY = 'django-insecure-ku-y3%=b8gz%x&4se2=4e0j*c!52#1bu=v7sreg*82xa#!r(#d'
+    ALLOWED_HOSTS = []
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ku-y3%=b8gz%x&4se2=4e0j*c!52#1bu=v7sreg*82xa#!r(#d'
+#SECRET_KEY = 'django-insecure-ku-y3%=b8gz%x&4se2=4e0j*c!52#1bu=v7sreg*82xa#!r(#d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 # DEBUG = False
-ALLOWED_HOSTS = ['10.0.0.2', '10.0.0.4', '127.0.0.1', '109.195.227.218', '192.168.0.135']
+
+#ALLOWED_HOSTS = ['10.0.0.2', '10.0.0.4', '127.0.0.1', '109.195.227.218', '192.168.0.135']
 
 
 # Application definition
@@ -69,10 +82,12 @@ ROOT_URLCONF = 'qualitas.urls'
 # Должен ли движок искать исходные файлы шаблонов внутри установленных приложений.
 # По умолчанию файл settings.py, созданный django-admin startproject, устанавливает 'APP_DIRS': True.
 
-TEMPLATES = [
+
+if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
+    TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +98,25 @@ TEMPLATES = [
             ],
         },
     },
-]
+    ]
+else:
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': ['templates'],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
+
+
 
 WSGI_APPLICATION = 'qualitas.wsgi.application'
 
@@ -91,13 +124,21 @@ WSGI_APPLICATION = 'qualitas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -139,9 +180,17 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # Список директорий из которых нужно собирать или искать в режиме dev нашу статику
 # По умолчанию только директория static внутри созданного приложения (app)
-STATICFILES_DIRS = [
-    BASE_DIR / "qualitas/static/"
-]
+
+
+if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "config/static/"),
+    ]
+else:
+    STATICFILES_DIRS = [
+        BASE_DIR / "qualitas/static/"
+    ]
+
 # Для production server
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "config/static/"),
