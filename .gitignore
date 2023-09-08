@@ -3,6 +3,7 @@ venv/
 __pycache__/
 deploy/
 dev/qualitas_root/static
+/static
 #prod/
 # # dotenv
 #.env
