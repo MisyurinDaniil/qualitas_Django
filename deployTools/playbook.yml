@@ -5,9 +5,8 @@
   vars:
       python_version: 3.10.13
       short_python_version: "3.10"
-      # host: "{{ inventory_hostname }}"
-      site_name: "staging.qualitas.store"
-      # ansible_user: "ak"
+      # site_name: "staging.qualitas.store"
+      site_name: "{{ inventory_hostname }}"
   
   tasks:
     # Обновляем кеш репозитория

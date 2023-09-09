@@ -14,12 +14,11 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-#BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
     DEBUG = False
-    # BASE_DIR =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     BASE_DIR = Path(__file__).resolve().parent.parent
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
     ALLOWED_HOSTS = [os.environ['SITENAME']]
@@ -29,7 +28,9 @@ else:
     SECRET_KEY = 'django-insecure-ku-y3%=b8gz%x&4se2=4e0j*c!52#1bu=v7sreg*82xa#!r(#d'
     ALLOWED_HOSTS = ['*']
 
-print (DEBUG, SECRET_KEY, ALLOWED_HOSTS)
+# print(type(os.environ))    
+# print (DEBUG, SECRET_KEY, ALLOWED_HOSTS)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -152,27 +153,14 @@ USE_TZ = True
 # URL для использования при обращении пользователей к статическим файлам
 # {% load static %} url({% static 'img/header_shadows.png' %})
 STATIC_URL = '/static/'
-# Список директорий из которых нужно собирать или искать в режиме dev нашу статику
-# По умолчанию только директория static внутри созданного приложения (app)
 
+# Список директорий из которых нужно собирать (manage.py collectstatic) или искать в режиме dev нашу статику
+# По умолчанию только директория static внутри созданных приложений (app)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "qualitas/static/")]
 
-# if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
-#     STATICFILES_DIRS = [
-#         os.path.join(BASE_DIR, "qualitas/static/"),
-#     ]
-# else:
-#     STATICFILES_DIRS = [
-#         BASE_DIR / "qualitas/static/"
-#     ]
-
-# Для production server
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "config/static/"),
-# ]
 # Директория сбора статических файлов в одном месте для production 
 # после запуска команды collectstatic - django соберет их в эту папку
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # аналогично STATIC_URL, это URL-адрес, по которому пользователи могут получить доступ к медиафайлам.
