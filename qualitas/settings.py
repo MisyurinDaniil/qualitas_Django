@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'django_cleanup.apps.CleanupConfig',
-    'appGetPages.apps.AppgetpagesConfig',
+    'appGetStaticPages.apps.AppgetstaticpagesConfig',
     'appProductItem.apps.AppproductitemConfig',
     'appOrders.apps.AppordersConfig',
     'ckeditor',

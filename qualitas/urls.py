@@ -22,7 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from appOrders.views import Makeorder
-from appGetPages import views as getPage
+from appGetStaticPages import views as getPage
 from appProductItem import views as product
 
 urlpatterns = [
