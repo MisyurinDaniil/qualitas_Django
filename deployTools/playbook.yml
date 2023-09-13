@@ -90,6 +90,7 @@
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
       tags:
         - git
+        - update_project
 
     # Создаем виртуальное окружение и устанавливаем зависимости
     - name: Create Python-{{ python_version }} venv and install requirements
@@ -99,6 +100,7 @@
         virtualenv_command: /usr/local/bin/python{{ short_python_version }} -m venv
       tags:
         - django
+        - update_project
 
     # Устраняет баг в названии библиотеки
     - name: Сhange a str - from django.utils.translation import gettext_lazy as _
@@ -109,6 +111,7 @@
         line: 'from django.utils.translation import gettext_lazy as _'
       tags:
         - django
+        - update_project
 
     # Прогоняем миграции
     - name: Run migrations
@@ -118,6 +121,7 @@
         virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
       tags:
         - django
+        - update_project
     
     # Собираем все статические файлы в одном месте
     - name: Collect Django Static Files
@@ -127,6 +131,7 @@
         virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
       tags:
         - django
+        - update_project
 
     # Создаем файл конфигурации в sites-available
     - name: Add nginx config to sites-available
@@ -153,11 +158,12 @@
         - nginx
 
     # Добавляем переменные из зашифрованного ансиблом файла.
-    - name: Add variables from ansible vault file.
+    - name: Add variables from ansible vault file for dotenv.j2.
       include_vars:
         file: vault_variable.yml
       tags:
         - dotenv
+        - update_project
 
     # Создаем файл .env с переменными
     - name: Create .env file
@@ -166,6 +172,7 @@
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/.env
       tags:
         - dotenv
+        - update_project
 
     # Настраиваем gunicorn --> [Перезапустить gunicorn]
     - name: Write gunicorn service script
@@ -188,6 +195,7 @@
         state: restarted
       tags:
         - gunicorn
+        - update_project
 
   handlers:   
     - name: Restart nginx

@@ -4,7 +4,6 @@ __pycache__/
 deploy/
 dev/qualitas_root/static
 /static
-/deployTools/dotenv.j2
 #prod/
 # # dotenv
 #.env
