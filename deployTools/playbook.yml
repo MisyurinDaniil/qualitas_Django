@@ -1,3 +1,13 @@
+# Для работы данного blaybook нуобходимо подготвоить сервер
+
+# apt update
+
+# apt upgrade
+
+# apt install python python3-apt python3-pip python-is-python3 sudo mc vim 
+
+# useradd -G sudo -m -s /bin/bash mda
+
 ---
 
 - name: Deploy Django project to remote server
@@ -5,8 +15,11 @@
   vars:
       python_version: 3.10.13
       short_python_version: "3.10"
-      site_name: "staging.qualitas.store"
-      #site_name: "{{ inventory_hostname }}"
+      # site_name: "staging.qualitas.store"
+      # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      # !!!!!! {{ inventory_hostname }} - very important virable
+      # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      site_name: "{{ inventory_hostname }}"
   
   tasks:
     # Обновляем кеш репозитория
@@ -15,17 +28,19 @@
       become: yes
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-    - name: Check alt python version
+    # Проверяем нализичие нежной нам версии Python
+    - name: Check python version
       tags: python
-      shell: /usr/local/bin/python3.10 --version
+      shell: /usr/local/bin/python{{ short_python_version }} --version
       register: cur_python3_version
       ignore_errors: yes  # If not installed
 
-
+    # Блок установки необходимой версии Python
     - name: Download, compile and install the correct version of Python
       tags: python
       block:
-    # Устанавливаем непобходимые пакеты для компиляции Python
+      
+      # Устанавливаем непобходимые пакеты для компиляции Python
       - name: Install required packages to compile Python-{{ python_version }} source code
         become: yes
         apt:
@@ -88,6 +103,7 @@
       git:
         repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
+        force: true
       tags:
         - git
         - update_project
@@ -133,15 +149,33 @@
         - django
         - update_project
 
+    - name: Change NGINX start user
+      become: yes
+      replace:
+        path: /etc/nginx/nginx.conf
+        regexp: '^user www-data;'
+        replace: |-
+          #user www-data;
+          user {{ ansible_ssh_user }};
+      tags:
+        - nginx
+        - update_project
+
+    # Удаляем дефолтный файл конфигурации nginx
+    - name: Remove default NGINX file /etc/nginx/sites-enabled/defaults
+      become: yes
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      tags:
+        - nginx
+
     # Создаем файл конфигурации в sites-available
     - name: Add nginx config to sites-available
       become: yes
       template: 
-        # src: ./nginx-sites-available-test.j2
         src: ./nginx-sites-available.j2
         dest: /etc/nginx/sites-available/{{ site_name }}
-      notify:
-        - Restart nginx
       tags:
         - nginx
 
@@ -152,8 +186,6 @@
           src: /etc/nginx/sites-available/{{ site_name }}
           dest: /etc/nginx/sites-enabled/{{ site_name }}
           state: link
-      notify:
-          - Restart nginx
       tags:
         - nginx
 
@@ -179,9 +211,7 @@
       become: yes
       template: 
         src: ./gunicorn.j2
-        dest: /etc/systemd/system/gunicorn_{{ site_name }}.service
-      # notify:
-      #   - Restart gunicorn
+        dest: /etc/systemd/system/gunicorn.{{ site_name }}.service
       tags:
         - gunicorn
 
@@ -189,7 +219,7 @@
     - name: Restart gunicorn
       become: yes
       systemd:
-        name: gunicorn_{{ site_name }}
+        name: gunicorn.{{ site_name }}
         daemon_reload: yes
         enabled: yes
         state: restarted
@@ -197,17 +227,12 @@
         - gunicorn
         - update_project
 
-  handlers:   
+    # Перезапускаем службу nginx
     - name: Restart nginx
       become: yes
       service:
         name: nginx
         state: restarted
-
-    # - name: Restart gunicorn
-    #   become: yes
-    #   systemd:
-    #     name: gunicorn_{{ site_name }}
-    #     daemon_reload: yes
-    #     enabled: yes
-    #     state: restarted
+      tags:
+        - nginx
+        - update_project
