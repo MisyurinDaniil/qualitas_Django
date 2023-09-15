@@ -17,30 +17,19 @@ import os
 # BASE_DIR = Path(__file__).resolve().parent.parent
 # BASE_DIR =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-if 'IS_DJANGO_DEBUG_FALSE' in os.environ:
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+
+if os.environ['DJANGO_DEBUG'] == "False":
     DEBUG = False
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
     ALLOWED_HOSTS = [os.environ['SITENAME']]
 else:
     DEBUG = True
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    SECRET_KEY = 'django-insecure-ku-y3%=b8gz%x&4se2=4e0j*c!52#1bu=v7sreg*82xa#!r(#d'
     ALLOWED_HOSTS = ['*']
-
-# print(type(os.environ))    
-# print (DEBUG, SECRET_KEY, ALLOWED_HOSTS)
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-ku-y3%=b8gz%x&4se2=4e0j*c!52#1bu=v7sreg*82xa#!r(#d'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# DEBUG = False
 
 #ALLOWED_HOSTS = ['10.0.0.2', '10.0.0.4', '127.0.0.1', '109.195.227.218', '192.168.0.135']
 
@@ -176,16 +165,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH = False
 
-# Настройка статики из папки static в корне проекта (проект про кино)
-# и файлов media
-# информация из https://www.youtube.com/watch?v=WTXPLwrK398&list=PLF-NY6ldwAWrb6nQcPL21XX_-AmivFAYq&index=8&ab_channel=DjangoSchool
-# STATIC_URL = '/static/'
-# STATIC_DIR = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [STATIC_DIR]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# MEDIA_URL = 'media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ###### CKEditro config ######
 
@@ -260,6 +239,10 @@ CKEDITOR_CONFIGS = {
 }
 
 RECAPTCHA_PUBLIC_KEY = "6LeWMsslAAAAANEINXlvxxyG7buNt6uXaZJTGLgH"
-RECAPTCHA_PRIVATE_KEY = "6LeWMsslAAAAAAj9KcwJjfBtrTUVywjSInXeJV_E"
+RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
+
+
+print(type(os.environ))    
+print (DEBUG, SECRET_KEY, ALLOWED_HOSTS, RECAPTCHA_PRIVATE_KEY, os.environ['TELEGRAM_TOKEN'], os.environ['TELEGRAM_CHAT_ID'],)

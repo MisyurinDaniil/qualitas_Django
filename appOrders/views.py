@@ -1,10 +1,29 @@
 from django.http import HttpResponse
 from .forms import ReviewForm
 from appProductItem.models import ProductItem
-from appTelegram.sendmessage import sendTelegram
-
 from django.views.generic.base import View
 # Create your views here.
+
+# Перед использование request, необходимо установить библиотекуц request
+
+import requests
+import os
+
+# Имя используемого бота @QualitasLeather_SuperBot
+telegram_token = os.environ['TELEGRAM_TOKEN']
+telegram_chat_id = os.environ['TELEGRAM_CHAT_ID']
+
+def sendTelegram(text = 'Test'):
+    api = 'https://api.telegram.org/bot'
+    method = api + telegram_token + '/sendMessage'
+
+    req = requests.post(method, data={
+        'chat_id': telegram_chat_id,
+        'text' : text,
+    })
+
+# sendTelegram()
+
 
 class Makeorder(View):
         def post(self, request, pk):
