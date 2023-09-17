@@ -8,6 +8,7 @@
 
 # useradd -G sudo -m -s /bin/bash mda
 
+# passwd mda
 ---
 
 - name: Deploy Django project to remote server
@@ -127,6 +128,22 @@
         line: 'from django.utils.translation import gettext_lazy as _'
       tags:
         - django
+    
+    # Добавляем переменные из зашифрованного ансиблом файла.
+    - name: Add variables from ansible vault file for dotenv.j2.
+      include_vars:
+        file: vault_variable.yml
+      tags:
+        - dotenv
+        - update_project
+
+    # Создаем файл .env с переменными
+    - name: Create .env file
+      template: 
+        src: ./dotenv.j2
+        dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/.env
+      tags:
+        - dotenv
         - update_project
 
     # Прогоняем миграции
@@ -135,6 +152,13 @@
         command: migrate
         app_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
         virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
+      environment:
+        DJANGO_DEBUG: "False"
+        SITENAME : "{{ site_name }}"
+        DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+        RECAPTCHA_PRIVATE_KEY: "{{ recaptcha_private_key }}"
+        TELEGRAM_TOKEN: "{{ telegram_token }}"
+        TELEGRAM_CHAT_ID: "{{ telegram_chat_id }}"
       tags:
         - django
         - update_project
@@ -145,6 +169,13 @@
         command: collectstatic --noinput
         app_path: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}"
         virtualenv: "/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv"
+      environment: 
+        DJANGO_DEBUG: "False"
+        SITENAME : "{{ site_name }}"
+        DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+        RECAPTCHA_PRIVATE_KEY: "{{ recaptcha_private_key }}"
+        TELEGRAM_TOKEN: "{{ telegram_token }}"
+        TELEGRAM_CHAT_ID: "{{ telegram_chat_id }}"
       tags:
         - django
         - update_project
@@ -159,7 +190,6 @@
           user {{ ansible_ssh_user }};
       tags:
         - nginx
-        - update_project
 
     # Удаляем дефолтный файл конфигурации nginx
     - name: Remove default NGINX file /etc/nginx/sites-enabled/defaults
@@ -188,23 +218,6 @@
           state: link
       tags:
         - nginx
-
-    # Добавляем переменные из зашифрованного ансиблом файла.
-    - name: Add variables from ansible vault file for dotenv.j2.
-      include_vars:
-        file: vault_variable.yml
-      tags:
-        - dotenv
-        - update_project
-
-    # Создаем файл .env с переменными
-    - name: Create .env file
-      template: 
-        src: ./dotenv.j2
-        dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/.env
-      tags:
-        - dotenv
-        - update_project
 
     # Настраиваем gunicorn --> [Перезапустить gunicorn]
     - name: Write gunicorn service script

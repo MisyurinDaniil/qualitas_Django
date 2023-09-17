@@ -244,5 +244,5 @@ RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 
-print(type(os.environ))    
-print (DEBUG, SECRET_KEY, ALLOWED_HOSTS, RECAPTCHA_PRIVATE_KEY, os.environ['TELEGRAM_TOKEN'], os.environ['TELEGRAM_CHAT_ID'],)
+# print(type(os.environ))    
+# print (DEBUG, SECRET_KEY, ALLOWED_HOSTS, RECAPTCHA_PRIVATE_KEY, os.environ['TELEGRAM_TOKEN'], os.environ['TELEGRAM_CHAT_ID'],)
