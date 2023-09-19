@@ -228,6 +228,60 @@
       tags:
         - gunicorn
 
+    # Устанавливаем пакетный менеджер snap
+    - name: Install snap
+      become: yes
+      apt: name=snapd state=latest
+      tags:
+        - nginx
+        - https
+    
+    # Устанавливаем snap core 
+    - name: Install core
+      become: yes
+      command: snap install core
+      tags:
+        - nginx
+        - https
+    
+    # Устанвливаем certbot
+    - name: Install certbot
+      become: yes
+      snap:
+        name: certbot
+        classic: true
+      tags:
+        - nginx
+        - https
+
+    # Делаем символическую ссылку для certobt
+    - name: Create a symbolic link fore certbot
+      become: yes
+      file:
+        src: /snap/bin/certbot
+        dest: /usr/bin/certbot
+        state: link
+      tags:
+        - nginx
+        - https
+
+    # Добавление ssl сертификата для домена
+    - name: Add SSL cert to domain
+      become: yes
+      command: certbot -n --agree-tos --email qualitas.store@yandex.ru --domain staging.qualitas.store certonly --nginx
+      tags:
+        - nginx
+        - https
+    
+    # Изменяем файл конфигурации в sites-available для работы с SSL HTTPS
+    - name: Add nginx config to sites-available with HTTPS
+      become: yes
+      template: 
+        src: ./nginx-sites-available-https.j2
+        dest: /etc/nginx/sites-available/{{ site_name }}
+      tags:
+        - nginx
+    
     # Перезапускаем службу gunicorn
     - name: Restart gunicorn
       become: yes

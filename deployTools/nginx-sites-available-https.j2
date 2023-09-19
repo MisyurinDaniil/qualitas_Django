@@ -1,0 +1,36 @@
+server {
+    server_name {{ site_name }};
+
+    location /static {
+        alias /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/static;
+    }
+
+    location /media {
+        alias /home/{{ ansible_ssh_user }}/sites/{{ site_name }}/media;
+    }
+
+    location / {
+        proxy_pass http://unix:/tmp/{{ site_name }}.socket;
+        proxy_set_header Host $host;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/{{ site_name }}/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/{{ site_name }}/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+
+}server {
+    if ($host = {{ site_name }}) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name {{ site_name }};
+    return 404; # managed by Certbot
+
+
+}
