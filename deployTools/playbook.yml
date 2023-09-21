@@ -9,6 +9,8 @@
 # useradd -G sudo -m -s /bin/bash mda
 
 # passwd mda
+
+# ssh-copy-id -i ~/.ssh/staging_qualitas_ruvds/id_rsa mda@10.0.0.4
 ---
 
 - name: Deploy Django project to remote server
@@ -21,6 +23,7 @@
       # !!!!!! {{ inventory_hostname }} - very important virable
       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       site_name: "{{ inventory_hostname }}"
+      mail_for_certbot_ssl: "qualitas.store@yandex.ru"
   
   tasks:
     # Обновляем кеш репозитория
@@ -268,7 +271,7 @@
     # Добавление ssl сертификата для домена
     - name: Add SSL cert to domain
       become: yes
-      command: certbot -n --agree-tos --email qualitas.store@yandex.ru --domain staging.qualitas.store certonly --nginx
+      command: certbot -n --agree-tos --email {{ mail_for_certbot_ssl }} --domain {{ site_name }} certonly --nginx
       tags:
         - nginx
         - https
@@ -281,6 +284,7 @@
         dest: /etc/nginx/sites-available/{{ site_name }}
       tags:
         - nginx
+        - https
     
     # Перезапускаем службу gunicorn
     - name: Restart gunicorn
