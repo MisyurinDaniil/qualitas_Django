@@ -36,6 +36,7 @@ urlpatterns = [
     path('contacts', getPage.contacts_page, name='contacts'),
     path('delivery', getPage.delivery_page, name='delivery'),
     path('payment', getPage.payment_page, name='payment'),
+    path('tisnenie', getPage.tisnenie_page, name='tisnenie'),
     path('makeorder/<int:pk>', Makeorder.as_view(), name='makeorder'),
     path('admin', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),

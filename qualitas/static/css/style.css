@@ -1072,11 +1072,11 @@ ul {
 **** Content / END-PRODUCT ****
 *********************************/
 
-.h1_end-product {
+.h1_narrow-header {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.h1-title_end-product {
+.h1-title_narrow-header {
     font-size: 40px;
 }
 .end-product-spec__list {
@@ -1287,10 +1287,10 @@ ul {
     }
 }
 @media (min-width: 768px) {
-    .h1_end-product {
+    .h1_narrow-header {
         margin-top: 20px;
     }
-    .h1-title_end-product {
+    .h1-title_narrow-header {
         font-size: 50px;
     }
     .end-product-spec__item {
@@ -1326,10 +1326,10 @@ ul {
 }
 
 @media (min-width: 1200px) {
-    .h1_end-product {
+    .h1_narrow-header {
         justify-content: flex-start;
     }
-    .h1-title_end-product {
+    .h1-title_narrow-header {
         font-size: 54px;
     }
     .end-product_wrap {

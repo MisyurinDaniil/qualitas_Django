@@ -5,7 +5,6 @@
 {% block title %}  
     {{product.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas leather"
 {% endblock %} 
-
 {% block meta_tags %}
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="description" content="{{ product.product_page_description }}">
@@ -21,12 +20,11 @@
 
 {% block mainContent %}
     {% include 'includes/header_small.html' %}
-
     <section class="main main_small-header">
         <div class="container">
             <div class="end-product">
-                <div class="h1 h1_end-product">
-                    <h1 class="h1__title h1-title_end-product">
+                <div class="h1 h1_narrow-header">
+                    <h1 class="h1__title h1-title_narrow-header">
                         {{product.product_name}}
                     </h1>
                 </div>

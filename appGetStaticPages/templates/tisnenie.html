@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} 
+    Услуга персонализации изделия тиснением (гравировка) | Мастерская кожаных изделий ручной работы "Qualitas leather"
+{% endblock %} 
+{% block meta_tags %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content='!!!!!!!!!!!!!!!!!!!!'>
+    <meta name="keywords" content="!!!!!!!!!!!!!!!!!!!!!!!">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content='Услуга персонализации изделия тиснением (гравировка) | Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+    <meta property="og:description" content='!!!!!!!!!!!!!!!!!!!!!'/>
+    <meta property="og:url" content="https://qualitas.store/tisnenie" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+    <meta property="og:image" content="{% static 'img/home/main_image_open_graph.jpg' %}"/>
+    <meta property="og:image:type" content="image/jpg">
+{% endblock %}
+
+{% block mainContent %}
+    {% include 'includes/header_small.html' %}
+    <section class="main main_small-header">
+        <div class="container">
+            <div class="information">
+                <div class="h1 h1_narrow-header">
+                    <h1 class="h1__title h1-title_narrow-header">Персонализация изделия тиснением (гравировка)</h1>
+                </div>
+                <div class="information_wrap">
+                    <div class="h2">
+                        <h2 class="h2__title">Каталог</h2>
+                        <span class="title-underline"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

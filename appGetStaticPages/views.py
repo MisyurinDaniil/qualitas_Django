@@ -28,5 +28,8 @@ def help_page(request):
 def payment_page(request):
     return render(request, './payment.html')
 
+def tisnenie_page(request):
+    return render(request, './tisnenie.html')
+
 def page_not_found(request, exception):
     return render(request, './404.html', status = 404)
