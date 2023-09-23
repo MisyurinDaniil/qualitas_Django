@@ -22,26 +22,24 @@
     {% include 'includes/header_small.html' %}
     <section class="main main_small-header">
         <div class="container">
-            <div class="information">
-                <div class="h1 h1_narrow-header">
-                    <h1 class="h1__title h1-title_narrow-header">Способы оплаты</h1>
+            <div class="h1-block h1-block--narrow-header">
+                <h1 class="h1-block__title h1-block__title--narrow-header">Способы оплаты</h1>
+            </div>
+            <div class="row-content row-content--minus-margin">
+                <div class="row-content__colum2">
+                    <img src="{% static 'img/payment.jpg' %}" alt="Способы оплаты" class="info-img-block__image" />
                 </div>
-                <div class="information_wrap">
-                    <div class="info-img-block">
-                        <img src="{% static 'img/payment.jpg' %}" alt="Способы оплаты" class="info-img-block__image" />
+                <div class="row-content__colum2">
+                    <div class="info-text-block__item">
+                        <p class="info-text-block__p">
+                            Переводом на банковскую карту Сбербанк, Тинькофф <br>(по номеру
+                            счета или телефона)
+                        </p>
                     </div>
-                    <div class="info-text-block">
-                        <div class="info-text-block__item">
-                            <p class="info-text-block__p">
-                                Переводом на банковскую карту Сбербанк, Тинькофф <br>(по номеру
-                                счета или телефона)
-                            </p>
-                        </div>
-                        <div class="info-text-block__item">
-                            <p class="info-text-block__p">
-                                Переводом на расчетный счет <br>(для юридических лиц и ИП)
-                            </p>
-                        </div>
+                    <div class="info-text-block__item">
+                        <p class="info-text-block__p">
+                            Переводом на расчетный счет <br>(для юридических лиц и ИП)
+                        </p>
                     </div>
                 </div>
             </div>

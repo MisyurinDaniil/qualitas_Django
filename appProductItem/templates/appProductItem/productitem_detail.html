@@ -22,61 +22,59 @@
     {% include 'includes/header_small.html' %}
     <section class="main main_small-header">
         <div class="container">
-            <div class="end-product">
-                <div class="h1 h1_narrow-header">
-                    <h1 class="h1__title h1-title_narrow-header">
-                        {{product.product_name}}
-                    </h1>
+            <div class="h1-block h1-block--narrow-header">
+                <h1 class="h1-block__title h1-block__title--narrow-header">
+                    {{product.product_name}}
+                </h1>
+            </div>
+            <div class="row-content row-content--minus-margin">
+                <div class="row-content__colum2">
+                    <div id="mainCarousel" class="carousel">
+                        {% for image in product.productimg_set.all %}
+                            <div
+                                class="carousel__slide"
+                                data-src="{{image.product_img_big.url}}"
+                                data-fancybox="gallery"
+                            >
+                                <img src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    <div id="thumbCarousel" class="carousel">
+                        {% for image in product.productimg_set.all %}
+                            <div class="carousel__slide">
+                                <img class="panzoom__content" src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
+                            </div>
+                        {% endfor %}
+
+                    </div>
                 </div>
-                <div class="end-product_wrap">
-                    <div class="end-product-img">
-                        <div id="mainCarousel" class="carousel">
-                            {% for image in product.productimg_set.all %}
-                                <div
-                                    class="carousel__slide"
-                                    data-src="{{image.product_img_big.url}}"
-                                    data-fancybox="gallery"
-                                >
-                                    <img src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
-                                </div>
-                            {% endfor %}
-
-                        </div>
-                        <div id="thumbCarousel" class="carousel">
-                            {% for image in product.productimg_set.all %}
-                                <div class="carousel__slide">
-                                    <img class="panzoom__content" src="{{image.product_img.url}}" alt="{{image.product_img_alt}}" title="{{image.product_img_title}}"/>
-                                </div>
-                            {% endfor %}
-
-                        </div>
-                    </div>
-                    <div class="end-product-spec">
-                        <ul class="end-product-spec__list">
-                            <li class="end-product-spec__item end-product-spec__price">
-                                {{product.product_price}} &#8381;
-                            </li>
-                            <li class="end-product-spec__item">Цвет: {{product.product_color.colorName}}</li>
-                            <li class="end-product-spec__item">Материал: {{product.product_material.materialName}}</li>
-                            <li class="end-product-spec__item">Размер: {{product.product_size}}</li>
-                            <li class="end-product-spec__item">Срок изготоления: {{product.product_make_time.make_time}}</li>
-                            {% if product.product_fitting.fittingName %}
-                                <li class="end-product-spec__item">Фурнитура: {{product.product_fitting.fittingName}}</li>
-                            {% endif %}
-                            <li class="end-product-spec__item">
-                                Упаковка: упаковывается в тканевый мешок с логотипом. Подарочная коробка +500р к стоимости.
-                            </li>
-                            <li class="end-product-spec__item end-product-spec__description">
-                                <span class="">Описание товара:</span>
-                                <p class="end-product-spec__description_p">
-                                    {{product.product_description|safe}}
-                                </p>
-                            </li>
-                        </ul>
-                        <button data-fancybox="" data-src="#modal-window" class="main-button main-button-modal">
-                            Оформить заказ
-                        </button>
-                    </div>
+                <div class="row-content__colum2">
+                    <ul class="end-product-spec__list">
+                        <li class="end-product-spec__item end-product-spec__price">
+                            {{product.product_price}} &#8381;
+                        </li>
+                        <li class="end-product-spec__item">Цвет: {{product.product_color.colorName}}</li>
+                        <li class="end-product-spec__item">Материал: {{product.product_material.materialName}}</li>
+                        <li class="end-product-spec__item">Размер: {{product.product_size}}</li>
+                        <li class="end-product-spec__item">Срок изготоления: {{product.product_make_time.make_time}}</li>
+                        {% if product.product_fitting.fittingName %}
+                            <li class="end-product-spec__item">Фурнитура: {{product.product_fitting.fittingName}}</li>
+                        {% endif %}
+                        <li class="end-product-spec__item">
+                            Упаковка: упаковывается в тканевый мешок с логотипом. Подарочная коробка +500р к стоимости.
+                        </li>
+                        <li class="end-product-spec__item end-product-spec__description">
+                            <span class="">Описание товара:</span>
+                            <p class="end-product-spec__description_p">
+                                {{product.product_description|safe}}
+                            </p>
+                        </li>
+                    </ul>
+                    <button data-fancybox="" data-src="#modal-window" class="main-button main-button-modal">
+                        Оформить заказ
+                    </button>
                 </div>
             </div>
             <div id="modal-window" class="modal-window">
