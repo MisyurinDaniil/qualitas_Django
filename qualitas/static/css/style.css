@@ -1812,3 +1812,25 @@ ul {
 .grecaptcha-badge {
     visibility: hidden
 }
+
+
+/********************************
+************ Tisnenie ************
+********************************/
+
+.text-paragraph {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: justify;
+    line-height: 22px;
+}
+.link-in-text {
+    color: #d78e36;
+}
+.image-container {
+    display: flex;
+    justify-content: space-between;
+}
+.image-container__img {
+    display: block;
+}
