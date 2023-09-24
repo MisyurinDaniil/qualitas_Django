@@ -28,6 +28,17 @@ else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
 
+RECAPTCHA_PUBLIC_KEY = "6LeWMsslAAAAANEINXlvxxyG7buNt6uXaZJTGLgH"
+RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5
+
+telegram_token = os.environ['TELEGRAM_TOKEN']
+telegram_chat_id = os.environ['TELEGRAM_CHAT_ID']
+
+# print(type(os.environ))    
+# print (DEBUG, SECRET_KEY, ALLOWED_HOSTS, RECAPTCHA_PRIVATE_KEY, os.environ['TELEGRAM_TOKEN'], os.environ['TELEGRAM_CHAT_ID'],)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -238,11 +249,3 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-RECAPTCHA_PUBLIC_KEY = "6LeWMsslAAAAANEINXlvxxyG7buNt6uXaZJTGLgH"
-RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
-RECAPTCHA_DEFAULT_ACTION = 'generic'
-RECAPTCHA_SCORE_THRESHOLD = 0.5
-
-
-# print(type(os.environ))    
-# print (DEBUG, SECRET_KEY, ALLOWED_HOSTS, RECAPTCHA_PRIVATE_KEY, os.environ['TELEGRAM_TOKEN'], os.environ['TELEGRAM_CHAT_ID'],)

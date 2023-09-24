@@ -2,16 +2,15 @@ from django.http import HttpResponse
 from .forms import ReviewForm
 from appProductItem.models import ProductItem
 from django.views.generic.base import View
+from qualitas.settings import telegram_token, telegram_chat_id
 # Create your views here.
 
 # Перед использование request, необходимо установить библиотекуц request
 
 import requests
-import os
 
 # Имя используемого бота @QualitasLeather_SuperBot
-telegram_token = os.environ['TELEGRAM_TOKEN']
-telegram_chat_id = os.environ['TELEGRAM_CHAT_ID']
+
 
 def sendTelegram(text = 'Test'):
     api = 'https://api.telegram.org/bot'
