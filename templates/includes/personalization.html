@@ -1,0 +1,81 @@
+{% load static %}
+<div class="services">
+    <div class="h2">
+        <h2 class="h2__title">Дополнительные услуги</h2>
+        <span class="h2__title-underline"></span>
+    </div>
+    <div class="services__list">
+        <div class="services__item">
+            <a href="{% url 'home' %}" class="services__link">
+                <picture>
+                    <source
+                        media="(max-width: 576px)"
+                        srcset="{% static 'img/home/choice_leather_and_accessories_1200px.jpg' %}"
+                    />
+                    <source
+                        media="(min-width: 1200px)"
+                        srcset="{% static 'img/home/choice_leather_and_accessories_1200px.jpg' %}"
+                    />
+                    <source
+                        media="(min-width: 768px)"
+                        srcset="{% static 'img/home/choice_leather_and_accessories_1200px.jpg' %}"
+                    />
+                    <img
+                        src="{% static 'img/home/choice_leather_and_accessories.jpg' %}"
+                        alt="Выбор кожи и фурнитуры"
+                        class="services__item-img"
+                    />
+                </picture>
+                <p class="services__item-p">Выбор кожи и фурнитуры</p>
+            </a>
+        </div>
+        <div class="services__item">
+            <a href="{% url 'lazernaya_gravirovka' %}" class="services__link">
+                <picture>
+                    <source
+                        media="(max-width: 576px)"
+                        srcset="{% static 'img/home/drawing_picture_1200px.jpg' %}"
+                    />
+                    <source
+                        media="(min-width: 1200px)"
+                        srcset="{% static 'img/home/drawing_picture_1200px.jpg' %}"
+                    />
+                    <source
+                        media="(min-width: 768px)"
+                        srcset="{% static 'img/home/drawing_picture_1200px.jpg' %}"
+                    />
+                    <img
+                        src="{% static 'img/home/drawing_picture.jpg' %}"
+                        alt="Нанесение рисунка"
+                        class="services__item-img"
+                    />
+                </picture>
+                <p class="services__item-p">Лазерная гравировка</p>
+            </a>
+        </div>
+        <div class="services__item">
+            <a href="{% url 'tisnenie' %}" class="services__link">
+                <picture>
+                    <source
+                        media="(max-width: 576px)"
+                        srcset="{% static 'img/home/personalization_1200px.jpg' %}"
+                    />
+                    <source
+                        media="(min-width: 1200px)"
+                        srcset="{% static 'img/home/personalization_1200px.jpg' %}"
+                    />
+                    <source
+                        media="(min-width: 768px)"
+                        srcset="{% static 'img/home/personalization_1200px.jpg' %}"
+                    />
+                    <img
+                        src="{% static 'img/home/personalization.jpg' %}"
+                        alt="Персонализация"
+                        class="services__item-img"
+                    />
+                </picture>
+                <p class="services__item-p">Тиснение</p>
+            </a>
+        </div>
+    </div>
+</div>
