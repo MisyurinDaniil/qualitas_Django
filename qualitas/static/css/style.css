@@ -1373,13 +1373,13 @@ ul {
 /********************************************************
 ************ Contacts / Delivery / Payment ************
 *********************************************************/
-/* .info-img-block {
+.row-content__colum2--margin-bot {
     margin-bottom: 20px;
-} */
+}
 .info-img-block__image {
     width: 100%;
 }
-.info-text-block {
+.row-content__colum2--text {
     font-size: 16px;
     line-height: 20px;
 }
@@ -1423,7 +1423,7 @@ ul {
         padding-left: 12px;
         padding-right: 12px;
     }
-    .info-text-block {
+    .row-content__colum2--text {
         width: 50%;
         padding-left: 12px;
         padding-right: 12px;
@@ -1433,7 +1433,7 @@ ul {
     }
 }
 @media (min-width: 1200px) {
-    .info-text-block {
+    .row-content__colum2--text {
         font-size: 20px;
         line-height: 24px;
     }
@@ -1446,7 +1446,7 @@ ul {
         padding-left: 20px;
         padding-right: 20px;
     }
-    .info-text-block {
+    .row-content__colum2--text {
         width: 50%;
         padding-left: 20px;
         padding-right: 20px;
@@ -1824,12 +1824,16 @@ ul {
     text-align: justify;
     line-height: 22px;
 }
+.text-paragraph--size20 {
+    font-size: 20px;
+}
 .link-in-text {
     color: #d78e36;
 }
 .image-container {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 .image-container__img {
     display: block;

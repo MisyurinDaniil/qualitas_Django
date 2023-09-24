@@ -26,17 +26,10 @@ from appGetStaticPages import views as getPage
 from appProductItem import views as product
 
 urlpatterns = [
-    path('', getPage.home_page, name='home'),
-    path('product/<slug:productItemSlug>', product.ProductDetail.as_view(), name='product'),
-    path('category/<slug:productCategorySlug>', product.ProductsInCategoryList.as_view(), name='category'),
+    path("", include("appGetStaticPages.urls")),
+    path("", include("appProductItem.urls")),
     # path('blog', getPage.blog_page, name='blog'),
     # path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
-    # path('aboutus', getPage.aboutus_page, name='aboutus'),
-    # path('help', getPage.help_page, name='help'),
-    path('contacts', getPage.contacts_page, name='contacts'),
-    path('delivery', getPage.delivery_page, name='delivery'),
-    path('payment', getPage.payment_page, name='payment'),
-    path('tisnenie', getPage.tisnenie_page, name='tisnenie'),
     path('makeorder/<int:pk>', Makeorder.as_view(), name='makeorder'),
     path('admin', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),

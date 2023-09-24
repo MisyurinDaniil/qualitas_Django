@@ -1,0 +1,115 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %} 
+    Услуга персонализации изделия лазерной гравировкой | Мастерская кожаных изделий ручной работы "Qualitas leather"
+{% endblock %} 
+{% block meta_tags %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content='!!!!!!!!!!!!!!!!!!!!'>
+    <meta name="keywords" content="!!!!!!!!!!!!!!!!!!!!!!!">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content='Услуга персонализации изделия лазерной гравировкой | Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+    <meta property="og:description" content='!!!!!!!!!!!!!!!!!!!!!'/>
+    <meta property="og:url" content="https://qualitas.store/tisnenie" />
+    <meta property="og:site_name" content='Мастерская кожаных изделий ручной работы "Qualitas leather"'/>
+    <meta property="og:image" content="{% static 'img/home/main_image_open_graph.jpg' %}"/>
+    <meta property="og:image:type" content="image/jpg">
+{% endblock %}
+
+{% block mainContent %}
+    {% include 'includes/header_small.html' %}
+    <section class="main main_small-header">
+        <div class="container">
+            <div class="h1-block h1-block--narrow-header">
+                <h1 class="h1-block__title h1-block__title--narrow-header">Персонализация изделия лазерной гравировкой</h1>
+            </div>
+            <div class="row-content">
+                <div class="row-content__colum1">
+                    <div class="h2">
+                        <h2 class="h2__title">Лазерная гравировка инициалов Ф.И.О., текста.</h2>
+                        <span class="h2__title-underline"></span>
+                    </div>
+                    <p class="text-paragraph">
+                        Лазерная гравировка вашего кожаного изделия придаст ему уникальность, неповторимость. Данная услуга подходит для клиентов, которые делают подарок мужу, отцу или парню. 
+                        Нанесение гравировки на ваше изделие будет по достоинству оценено человеком для которого вы делаете подарок. 
+                        Наши клиенты для гравировки используют слова пожелания, инициалов фамилии имени и отчества, контактные данные в случае потери.
+                    </p>
+                    <p class="text-paragraph">
+                        Процедура нанесения текста автоматическая, производится с помощью ЧПУ станка высокоточным выжиганием. 
+                        Вам достаточно выбрать начертание шрифта и его размер из представленных ниже. Нанести можно на любое место изделия. 
+                    </p>
+                    <p class="text-paragraph">
+                        Для заказа данной услуги достаточно в поле “Комментарий к заказу” указать следующую информацию: дополнительная услуга лазерной гравировки текста, 
+                        номер выбранного вами шрифта, размер шрифта в pt (пункт), текст для нанесения, место нанесения. 
+                        Если у вас возникли вопросы напишите любым удобным вам способом <a href="{% url 'contacts' %}" class="link-in-text">(НАШИ КОНТАКТЫ)</a>.
+                    </p>
+                    <p class="text-paragraph">
+                        Для заказа данной услуги достаточно в поле “Комментарий к заказу” указать следующую информацию: дополнительная услуга тиснение текста,  
+                        текст для нанесения, место нанесения. Если у вас возникли вопросы напишите любым удобным вам способом 
+                        <a href="{% url 'contacts' %}" class="link-in-text">(НАШИ КОНТАКТЫ)</a>.
+                    </p>
+                    <p class="text-paragraph text-paragraph--size20">
+                        Стоимость услуги — 400 рублей.
+                    </p>
+                    <div class="image-container">
+                        <img src="{% static 'img/lazernay_gravirovka/vibor_shrifta_dlya_gravirovki.jpg' %}" 
+                            alt="Примеры шрифта для лазерной гравировки" 
+                            class="image-container__img">
+                    </div>
+                    <p class="text-paragraph text-paragraph--size20">
+                        Примеры наших работ.
+                    </p>
+                    <div class="image-container">
+                        <img src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_text.jpg' %}" 
+                            alt="Фото лазерной гравировки текста" 
+                            class="image-container__img">
+                        <img src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_fio.jpg' %}" 
+                            alt="Фото лазерной гравировки инициалов фамилии, имени и отчества" 
+                            class="image-container__img">
+                        <img src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_pojelanie.jpg' %}" 
+                            alt="Фото лазерной гравировки текста пожелания" 
+                            class="image-container__img">
+                    </div>
+
+                </div>
+                <div class="row-content__colum1">
+                    <div class="h2">
+                        <h2 class="h2__title">Лазерная гравировка рисунка или логотипа</h2>
+                        <span class="h2__title-underline"></span>
+                    </div>
+                    <p class="text-paragraph">
+                        При покупки у нас кожаного изделия можем нанести гравировку рисунка или логотипа вашей компании. 
+                        Изображение может быть представлено вами в векторном формате (CorelDRAW) или разработано нашим дизайнером. 
+                    </p>
+                    <p class="text-paragraph">
+                        Процедура аналогично с нанесением текста выполняется на лазерном ЧПУ станке путем выжигания.
+                    </p>
+                    <p class="text-paragraph">
+                        Для заказа данной услуги достаточно в поле “Комментарий к заказу” указать следующую информацию: дополнительная услуга лазерной гравировки изображения, место нанесения. 
+                        Свяжитесь с нами любым удобным вам способом  <a href="{% url 'contacts' %}" class="link-in-text">(НАШИ КОНТАКТЫ)</a> и представьте картинку в векторном формате или согласуйте разработку уникального изображения.
+                    </p>
+                    <p class="text-paragraph text-paragraph--size20">
+                        Стоимость услуги при предоставлении изображения в векторном формате — 400 рублей. 
+                        Стоимость услуги при необходимости обрисовки дизайнером — 1000 рублей.
+                    </p>
+                    <p class="text-paragraph text-paragraph--size20">
+                        Примеры наших работ.
+                    </p>
+                    <div class="image-container">
+                        <img src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_logo_1.jpg' %}" 
+                            alt="Фото лазерной гравировки логотипа компании" 
+                            class="image-container__img">
+                        <img src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_logo_2.jpg' %}" 
+                            alt="Фото лазерной гравировки изображения" 
+                            class="image-container__img">
+                        <img src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_logo_3.jpg' %}" 
+                            alt="Фото лазерной гравировки логотипа компании" 
+                            class="image-container__img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

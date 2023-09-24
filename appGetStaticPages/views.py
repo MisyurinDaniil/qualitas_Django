@@ -31,5 +31,8 @@ def payment_page(request):
 def tisnenie_page(request):
     return render(request, './tisnenie.html')
 
+def lazernaya_gravirovka_page(request):
+    return render(request, './lazernaya_gravirovka.html')
+
 def page_not_found(request, exception):
     return render(request, './404.html', status = 404)
