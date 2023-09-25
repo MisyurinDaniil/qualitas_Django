@@ -1266,6 +1266,9 @@ ul {
 .fancybox__slide {
     padding-top: 8px;
 }
+.fancybox__caption {
+    font-size: 16px;
+}
 @media (min-width: 576px) {
     #thumbCarousel .carousel__slide {
         width: 144px;
@@ -1847,4 +1850,7 @@ ul {
 }
 .image-container__img {
     display: block;
+}
+.image-container__link-item {
+    cursor: pointer;
 }
