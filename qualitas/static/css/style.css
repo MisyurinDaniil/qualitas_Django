@@ -1828,7 +1828,7 @@ ul {
 
 
 /********************************
-************ Tisnenie ************
+************ Personalization ************
 ********************************/
 
 .text-paragraph {
@@ -1844,13 +1844,27 @@ ul {
     color: #d78e36;
 }
 .image-container {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 20px;
 }
 .image-container__img {
     display: block;
+    width: 100%;
 }
 .image-container__link-item {
+    display: block;
     cursor: pointer;
+    margin-bottom: 10px;
+}
+@media (min-width: 576px) {
+    .image-container {
+        display: flex;
+        justify-content: space-between;
+    }
+    .image-container__link-item {
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+    .image-container__link-item:last-child {
+        margin-right: 0px;
+    }
 }

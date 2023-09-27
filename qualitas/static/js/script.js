@@ -35,12 +35,12 @@ if (mainCarouselEl && thumbCarouselEl) {
     });
 }
 
-Fancybox.bind('[data-fancybox="tisnenie_page_1"]', {
-    // Custom options for the first gallery
-  });
-Fancybox.bind('[data-fancybox="tisnenie_page_2"]', {
-// Custom options for the first gallery
-});
+// Fancybox.bind('[data-fancybox="tisnenie_page_1"]', {
+//     // Custom options for the first gallery
+//   });
+// Fancybox.bind('[data-fancybox="tisnenie_page_2"]', {
+// // Custom options for the first gallery
+// });
 
 // isMobile. Проверяет зашел ли текущий пользователь с мобильного утсройства (планшет, телефон)
 // Checks if the current user is logged in from a mobile device (tablet, phone)

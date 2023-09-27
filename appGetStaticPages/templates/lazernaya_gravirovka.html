@@ -54,9 +54,21 @@
                         Стоимость услуги — 400 рублей.
                     </p>
                     <div class="image-container">
-                        <img src="{% static 'img/lazernay_gravirovka/vibor_shrifta_dlya_gravirovki.jpg' %}" 
-                            alt="Примеры шрифта для лазерной гравировки" 
-                            class="image-container__img">
+                        <a
+                            data-fancybox="lazernaya_gravirovka_page_0"
+                            data-src="{% static 'img/lazernay_gravirovka/vibor_shrifta_dlya_gravirovki.jpg' %}"
+                            data-caption="Образцы шрифтов для лазерной гравировки"
+                            class="image-container__link-item"
+                        >
+                            <img 
+                                src="{% static 'img/lazernay_gravirovka/vibor_shrifta_dlya_gravirovki.jpg' %}" 
+                                alt="Образцы шрифтов для лазерной гравировки" 
+                                class="image-container__img"
+                            />
+                        </a>
+                        {% comment %} <img src="{% static 'img/lazernay_gravirovka/vibor_shrifta_dlya_gravirovki.jpg' %}" 
+                            alt="Образцы шрифтов для лазерной гравировки" 
+                            class="image-container__img"> {% endcomment %}
                     </div>
                     <p class="text-paragraph text-paragraph--size20">
                         Примеры наших работ.
@@ -71,6 +83,7 @@
                             <img 
                                 src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_text.jpg' %}" 
                                 alt="Фото лазерной гравировки текста" 
+                                class="image-container__img"
                             />
                         </a>
 
@@ -83,6 +96,7 @@
                             <img 
                                 src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_fio.jpg' %}"
                                 alt="Фото лазерной гравировки инициалов фамилии, имени и отчества" 
+                                class="image-container__img"
                             />
                         </a>
 
@@ -95,6 +109,7 @@
                             <img 
                                 src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_pojelanie.jpg' %}" 
                                 alt="Фото лазерной гравировки текста пожелания" 
+                                class="image-container__img"
                             />
                         </a>
                     </div>
@@ -134,6 +149,7 @@
                             <img 
                                 src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_logo_1.jpg' %}" 
                                 alt="Фото лазерной гравировки логотипа компании"
+                                class="image-container__img"
                             />
                         </a>
 
@@ -146,6 +162,7 @@
                             <img 
                                 src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_logo_2.jpg' %}"
                                 alt="Фото лазерной гравировки изображения"
+                                class="image-container__img"
                             />
                         </a>
 
@@ -158,6 +175,7 @@
                             <img 
                                 src="{% static 'img/lazernay_gravirovka/lazernay_gravirovka_logo_3.jpg' %}" 
                                 alt="Фото лазерной гравировки логотипа компании"
+                                class="image-container__img"
                             />
                         </a>
                     </div>
