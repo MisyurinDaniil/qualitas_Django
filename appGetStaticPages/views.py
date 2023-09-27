@@ -34,5 +34,8 @@ def tisnenie_page(request):
 def lazernaya_gravirovka_page(request):
     return render(request, './lazernaya_gravirovka.html')
 
+def kozha_nit_furnitura(request):
+    return render(request, './kozha_nit_furnitura.html')
+
 def page_not_found(request, exception):
     return render(request, './404.html', status = 404)
