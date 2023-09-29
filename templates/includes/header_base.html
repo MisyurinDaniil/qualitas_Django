@@ -1,0 +1,111 @@
+{% load static %}
+
+{% comment %}
+    Использование Simple Tags
+    {% load get_categorys_tag %} - Подключаем наш simple tag "get_categorys_tag"
+        из директории appProductItem/templatetags.
+        get_categorys_tag - название директории, есть название тега.
+    {% getProductsCategorys as  productCategoryList %} - вызываем функцию getProductsCategorys
+        и помещаем результат работы функции в переменную productCategoryList
+
+    Имеется еще один вид тегов в Django - Inclusion tags. Умеет рендерить шаблон.
+{% endcomment %}
+{% load get_categorys_tag %}
+{% getProductsCategorys as  productCategoryList %}
+
+<div class="container container-header">
+    <div class="logo header__logo">
+        <a href="{% url 'home' %}" class="logo__link">
+            <img
+                src="{% static 'img/logo_qualitas_leather.svg' %}"
+                alt="Логотип qualitas leather"
+                class="logo__img"
+            />
+        </a>
+    </div>
+    <div class="burger">
+        <span class="burger__span"></span>
+    </div>
+    <nav class="nav nav__display-none">
+        <div class="close-button"></div>
+        <ul class="nav__list">
+            <li class="nav__item">
+                <a href="{% url 'home' %}" class="nav__item-link">Главная</a>
+                <span class="title-underline nav-title-underline"></span>
+            </li>
+            <li class="nav__item">
+                <div class="nav-link__container">
+                    <a href="#" class="nav__item-link">Каталог</a>
+                    <div class="triangle"></div>
+                </div>
+                <span class="title-underline nav-title-underline"></span>
+                <ul class="sub-nav__list sub-nav__list-none">
+                    {% for productCategory in productCategoryList %}
+                        <li class="sub-nav__item">
+                            <a href="{{ productCategory.get_absolute_url }}" class="sub-nav__item-link">{{productCategory.product_category_name}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="nav__item">
+                <div class="nav-link__container">
+                    <a href="#" class="nav__item-link">Персонализация</a>
+                    <div class="triangle"></div>
+                </div>
+                <span class="title-underline nav-title-underline"></span>
+                <ul class="sub-nav__list sub-nav__list-none">
+                    <li class="sub-nav__item">
+                        <a href="{% url 'kozha_nit_furnitura' %}" class="sub-nav__item-link"
+                            >Выбор кожи, фурнитуры, нити</a
+                        >
+                    </li>
+                    <li class="sub-nav__item">
+                        <a href="{% url 'lazernaya_gravirovka' %}" class="sub-nav__item-link"
+                            >Лазерная гравировка</a
+                        >
+                    </li>
+                    <li class="sub-nav__item">
+                        <a href="{% url 'tisnenie' %}" class="sub-nav__item-link"
+                            >Гравировка тиснением</a
+                        >
+                    </li>
+                </ul>
+            </li>
+            {% comment %} <li class="nav__item">
+                <a href="{% url 'blog' %}" class="nav__item-link">Блог</a>
+                <span class="title-underline nav-title-underline"></span>
+            </li> {% endcomment %}
+            <li class="nav__item">
+                <div class="nav-link__container">
+                    <a href="#" class="nav__item-link">Информация</a>
+                    <div class="triangle"></div>
+                </div>
+                <span class="title-underline nav-title-underline"></span>
+                <ul class="sub-nav__list sub-nav__list-none">
+                    <li class="sub-nav__item">
+                        <a href="{% url 'delivery' %}" class="sub-nav__item-link"
+                            >Способы доставки</a
+                        >
+                    </li>
+                    <li class="sub-nav__item">
+                        <a href="{% url 'payment' %}" class="sub-nav__item-link"
+                            >Способы оплаты</a
+                        >
+                    </li>
+                    {% comment %} <li class="sub-nav__item">
+                        <a href="{% url 'aboutus' %}" class="sub-nav__item-link">О нас</a>
+                    </li>
+                    <li class="sub-nav__item">
+                        <a href="{% url 'help' %}" class="sub-nav__item-link"
+                            >Часто задаваемые вопросы</a
+                        >
+                    </li> {% endcomment %}
+                </ul>
+            </li>
+            <li class="nav__item">
+                <a href="{% url 'contacts' %}" class="nav__item-link">Контакты</a>
+                <span class="title-underline nav-title-underline"></span>
+            </li>
+        </ul>
+    </nav>
+</div>
