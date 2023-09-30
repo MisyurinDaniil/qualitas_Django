@@ -179,3 +179,17 @@ class ProductImg(models.Model):
     class Meta:
         verbose_name = "Картинки для конечной страницы товара"
         verbose_name_plural = "2. Картинки для конечной страницы товара"
+
+class Review(models.Model):
+    userName = models.CharField(max_length=255, verbose_name='Имя пользователся')
+    text = models.TextField(max_length=2000, verbose_name='Текст отзыва')
+    parent = models.ForeignKey(
+        'self', verbose_name='Сообщение родитель', on_delete=models.SET_NULL, blank=True, null=True
+    )
+    product = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
+
+    def __str__(self):
+        return f"{self.name} - {self.product}"
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
