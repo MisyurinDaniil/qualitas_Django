@@ -183,9 +183,7 @@ class ProductImg(models.Model):
 class Review(models.Model):
     userName = models.CharField(max_length=255, verbose_name='Имя пользователся')
     text = models.TextField(max_length=2000, verbose_name='Текст отзыва')
-    parent = models.ForeignKey(
-        'self', verbose_name='Сообщение родитель', on_delete=models.SET_NULL, blank=True, null=True
-    )
+    stars = models.SmallIntegerField(default=0, verbose_name='Количество звезд рейтинга  ')
     product = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
 
     def __str__(self):
