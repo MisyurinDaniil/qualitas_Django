@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .forms import ReviewForm
+from .forms import OrderForm
 from appProductItem.models import ProductItem
 from django.views.generic.base import View
 from qualitas.settings import telegram_token, telegram_chat_id
@@ -26,7 +26,7 @@ def sendTelegram(text = 'Test'):
 
 class Makeorder(View):
         def post(self, request, pk):
-                form = ReviewForm(request.POST)
+                form = OrderForm(request.POST)
                 if form.is_valid():
                         # Изменять форму можно только после команды form = form.save(commit=False)
                         form = form.save(commit=False)

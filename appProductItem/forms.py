@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order
+from .models import Review
 
 # Проект recapcha на github
 # Там же находится мануал
@@ -13,20 +13,20 @@ from .models import Order
 # from django.utils.translation import gettext_lazy as _
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
-class OrderForm(forms.ModelForm):
+class AddReviewForm(forms.ModelForm):
     """
         Форма отзывов
 
         Для указания класса для поля input можно использовать следующую конструкцию
         def __init__(self, *args, **kwargs):
-            super(OrderForm, self).__init__(*args, **kwargs)
+            super(AddReviewForm, self).__init__(*args, **kwargs)
             self.fields['order_customer_name'].widget.attrs['class'] = 
     """
     captcha = ReCaptchaField()
     
     class Meta:
-        model = Order
-        fields = ("order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment", "captcha")
+        model = Review
+        fields = ("userName", "text", "stars", "product", "captcha")
         # labels = {
         #     'order_customer_name': 'Как вас зовут', 
         #     'order_customer_telephone': 'Контактный телефон',

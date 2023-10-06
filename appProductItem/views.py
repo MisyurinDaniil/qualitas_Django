@@ -4,7 +4,9 @@ from .models import ProductItem, ProductCategory
 from django.db.models import Q
 
 from django.views.generic import ListView, DetailView
-from appOrders.forms import ReviewForm 
+from django.views.generic.base import View
+from appOrders.forms import OrderForm 
+from django.http import HttpResponse
 
 ############ CBV test ############# 
 class ProductsInCategoryList(ListView):
@@ -99,5 +101,10 @@ class ProductDetail(DetailView):
             Через переменную category в шаблоне доступен объект нужной категории.
         """
         context = super().get_context_data(**kwargs)
-        context['form'] = ReviewForm()
+        context['form'] = OrderForm()
         return context
+
+class AddReview(View):
+    def post(self, request, pk):
+        print(request.POST)
+        return HttpResponse("True")
