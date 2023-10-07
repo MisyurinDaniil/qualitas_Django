@@ -1960,7 +1960,9 @@ ul {
   .stars .stars__items input:hover ~ label .star-stroke,.stars .stars__items input:checked ~ label .star-stroke{
     background: var(--star-colour);
   }
-  
+  .star-stroke--background-col {
+    background: var(--star-colour)!important;
+  }
   .stars .stars__items input:checked ~ label .star-stroke .star-fill{
     background: var(--star-colour);
   }

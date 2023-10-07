@@ -116,6 +116,7 @@ class AddReview(View):
         
     def post(self, request, pk):
         form = AddReviewForm(request.POST)
+        print('#######################################')
         print(request.POST)
         print('#######################################')
         print(form)
