@@ -186,9 +186,10 @@ class Review(models.Model):
     text = models.TextField(max_length=2000, verbose_name='Текст отзыва')
     product = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
     date = models.DateTimeField(auto_now=True, verbose_name='Дата отзыва')
+    ip = models.CharField(verbose_name='Ip adress клиента', null=True, blank=True, max_length=15)
 
     def __str__(self):
-        return f"{self.name} - {self.product}"
+        return f"{self.userName} - {self.product}"
     class Meta:
         verbose_name = "Отзыв"
-        verbose_name_plural = "Отзывы"
+        verbose_name_plural = "9. Отзывы"

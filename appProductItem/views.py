@@ -1,6 +1,6 @@
 # Create your views here.
 
-from .models import ProductItem, ProductCategory
+from .models import ProductItem, ProductCategory, Review
 from django.db.models import Q
 
 from django.views.generic import ListView, DetailView
@@ -106,6 +106,14 @@ class ProductDetail(DetailView):
         return context
 
 class AddReview(View):
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+        
     def post(self, request, pk):
         form = AddReviewForm(request.POST)
         print(request.POST)
@@ -116,25 +124,13 @@ class AddReview(View):
             # Изменять форму можно только после команды form = form.save(commit=False)
             form = form.save(commit=False)
             form.product_id = pk
-            form.save()
-            return HttpResponse("True")
+            ip = self.get_client_ip(request)
+            try:
+                Review.objects.get(Q(product_id = pk) & Q(ip = ip))
+                return HttpResponse("already_exists_client")
+            except Review.DoesNotExist:
+                form.ip = ip
+                form.save()
+                return HttpResponse("True")
         print(form.errors)
         return HttpResponse("False")
-
-# class Makeorder(View):
-#         def post(self, request, pk):
-#                 form = OrderForm(request.POST)
-#                 if form.is_valid():
-#                         # Изменять форму можно только после команды form = form.save(commit=False)
-#                         form = form.save(commit=False)
-#                         form.order_binding_id = pk
-#                         form.save()
-#                         text = ('Ссылка на товар - ' + request.POST['order_product_url'] + '\n' + 
-#                                 'Название товара - ' + ProductItem.objects.get(id=pk).product_name + '\n' + 
-#                                 'Имя заказчика - ' + request.POST['order_customer_name'] + '\n' + 
-#                                 'Телефон закачика - ' + request.POST['order_customer_telephone'] + '\n' + '\n' +
-#                                 'Комментарий к заказу - ' + request.POST['order_customer_comment'])
-#                         sendTelegram(text)
-#                         return HttpResponse("True")
-#                 print(form.errors)
-#                 return HttpResponse("False")

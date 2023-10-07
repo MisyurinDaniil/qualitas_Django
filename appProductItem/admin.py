@@ -167,6 +167,16 @@ class CustomizeProductImg(admin.ModelAdmin):
     get_product_img.short_description = 'Миниатюра'
     get_product_img_big.short_description = 'Миниатюра'
 
+class CustomizeProductReview(admin.ModelAdmin):
+    # Кортеж с именами полей, который хотим отобразит в админ панеле на этапе просмотра всего перечня картинок
+    list_display = ('id', 'ip', 'userName', 'product', 'date')
+    # Отмечаем поля по нажатию на которые можно перейти на страницу слайда
+    list_display_links = ('id', 'ip', 'userName',)
+    # Указжем поля отображаемые на карточке слайда
+    fields = ('id', 'ip', 'product', 'userName', 'text', 'stars', 'date')
+    # Укажем поля только для чтения, чтобы django не вывалилвался в ошибку
+    readonly_fields = ('id', 'date', 'product', )
+
 # Добавляем нашу модель в админ панель
 admin.site.register(ProductItem, CustomizeProductItem)
 admin.site.register(ProductCategory, CustomProductCategory)
@@ -176,3 +186,4 @@ admin.site.register(ProductMaterial)
 admin.site.register(ProductFitting)
 admin.site.register(ProductMakeTime)
 admin.site.register(ProductImg, CustomizeProductImg)
+admin.site.register(Review, CustomizeProductReview)
