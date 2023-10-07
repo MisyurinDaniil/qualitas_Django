@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from appOrders.forms import OrderForm 
 from django.http import HttpResponse
+from .forms import AddReviewForm
 
 ############ CBV test ############# 
 class ProductsInCategoryList(ListView):
@@ -106,5 +107,34 @@ class ProductDetail(DetailView):
 
 class AddReview(View):
     def post(self, request, pk):
+        form = AddReviewForm(request.POST)
         print(request.POST)
-        return HttpResponse("True")
+        print('#######################################')
+        print(form)
+        print('#######################################')
+        if form.is_valid():
+            # Изменять форму можно только после команды form = form.save(commit=False)
+            form = form.save(commit=False)
+            form.product_id = pk
+            form.save()
+            return HttpResponse("True")
+        print(form.errors)
+        return HttpResponse("False")
+
+# class Makeorder(View):
+#         def post(self, request, pk):
+#                 form = OrderForm(request.POST)
+#                 if form.is_valid():
+#                         # Изменять форму можно только после команды form = form.save(commit=False)
+#                         form = form.save(commit=False)
+#                         form.order_binding_id = pk
+#                         form.save()
+#                         text = ('Ссылка на товар - ' + request.POST['order_product_url'] + '\n' + 
+#                                 'Название товара - ' + ProductItem.objects.get(id=pk).product_name + '\n' + 
+#                                 'Имя заказчика - ' + request.POST['order_customer_name'] + '\n' + 
+#                                 'Телефон закачика - ' + request.POST['order_customer_telephone'] + '\n' + '\n' +
+#                                 'Комментарий к заказу - ' + request.POST['order_customer_comment'])
+#                         sendTelegram(text)
+#                         return HttpResponse("True")
+#                 print(form.errors)
+#                 return HttpResponse("False")

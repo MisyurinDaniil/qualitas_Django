@@ -20,6 +20,9 @@ def sendTelegram(text = 'Test'):
         'chat_id': telegram_chat_id,
         'text' : text,
     })
+#     print(telegram_token, telegram_chat_id)
+#     print(text)
+
 
 # sendTelegram()
 
@@ -39,4 +42,5 @@ class Makeorder(View):
                                 'Комментарий к заказу - ' + request.POST['order_customer_comment'])
                         sendTelegram(text)
                         return HttpResponse("True")
+                print(form.errors)
                 return HttpResponse("False")

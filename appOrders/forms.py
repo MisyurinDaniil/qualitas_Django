@@ -27,6 +27,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ("order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment", "captcha")
+        # fields = ("order_product_url", "order_customer_name", "order_customer_telephone", "order_customer_comment")
         # labels = {
         #     'order_customer_name': 'Как вас зовут', 
         #     'order_customer_telephone': 'Контактный телефон',

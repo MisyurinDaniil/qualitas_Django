@@ -181,10 +181,11 @@ class ProductImg(models.Model):
         verbose_name_plural = "2. Картинки для конечной страницы товара"
 
 class Review(models.Model):
+    stars = models.SmallIntegerField(default=0, verbose_name='Количество звезд рейтинга')
     userName = models.CharField(max_length=255, verbose_name='Имя пользователся')
     text = models.TextField(max_length=2000, verbose_name='Текст отзыва')
-    stars = models.SmallIntegerField(default=0, verbose_name='Количество звезд рейтинга')
     product = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
+    date = models.DateTimeField(auto_now=True, verbose_name='Дата отзыва')
 
     def __str__(self):
         return f"{self.name} - {self.product}"

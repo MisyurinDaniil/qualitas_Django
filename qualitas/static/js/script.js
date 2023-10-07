@@ -156,7 +156,11 @@ if (document.querySelector("form")) {
                 .then((response) => {
                     console.log(response);
                     // form.reset(); // очищаем поля формы
-                    if (mainButtonModal) {
+                    if (mainButtonModal && response == "False") {
+                        document.querySelector(".modal-window__content").classList.add('display-none')
+                        document.querySelector(".modal-window__order-false").classList.remove('display-none')
+                    }
+                    if (mainButtonModal && response == "True") {
                         document.querySelector(".modal-window__content").classList.add('display-none')
                         document.querySelector(".modal-window__order-true").classList.remove('display-none')
                     }
