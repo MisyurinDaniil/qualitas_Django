@@ -27,6 +27,7 @@
       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       site_name: "{{ inventory_hostname }}"
       mail_for_certbot_ssl: "qualitas.store@yandex.ru"
+      use_git_branch: "productReview"
   
   tasks:
     # Обновляем кеш репозитория
@@ -111,6 +112,15 @@
         repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
         force: true
+      tags:
+        - git
+        - update_project
+
+    # Выбираем ветку git
+    - name: Change git branch
+      command: git checkout {{ use_git_branch }}
+      args:
+        chdir: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
       tags:
         - git
         - update_project

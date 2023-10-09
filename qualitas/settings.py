@@ -28,8 +28,6 @@ if os.environ['DJANGO_DEBUG'] == "False":
 else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
-    CSRF_TRUSTED_ORIGINS = ['*']
-    
 
 RECAPTCHA_PUBLIC_KEY = "6LeWMsslAAAAANEINXlvxxyG7buNt6uXaZJTGLgH"
 RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
