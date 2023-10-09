@@ -24,7 +24,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 if os.environ['DJANGO_DEBUG'] == "False":
     DEBUG = False
     ALLOWED_HOSTS = [os.environ['SITENAME']]
-    CSRF_TRUSTED_ORIGINS=[os.environ['SITENAME']]
+    CSRF_TRUSTED_ORIGINS=['https://' + os.environ['SITENAME']]
 else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
