@@ -9,6 +9,10 @@ EnvironmentFile=/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/.env
 
 ExecStart=/home/{{ ansible_ssh_user }}/sites/{{ site_name }}/venv/bin/gunicorn \
     --bind unix:/tmp/{{ site_name }}.socket \
+    --error-logfile /home/{{ ansible_ssh_user }}/log/{{ site_name }}/error.log \
+    --access-logfile /home/{{ ansible_ssh_user }}/log/{{ site_name }}/access.log \
+    --capture-output \
+    --log-level debug \
     qualitas.wsgi:application
 
 [Install]

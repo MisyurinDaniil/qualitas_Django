@@ -235,6 +235,28 @@
       tags:
         - nginx
 
+    # Создаем директорию для логов gunicorn
+    - name: Added folder for gunicorn log
+      file:
+        path: /home/{{ ansible_ssh_user }}/log/{{ site_name }}
+        state: directory
+        recurse: yes
+      tags:
+        - gunicorn
+        - test
+
+    # Создаем файлы error.log и access.log для gunicorn
+    - name: Added folder for gunicorn log
+      file:
+        path: "{{ item }}"
+        state: touch
+      with_items:
+        - /home/{{ ansible_ssh_user }}/log/{{ site_name }}/error.log
+        - /home/{{ ansible_ssh_user }}/log/{{ site_name }}/access.log
+      tags:
+        - gunicorn
+        - test
+
     # Настраиваем gunicorn --> [Перезапустить gunicorn]
     - name: Write gunicorn service script
       become: yes
