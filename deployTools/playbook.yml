@@ -106,6 +106,17 @@
       tags:
         - git
 
+    # Останавливаем gunicorn
+    - name: Stoped gunicorn.{{ site_name }}
+      become: yes
+      systemd:
+        name: gunicorn.{{ site_name }}
+        state: stopped
+      ignore_errors: yes  # if the service does not exist
+      tags:
+        - update_project
+        - test
+
     # Скачиваем код проекта из гитхаба
     - name: Download project code from Github
       git:
@@ -243,7 +254,6 @@
         recurse: yes
       tags:
         - gunicorn
-        - test
 
     # Создаем файлы error.log и access.log для gunicorn
     - name: Added folder for gunicorn log
@@ -255,7 +265,6 @@
         - /home/{{ ansible_ssh_user }}/log/{{ site_name }}/access.log
       tags:
         - gunicorn
-        - test
 
     # Настраиваем gunicorn --> [Перезапустить gunicorn]
     - name: Write gunicorn service script
