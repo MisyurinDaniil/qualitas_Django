@@ -106,14 +106,6 @@ class ProductDetail(DetailView):
         return context
 
 class AddReview(View):
-    def get_client_ip(self, request):
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
-        
     def post(self, request, pk):
         form = AddReviewForm(request.POST)
         print('#######################################')
@@ -125,7 +117,7 @@ class AddReview(View):
             # Изменять форму можно только после команды form = form.save(commit=False)
             form = form.save(commit=False)
             form.product_id = pk
-            ip = self.get_client_ip(request)
+            ip = request.META.get("HTTP_X_REAL_IP")
             try:
                 Review.objects.get(Q(product_id = pk) & Q(ip = ip))
                 return HttpResponse("already_exists_client")

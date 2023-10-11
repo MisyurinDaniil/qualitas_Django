@@ -256,7 +256,7 @@
         - gunicorn
 
     # Создаем файлы error.log и access.log для gunicorn
-    - name: Added folder for gunicorn log
+    - name: Added files for gunicorn log
       file:
         path: "{{ item }}"
         state: touch
