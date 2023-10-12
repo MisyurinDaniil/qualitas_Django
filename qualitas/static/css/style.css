@@ -1090,9 +1090,9 @@ ul {
     list-style: none;
 }
 .end-product-spec__item {
-    font-size: 12px;
+    font-size: 14px;
     padding-bottom: 3px;
-    line-height: 16px;
+    line-height: 18px;
     text-transform: uppercase;
 }
 .end-product-spec__price {
@@ -1869,7 +1869,9 @@ ul {
     }
 }
 
-/* Checkbox stars */
+/* #####################
+####### Checkbox stars ####### 
+####################### */
 
 :root{
     --primary-colour: #191919;
@@ -1935,7 +1937,7 @@ ul {
   }
   
   .stars .stars__items label{
-    width: 30px;
+    width: 24px;
     aspect-ratio: 1;
     cursor: pointer;
   }
@@ -1943,15 +1945,15 @@ ul {
   .stars .stars__items label .star-stroke{
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background: var(--secondary-colour);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     transition: .4s;
   }
   
   .stars .stars__items label .star-stroke .star-fill{
-    width: 18px;
+    width: 15px;
     aspect-ratio: 1;
     background: var(--primary-colour);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
@@ -2007,18 +2009,18 @@ ul {
     margin-bottom: 10px;
 }
 .old-review__name {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 5px;
 }
 .old-review__date {
     font-size: 14px;
 }
 .old-review__message {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 22px;
 }
-.review-form {
-    /* margin-top: 60px; */
+.old-review__img {
+    width: 60px;
 }
 .review-form__input {
     font-size: 16px;
@@ -2029,8 +2031,36 @@ ul {
     height: 100px;
 }
 .review-form__label {
-    font-size: 18px;
+    font-size: 16px;
 }
 .review-form__label--mar-top {
     margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+    .stars .stars__items label{
+        width: 30px;
+    }
+    .old-review__name {
+        font-size: 24px;
+    }
+    .old-review__message {
+        font-size: 16px;
+    }
+    .old-review__date {
+        font-size: 12px;
+    }
+    .review-form__label {
+        font-size: 18px;
+    }
+    .old-review__img {
+        width: auto;
+    }
+    .stars .stars__items label .star-stroke{
+        width: 30px;
+        height: 30px;
+    }
+    .stars .stars__items label .star-stroke .star-fill{
+        width: 18px;
+    }
 }
