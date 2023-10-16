@@ -29,6 +29,10 @@ else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
 
+
+# django-recaptcha3
+# https://github.com/kbytesys/django-recaptcha3
+
 RECAPTCHA_PUBLIC_KEY = "6LeWMsslAAAAANEINXlvxxyG7buNt6uXaZJTGLgH"
 RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
 RECAPTCHA_DEFAULT_ACTION = 'generic'

@@ -154,6 +154,7 @@ if (document.querySelector("form")) {
             let url = this.attributes.action.nodeValue;
             ajaxSend(formData, url)
                 .then((response) => {
+                    console.log(form);
                     console.log(response);
                     // form.reset(); // очищаем поля формы
                     if (mainButtonModal && response == "False") {

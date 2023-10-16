@@ -8,6 +8,7 @@ from django.views.generic.base import View
 from appOrders.forms import OrderForm 
 from django.http import HttpResponse
 from .forms import AddReviewForm
+from django.shortcuts import redirect
 
 ############ CBV test ############# 
 class ProductsInCategoryList(ListView):
@@ -102,28 +103,37 @@ class ProductDetail(DetailView):
             Через переменную category в шаблоне доступен объект нужной категории.
         """
         context = super().get_context_data(**kwargs)
-        context['form'] = OrderForm()
+        context['form_order'] = OrderForm()
+        context['form_review'] = AddReviewForm()
         return context
 
 class AddReview(View):
+    def get_client_ip(self, request):
+        ip = request.META.get("HTTP_X_REAL_IP")
+        if ip:
+            return ip
+        else:
+            return request.META.get('REMOTE_ADDR')
+
     def post(self, request, pk):
-        form = AddReviewForm(request.POST)
-        print('#######################################')
-        print(request.POST)
-        print('#######################################')
-        print(form)
-        print('#######################################')
-        if form.is_valid():
-            # Изменять форму можно только после команды form = form.save(commit=False)
-            form = form.save(commit=False)
-            form.product_id = pk
-            ip = request.META.get("HTTP_X_REAL_IP")
-            try:
-                Review.objects.get(Q(product_id = pk) & Q(ip = ip))
-                return HttpResponse("already_exists_client")
-            except Review.DoesNotExist:
-                form.ip = ip
-                form.save()
-                return HttpResponse("True")
-        print(form.errors)
-        return HttpResponse("False")
+        # form = AddReviewForm(request.POST)
+        # print('#######################################')
+        # print(form)
+        # print('#######################################')
+        # if form.is_valid():
+        #     # Изменять форму можно только после команды form = form.save(commit=False)
+        #     form = form.save(commit=False)
+        #     form.product_id = pk
+        #     ip = self.get_client_ip(request)
+        #     try:
+        #         Review.objects.get(Q(product_id = pk) & Q(ip = ip))
+        #         return HttpResponse("already_exists_client")
+        #     except Review.DoesNotExist:
+        #         form.ip = ip
+        #         form.save()
+        #         return HttpResponse("True")
+        # print('*****************************************')
+        # print(form.errors)
+        # print('*****************************************')
+        # return HttpResponse("False")
+        return HttpResponse("True")

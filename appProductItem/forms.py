@@ -15,9 +15,9 @@ from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 class AddReviewForm(forms.ModelForm):
 
-    # captcha = ReCaptchaField()
+    captcha = ReCaptchaField()
     
     class Meta:
         model = Review
-        fields = ("stars", "userName", "text")
+        fields = ("stars", "userName", "text", "captcha")
 

@@ -72,19 +72,19 @@
                             </p>
                         </li>
                     </ul>
-                    <button data-fancybox="" data-src="#modal-window" class="main-button main-button-modal">
+                    <button data-fancybox="" data-src="#modal-window-order" class="main-button main-button-modal">
                         Оформить заказ
                     </button>
                 </div>
             </div>
-            <div id="modal-window" class="modal-window">
+            <div id="modal-window-order" class="modal-window">
                 <div class="modal-window__content">
                     <p class="modal-window__text">
                         Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                     </p>
                     <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form">
-                        {{ form.non_field_errors }}
+                        {% comment %} {{ form_order.non_field_errors }} {% endcomment %}
                         {% csrf_token %}
                         <ul class="modal-window__list">
                             <li class="modal-window__list-item">
@@ -98,32 +98,29 @@
                                     alt="{{ product.product_img_main_alt }}"
                                 />
                                 
-                                {{ form.order_product_url.errors }}
-                                {{ form.order_product_url }}
+                                {% comment %} {{ form_order.order_product_url.errors }} {% endcomment %}
+                                {{ form_order.order_product_url }}
 
-                                {{ form.captcha }}
+                                {{ form_order.captcha }}
                             </li>
                             <li class="modal-window__list-item">
-                                {{ form.order_customer_name.errors }}
-                                <label class="modal-window__input_title" for="{{ form.order_customer_name.id_for_label  }}"
+                                <label class="modal-window__input_title" for="{{ form_order.order_customer_name.id_for_label  }}"
                                     >Как вас зовут:</label
                                 >
-                                {{ form.order_customer_name }}
+                                {{ form_order.order_customer_name }}
                             </li>
                             <li class="modal-window__list-item">
-                                {{ form.order_customer_telephone.errors }}
-                                <label class="modal-window__input_title" for="{{ form.order_customer_telephone.id_for_label  }}"
+                                <label class="modal-window__input_title" for="{{ form_order.order_customer_telephone.id_for_label  }}"
                                     >Контактный телефон:
                                 </label>
-                                {{ form.order_customer_telephone }}
+                                {{ form_order.order_customer_telephone }}
                                 
                             </li>
                             <li class="modal-window__list-item">
-                                {{ form.order_customer_comment.errors }}
-                                <label class="modal-window__input_title" for="{{ form.order_customer_comment.id_for_label  }}"
+                                <label class="modal-window__input_title" for="{{ form_order.order_customer_comment.id_for_label  }}"
                                     >Комментарий к заказу:</label
                                 >
-                                {{ form.order_customer_comment }}
+                                {{ form_order.order_customer_comment }}
                             </li>
                             <li class="modal-window__list-item">
                                 <input
@@ -176,6 +173,7 @@
                         </div>
                     {% endfor %}
                     <form action="{% url 'add_review' product.id %}" class="review-form">
+                        {{ form_review.captcha }}
                         {% csrf_token %}
                         <span class="review-form__label">Оцените товар *:</span>
                         <div class="stars stars--mar-top">
@@ -223,7 +221,7 @@
                             <textarea class="review-form__input review-form__input--width" placeholder="Отзыв" id='review-form__text' name="text"></textarea>
                         </div>
                         <input
-                            class="main-button main-button__submit-review"
+                            class="main-button main-button__submit-review main-button-modal"
                             type="submit"
                             value="Отправить"
                         />
