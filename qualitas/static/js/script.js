@@ -147,6 +147,28 @@ if (document.querySelector("form")) {
 
     const forms = document.querySelectorAll("form");
 
+    function formsHandlers(form, response) {
+        console.log(form);
+        console.log(form.id);
+        console.log(response);
+        if (form.id === "form-order") {
+            if (mainButtonModal && response == "False") {
+                document.querySelector(".modal-window__content").classList.add('display-none')
+                document.querySelector(".modal-window__order-false").classList.remove('display-none')
+            }
+            if (mainButtonModal && response == "True") {
+                document.querySelector(".modal-window__content").classList.add('display-none')
+                document.querySelector(".modal-window__order-true").classList.remove('display-none')
+            }
+        }
+        if (form.id === "form-review") {
+            if (response == "True") {
+                form.reset()
+                location.reload();
+            }
+        }
+    }
+
     forms.forEach(form => {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -154,17 +176,7 @@ if (document.querySelector("form")) {
             let url = this.attributes.action.nodeValue;
             ajaxSend(formData, url)
                 .then((response) => {
-                    console.log(form);
-                    console.log(response);
-                    // form.reset(); // очищаем поля формы
-                    if (mainButtonModal && response == "False") {
-                        document.querySelector(".modal-window__content").classList.add('display-none')
-                        document.querySelector(".modal-window__order-false").classList.remove('display-none')
-                    }
-                    if (mainButtonModal && response == "True") {
-                        document.querySelector(".modal-window__content").classList.add('display-none')
-                        document.querySelector(".modal-window__order-true").classList.remove('display-none')
-                    }
+                    formsHandlers(form, response);
                 })
                 .catch((err) => {
                     console.error(err)

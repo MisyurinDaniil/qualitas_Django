@@ -83,7 +83,7 @@
                         Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                     </p>
-                    <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form">
+                    <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form" id="form-order">
                         {% comment %} {{ form_order.non_field_errors }} {% endcomment %}
                         {% csrf_token %}
                         <ul class="modal-window__list">
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <form action="{% url 'add_review' product.id %}" class="review-form">
+                    <form action="{% url 'add_review' product.id %}" class="review-form" id="form-review">
                         {{ form_review.captcha }}
                         {% csrf_token %}
                         <span class="review-form__label">Оцените товар *:</span>
@@ -221,7 +221,7 @@
                             <textarea class="review-form__input review-form__input--width" placeholder="Отзыв" id='review-form__text' name="text"></textarea>
                         </div>
                         <input
-                            class="main-button main-button__submit-review main-button-modal"
+                            class="main-button main-button__submit-review"
                             type="submit"
                             value="Отправить"
                         />
