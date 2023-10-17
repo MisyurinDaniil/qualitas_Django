@@ -1941,7 +1941,9 @@ ul {
     aspect-ratio: 1;
     cursor: pointer;
   }
-  
+  .stars__items--no-pointer {
+    cursor: auto !important; 
+  }
   .stars .stars__items label .star-stroke{
     display: grid;
     place-items: center;

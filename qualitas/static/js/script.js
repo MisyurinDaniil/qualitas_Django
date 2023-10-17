@@ -35,6 +35,7 @@ if (mainCarouselEl && thumbCarouselEl) {
     });
 }
 
+
 // Fancybox.bind('[data-fancybox="tisnenie_page_1"]', {
 //     // Custom options for the first gallery
 //   });
@@ -163,8 +164,14 @@ if (document.querySelector("form")) {
         }
         if (form.id === "form-review") {
             if (response == "True") {
-                form.reset()
-                location.reload();
+                // form.reset()
+                // location.reload();
+                new Fancybox(
+                    {
+                        href: '#modal-window-review', 
+                        modal: true
+                    }
+                  );
             }
         }
     }

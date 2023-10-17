@@ -72,7 +72,7 @@
                             </p>
                         </li>
                     </ul>
-                    <button data-fancybox="" data-src="#modal-window-order" class="main-button main-button-modal">
+                    <button data-fancybox data-src="#modal-window-order" class="main-button main-button-modal">
                         Оформить заказ
                     </button>
                 </div>
@@ -226,6 +226,29 @@
                             value="Отправить"
                         />
                     </form>
+                    <div id="modal-window-review" class="modal-window">
+                        <div class="modal-window__content">
+                            <div class="modal-window__review-false display-none">
+                                <br />
+                                Приносим извинения за временные неполадки. <br />
+                                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                            </div>
+                            <div class="modal-window__review-true display-none">
+                                <br />
+                                Приносим извинения за временные неполадки. <br />
+                                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                            </div>
+                            <div class="modal-window__already-exists display-none">
+                                <br />
+                                Приносим извинения за временные неполадки. <br />
+                                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
