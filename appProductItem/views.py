@@ -116,24 +116,23 @@ class AddReview(View):
             return request.META.get('REMOTE_ADDR')
 
     def post(self, request, pk):
-        # form = AddReviewForm(request.POST)
+        form = AddReviewForm(request.POST)
         # print('#######################################')
         # print(form)
         # print('#######################################')
-        # if form.is_valid():
-        #     # Изменять форму можно только после команды form = form.save(commit=False)
-        #     form = form.save(commit=False)
-        #     form.product_id = pk
-        #     ip = self.get_client_ip(request)
-        #     try:
-        #         Review.objects.get(Q(product_id = pk) & Q(ip = ip))
-        #         return HttpResponse("already_exists_client")
-        #     except Review.DoesNotExist:
-        #         form.ip = ip
-        #         form.save()
-        #         return HttpResponse("True")
-        # print('*****************************************')
-        # print(form.errors)
-        # print('*****************************************')
-        # return HttpResponse("False")
-        return HttpResponse("True")
+        if form.is_valid():
+            # Изменять форму можно только после команды form = form.save(commit=False)
+            form = form.save(commit=False)
+            form.product_id = pk
+            ip = self.get_client_ip(request)
+            try:
+                Review.objects.get(Q(product_id = pk) & Q(ip = ip))
+                return HttpResponse("already_exists_client")
+            except Review.DoesNotExist:
+                form.ip = ip
+                form.save()
+                return HttpResponse("True")
+        print('*****************************************')
+        print(form.errors)
+        print('*****************************************')
+        return HttpResponse("False")

@@ -72,7 +72,7 @@
                             </p>
                         </li>
                     </ul>
-                    <button data-fancybox data-src="#modal-window-order" class="main-button main-button-modal">
+                    <button data-fancybox="product-order-window" data-src="#modal-window-order" class="main-button main-button-modal">
                         Оформить заказ
                     </button>
                 </div>
@@ -135,13 +135,13 @@
                 <div class="modal-window__order-true display-none">
                     <br />
                     Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
-                    Вы также можете написать нам в социальных сетях.<br />
+                    Вы также можете написать нам любым удовбным для Вас способом.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                 </div>
                 <div class="modal-window__order-false display-none">
                     <br />
                     Приносим извинения за временные неполадки. <br />
-                    Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                    Попробуйте оформить заказ подзднее или свяжитесь с нами любым удовбным для Вас способом.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                 </div>
             </div>
@@ -226,27 +226,31 @@
                             value="Отправить"
                         />
                     </form>
-                    <div id="modal-window-review" class="modal-window">
+                    <div id="modal-window-review-true" class="modal-window">
                         <div class="modal-window__content">
-                            <div class="modal-window__review-false display-none">
+                            <div>
+                                Спасибо за оставленный отзыв, мы обязательно его учтем в совей работе.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal-window-review-false" class="modal-window">
+                        <div class="modal-window__content">
+                            <div>
                                 <br />
                                 Приносим извинения за временные неполадки. <br />
-                                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                                Попробуйте оставить отзыв подзднее или свяжитесь с нами любым удовбным для Вас способом.<br />
                                 <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                             </div>
-                            <div class="modal-window__review-true display-none">
-                                <br />
-                                Приносим извинения за временные неполадки. <br />
-                                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                        </div>
+                    </div>
+                    <div id="modal-window-review-al-ex-cl" class="modal-window">
+                        <div class="modal-window__content">
+                            <div>
+                                Для этого товара Вами ранее уже оставлен отзыв.<br />
+                                Для одного товара можно оставить только один отзыв.<br />
+                                Если у Вас есть вопросы, Вы можете связиться с нами любым удовбным для Вас способом.
                                 <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                             </div>
-                            <div class="modal-window__already-exists display-none">
-                                <br />
-                                Приносим извинения за временные неполадки. <br />
-                                Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
-                                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>

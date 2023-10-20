@@ -36,13 +36,6 @@ if (mainCarouselEl && thumbCarouselEl) {
 }
 
 
-// Fancybox.bind('[data-fancybox="tisnenie_page_1"]', {
-//     // Custom options for the first gallery
-//   });
-// Fancybox.bind('[data-fancybox="tisnenie_page_2"]', {
-// // Custom options for the first gallery
-// });
-
 // isMobile. Проверяет зашел ли текущий пользователь с мобильного утсройства (планшет, телефон)
 // Checks if the current user is logged in from a mobile device (tablet, phone)
 
@@ -164,14 +157,16 @@ if (document.querySelector("form")) {
         }
         if (form.id === "form-review") {
             if (response == "True") {
-                // form.reset()
-                // location.reload();
-                new Fancybox(
-                    {
-                        href: '#modal-window-review', 
-                        modal: true
-                    }
-                  );
+                form.reset()
+                Fancybox.show([{ src: "#modal-window-review-true", type: "inline" }]);
+            }
+            if (response == "False") {
+                form.reset()
+                Fancybox.show([{ src: "#modal-window-review-false", type: "inline" }]);
+            }
+            if (response == "already_exists_client") {
+                form.reset()
+                Fancybox.show([{ src: "#modal-window-review-al-ex-cl", type: "inline" }]);
             }
         }
     }
