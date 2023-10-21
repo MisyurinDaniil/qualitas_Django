@@ -141,9 +141,16 @@ if (document.querySelector("form")) {
 
     const forms = document.querySelectorAll("form");
 
-    function formsHandlers(form, response) {
-        console.log(form);
-        console.log(form.id);
+    // Добавляем отзыв без перезагрузки страницы
+    function addReview(formData){
+        console.log(formData);
+        console.log(formData.get('stars'), formData.get('userName'), formData.get('text'));
+        document.getElementsByClassName('')
+    }
+
+    function formsHandlers(form, response, formData) {
+        // console.log(form);
+        // console.log(form.id);
         console.log(response);
         if (form.id === "form-order") {
             if (mainButtonModal && response == "False") {
@@ -159,6 +166,7 @@ if (document.querySelector("form")) {
             if (response == "True") {
                 form.reset()
                 Fancybox.show([{ src: "#modal-window-review-true", type: "inline" }]);
+                addReview(formData);
             }
             if (response == "False") {
                 Fancybox.show([{ src: "#modal-window-review-false", type: "inline" }]);
@@ -176,7 +184,7 @@ if (document.querySelector("form")) {
             let url = this.attributes.action.nodeValue;
             ajaxSend(formData, url)
                 .then((response) => {
-                    formsHandlers(form, response);
+                    formsHandlers(form, response, formData);
                 })
                 .catch((err) => {
                     console.error(err)
@@ -197,7 +205,6 @@ if (document.querySelector("form")) {
         submitReview.addEventListener('click', function(e){
             let formReview = document.getElementById('form-review');
             if(formReview.stars.value == '') {
-                console.log(document.querySelector('.review-form__validation-prompt--stars'))
                 document.querySelector('.review-form__validation-prompt--stars').classList.remove('display-none');
             }
             if(formReview.stars.value != '') {
