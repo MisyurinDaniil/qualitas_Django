@@ -161,11 +161,9 @@ if (document.querySelector("form")) {
                 Fancybox.show([{ src: "#modal-window-review-true", type: "inline" }]);
             }
             if (response == "False") {
-                form.reset()
                 Fancybox.show([{ src: "#modal-window-review-false", type: "inline" }]);
             }
             if (response == "already_exists_client") {
-                form.reset()
                 Fancybox.show([{ src: "#modal-window-review-al-ex-cl", type: "inline" }]);
             }
         }
@@ -189,4 +187,23 @@ if (document.querySelector("form")) {
                 });
         });
     });
+
+
+    // Валидация формы отрпавки отзыва (только количество звезд).
+    // Проверяем на обязательность выбора количества звезд отзыва.
+    // Показываем подсказку если количество звезд не указана пользователем.
+    let submitReview = document.querySelector('.main-button__submit-review');
+    if (submitReview) {
+        submitReview.addEventListener('click', function(e){
+            let formReview = document.getElementById('form-review');
+            if(formReview.stars.value == '') {
+                console.log(document.querySelector('.review-form__validation-prompt--stars'))
+                document.querySelector('.review-form__validation-prompt--stars').classList.remove('display-none');
+            }
+            if(formReview.stars.value != '') {
+                document.querySelector('.review-form__validation-prompt--stars').classList.add('display-none');
+            }
+        })
+    }
+
 }

@@ -2038,7 +2038,10 @@ ul {
 .review-form__label--mar-top {
     margin-top: 15px;
 }
-
+.review-form__validation-prompt {
+    color: red;
+    font-size: 14px;
+}
 @media (min-width: 768px) {
     .stars .stars__items label{
         width: 30px;
