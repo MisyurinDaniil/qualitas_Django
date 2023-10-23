@@ -143,9 +143,68 @@ if (document.querySelector("form")) {
 
     // Добавляем отзыв без перезагрузки страницы
     function addReview(formData){
-        console.log(formData);
-        console.log(formData.get('stars'), formData.get('userName'), formData.get('text'));
-        document.getElementsByClassName('')
+        let starsCounter = 0;
+        let allStarsHTML = '';
+        activateStarHTML = `
+            <label class="stars__items--no-pointer">
+                <div class="star-stroke star-stroke--background-col">
+                    <div class="star-fill star-stroke--background-col"></div>
+                </div>
+            </label>
+        `
+        notActivateStarHTML = `
+            <label class="stars__items--no-pointer">
+                <div class="star-stroke">
+                    <div class="star-fill"></div>
+                </div>
+            </label>
+        `
+        for (let i=0; i<5; i++) {
+            if (starsCounter < formData.get('stars')) {
+                starsCounter++;
+                allStarsHTML = activateStarHTML + allStarsHTML;
+                continue;
+            }
+            allStarsHTML = notActivateStarHTML + allStarsHTML;
+        }
+
+        var timeOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour:'numeric', 
+            minute: 'numeric',
+            timezone: 'UTC'
+        };
+        let subString  = ' в ';
+        let dateStrForHTML = String(new Date().toLocaleString("ru", timeOptions)).replace(subString, ' ');
+
+        var els = document.querySelectorAll('.old-review')
+        var lastEl = els[els.length - 1];
+        let newReview = `
+            <div class="old-review">
+            <div class="old-review__image-block">
+                <img src="/static/img/user-icon-review.svg" alt="" class="old-review__img">
+            </div>
+            <div class="old-review__text">
+                <div class="old-review__name-date-star__block">
+                    <div class="old-review__name-date__block">
+                        <p class="old-review__name">${formData.get('userName')}</p>
+                        <p class="old-review__date">${dateStrForHTML}</p>
+                    </div>
+                    <div class="stars">
+                        <div class="stars__items stars__items--align-item">
+                            ${allStarsHTML}
+                        </div>
+                    </div>
+                </div>
+                <p class="old-review__message">
+                    ${formData.get('text')}
+                </p>
+            </div>
+            </div>
+        `
+        lastEl.insertAdjacentHTML('afterEnd', newReview);
     }
 
     function formsHandlers(form, response, formData) {
@@ -195,7 +254,6 @@ if (document.querySelector("form")) {
                 });
         });
     });
-
 
     // Валидация формы отрпавки отзыва (только количество звезд).
     // Проверяем на обязательность выбора количества звезд отзыва.
