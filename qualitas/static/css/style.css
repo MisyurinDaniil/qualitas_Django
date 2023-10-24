@@ -1199,7 +1199,7 @@ ul {
 *******maximum value*****
 **************************/
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 /**** Content / END-PRODUCT-MODAL-WINDOW****/

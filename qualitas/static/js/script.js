@@ -119,11 +119,13 @@ if (document.querySelector("form")) {
     
     let url = window.location.href;
     document.getElementById('id_order_product_url').value = url
-
+    document.getElementById('review-form__product-url').value = url
+    
     mainButtonModal = document.querySelector('.main-button-modal');
+
     if (mainButtonModal) {
         mainButtonModal.addEventListener('click', () => {
-            document.querySelector(".modal-window__content").classList.remove('display-none');
+            document.querySelector(".modal-window__order").classList.remove('display-none');
             document.querySelector(".modal-window__order-true").classList.add('display-none');
             document.querySelector(".modal-window__order-false").classList.add('display-none');
         })
@@ -212,12 +214,13 @@ if (document.querySelector("form")) {
         // console.log(form.id);
         console.log(response);
         if (form.id === "form-order") {
-            if (mainButtonModal && response == "False") {
-                document.querySelector(".modal-window__content").classList.add('display-none')
+            if (response == "False") {
+                document.querySelector(".modal-window__order").classList.add('display-none')
                 document.querySelector(".modal-window__order-false").classList.remove('display-none')
             }
-            if (mainButtonModal && response == "True") {
-                document.querySelector(".modal-window__content").classList.add('display-none')
+            if (response == "True") {
+                form.reset()
+                document.querySelector(".modal-window__order").classList.add('display-none')
                 document.querySelector(".modal-window__order-true").classList.remove('display-none')
             }
         }
@@ -236,7 +239,7 @@ if (document.querySelector("form")) {
         }
     }
 
-    forms.forEach(form => {
+    forms.forEach((form) => {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -247,8 +250,11 @@ if (document.querySelector("form")) {
                 })
                 .catch((err) => {
                     console.error(err)
+                    // !!!!!!!!!
+                    // ДОбавлю функционал позже. Нужно закрыть все окна и открыть окно с ошибкой, сейчас не реализовано!!!!
+                    // !!!!!!!!!
                     if (mainButtonModal) {
-                        document.querySelector(".modal-window__content").classList.add('display-none')
+                        document.querySelector(".modal-window__order").classList.add('display-none')
                         document.querySelector(".modal-window__order-false").classList.remove('display-none')
                     }
                 });

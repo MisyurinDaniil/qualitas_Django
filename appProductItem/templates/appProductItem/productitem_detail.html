@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div id="modal-window-order" class="modal-window">
-                <div class="modal-window__content">
+                <div class="modal-window__content modal-window__order">
                     <p class="modal-window__text">
                         Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
@@ -220,6 +220,9 @@
                             <label for="review-form__text" class="review-form__label">Оставьте отызыв к изделию *:</label>
                             <br>
                             <textarea required class="review-form__input review-form__input--width" placeholder="Отзыв" id='review-form__text' name="text"></textarea>
+                        </div>
+                        <div class="review-form__label--mar-top display-none">
+                            <input type="text" required class="review-form__input display-none" id='review-form__product-url' name='product_url'>
                         </div>
                         <input
                             class="main-button main-button__submit-review"

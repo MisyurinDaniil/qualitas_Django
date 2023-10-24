@@ -19,5 +19,5 @@ class AddReviewForm(forms.ModelForm):
     
     class Meta:
         model = Review
-        fields = ("stars", "userName", "text", "captcha")
+        fields = ("stars", "userName", "text", "captcha", 'product_url')
 

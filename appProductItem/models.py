@@ -187,6 +187,7 @@ class Review(models.Model):
     product = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
     date = models.DateTimeField(auto_now=True, verbose_name='Дата отзыва')
     ip = models.CharField(verbose_name='Ip adress клиента', null=True, blank=True, max_length=15)
+    product_url = models.URLField(max_length=255, verbose_name='URL товара')
 
     def __str__(self):
         return f"{self.userName} - {self.product}"

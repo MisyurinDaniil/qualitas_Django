@@ -9,6 +9,7 @@ from appOrders.forms import OrderForm
 from django.http import HttpResponse
 from .forms import AddReviewForm
 from django.shortcuts import redirect
+from appOrders.views import sendTelegram 
 
 ############ CBV test ############# 
 class ProductsInCategoryList(ListView):
@@ -130,6 +131,11 @@ class AddReview(View):
                 return HttpResponse("already_exists_client")
             except Review.DoesNotExist:
                 form.ip = ip
+                text = ('Ссылка на товар - ' + request.POST['order_product_url'] + '\n' + 
+                    'Количество звезд - ' + request.POST['stars'] + '\n' + 
+                    'Имя пользователя- ' + request.POST['userName'] + '\n' + '\n' +
+                    'Отзыв - ' + request.POST['text'])
+                sendTelegram(text)
                 form.save()
                 return HttpResponse("True")
         print('*****************************************')
