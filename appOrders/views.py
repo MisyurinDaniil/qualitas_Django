@@ -35,7 +35,8 @@ class Makeorder(View):
             form = form.save(commit=False)
             form.order_binding_id = pk
             form.save()
-            text = ('Ссылка на товар - ' + request.POST['order_product_url'] + '\n' + 
+            text = ('** ЗАКАЗ **' + '\n' + 
+                    'Ссылка на товар - ' + request.POST['order_product_url'] + '\n' + 
                     'Название товара - ' + ProductItem.objects.get(id=pk).product_name + '\n' + 
                     'Имя заказчика - ' + request.POST['order_customer_name'] + '\n' + 
                     'Телефон закачика - ' + request.POST['order_customer_telephone'] + '\n' + '\n' +
