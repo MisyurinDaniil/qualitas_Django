@@ -118,9 +118,6 @@ class AddReview(View):
 
     def post(self, request, pk):
         form = AddReviewForm(request.POST)
-        # print('#######################################')
-        # print(form)
-        # print('#######################################')
         if form.is_valid():
             # Изменять форму можно только после команды form = form.save(commit=False)
             form = form.save(commit=False)
@@ -131,14 +128,14 @@ class AddReview(View):
                 return HttpResponse("already_exists_client")
             except Review.DoesNotExist:
                 form.ip = ip
-                text = ('Ссылка на товар - ' + request.POST['order_product_url'] + '\n' + 
+                text = ('Ссылка на товар - ' + request.POST['product_url'] + '\n' + 
                     'Количество звезд - ' + request.POST['stars'] + '\n' + 
                     'Имя пользователя- ' + request.POST['userName'] + '\n' + '\n' +
                     'Отзыв - ' + request.POST['text'])
                 sendTelegram(text)
                 form.save()
                 return HttpResponse("True")
-        print('*****************************************')
-        print(form.errors)
-        print('*****************************************')
+        # print('*****************************************')
+        # print(form.errors)
+        # print('*****************************************')
         return HttpResponse("False")

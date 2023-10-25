@@ -173,7 +173,7 @@ class CustomizeProductReview(admin.ModelAdmin):
     # Отмечаем поля по нажатию на которые можно перейти на страницу слайда
     list_display_links = ('id', 'ip', 'userName',)
     # Указжем поля отображаемые на карточке слайда
-    fields = ('id', 'ip', 'product', 'userName', 'text', 'stars', 'date')
+    fields = ('id', 'ip', 'product', 'userName', 'text', 'stars', 'date', 'product_url')
     # Укажем поля только для чтения, чтобы django не вывалилвался в ошибку
     readonly_fields = ('id', 'date', 'product', )
 
