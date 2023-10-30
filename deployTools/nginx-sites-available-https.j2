@@ -12,6 +12,10 @@ server {
     location / {
         proxy_pass http://unix:/tmp/{{ site_name }}.socket;
         proxy_set_header Host $host;
+
+                
+        # To correctly determine the client's IP address in combination with Nginx + Django gunicorn
+        proxy_set_header X-Real-IP $remote_addr;
     }
 
     listen 443 ssl; # managed by Certbot

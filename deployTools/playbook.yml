@@ -27,6 +27,7 @@
       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       site_name: "{{ inventory_hostname }}"
       mail_for_certbot_ssl: "qualitas.store@yandex.ru"
+      use_git_branch: "productReview"
   
   tasks:
     # Обновляем кеш репозитория
@@ -105,12 +106,32 @@
       tags:
         - git
 
+    # Останавливаем gunicorn
+    - name: Stoped gunicorn.{{ site_name }}
+      become: yes
+      systemd:
+        name: gunicorn.{{ site_name }}
+        state: stopped
+      ignore_errors: yes  # if the service does not exist
+      tags:
+        - update_project
+        - test
+
     # Скачиваем код проекта из гитхаба
     - name: Download project code from Github
       git:
         repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
         force: true
+      tags:
+        - git
+        - update_project
+
+    # Выбираем ветку git
+    - name: Change git branch
+      command: git checkout {{ use_git_branch }}
+      args:
+        chdir: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
       tags:
         - git
         - update_project
@@ -224,6 +245,26 @@
           state: link
       tags:
         - nginx
+
+    # Создаем директорию для логов gunicorn
+    - name: Added folder for gunicorn log
+      file:
+        path: /home/{{ ansible_ssh_user }}/log/{{ site_name }}
+        state: directory
+        recurse: yes
+      tags:
+        - gunicorn
+
+    # Создаем файлы error.log и access.log для gunicorn
+    - name: Added files for gunicorn log
+      file:
+        path: "{{ item }}"
+        state: touch
+      with_items:
+        - /home/{{ ansible_ssh_user }}/log/{{ site_name }}/error.log
+        - /home/{{ ansible_ssh_user }}/log/{{ site_name }}/access.log
+      tags:
+        - gunicorn
 
     # Настраиваем gunicorn --> [Перезапустить gunicorn]
     - name: Write gunicorn service script

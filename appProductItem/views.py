@@ -1,10 +1,15 @@
 # Create your views here.
 
-from .models import ProductItem, ProductCategory
+from .models import ProductItem, ProductCategory, Review
 from django.db.models import Q
 
 from django.views.generic import ListView, DetailView
-from appOrders.forms import ReviewForm 
+from django.views.generic.base import View
+from appOrders.forms import OrderForm 
+from django.http import HttpResponse
+from .forms import AddReviewForm
+from django.shortcuts import redirect
+from appOrders.views import sendTelegram 
 
 ############ CBV test ############# 
 class ProductsInCategoryList(ListView):
@@ -99,5 +104,39 @@ class ProductDetail(DetailView):
             Через переменную category в шаблоне доступен объект нужной категории.
         """
         context = super().get_context_data(**kwargs)
-        context['form'] = ReviewForm()
+        context['form_order'] = OrderForm()
+        context['form_review'] = AddReviewForm()
         return context
+
+class AddReview(View):
+    def get_client_ip(self, request):
+        ip = request.META.get("HTTP_X_REAL_IP")
+        if ip:
+            return ip
+        else:
+            return request.META.get('REMOTE_ADDR')
+
+    def post(self, request, pk):
+        form = AddReviewForm(request.POST)
+        if form.is_valid():
+            # Изменять форму можно только после команды form = form.save(commit=False)
+            form = form.save(commit=False)
+            form.product_id = pk
+            ip = self.get_client_ip(request)
+            try:
+                Review.objects.get(Q(product_id = pk) & Q(ip = ip))
+                return HttpResponse("already_exists_client")
+            except Review.DoesNotExist:
+                form.ip = ip
+                text = ('** ОТЗЫВ **' + '\n' + 
+                    'Ссылка на товар - ' + request.POST['product_url'] + '\n' + 
+                    'Количество звезд - ' + request.POST['stars'] + '\n' + 
+                    'Имя пользователя- ' + request.POST['userName'] + '\n' +
+                    'Отзыв - ' + request.POST['text'])
+                sendTelegram(text)
+                # form.save()
+                return HttpResponse("True")
+        # print('*****************************************')
+        # print(form.errors)
+        # print('*****************************************')
+        return HttpResponse("False")

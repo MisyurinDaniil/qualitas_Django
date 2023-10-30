@@ -24,9 +24,14 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 if os.environ['DJANGO_DEBUG'] == "False":
     DEBUG = False
     ALLOWED_HOSTS = [os.environ['SITENAME']]
+    CSRF_TRUSTED_ORIGINS=['https://' + os.environ['SITENAME']]
 else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
+
+
+# django-recaptcha3
+# https://github.com/kbytesys/django-recaptcha3
 
 RECAPTCHA_PUBLIC_KEY = "6LeWMsslAAAAANEINXlvxxyG7buNt6uXaZJTGLgH"
 RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']

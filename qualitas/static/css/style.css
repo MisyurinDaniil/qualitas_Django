@@ -1090,9 +1090,9 @@ ul {
     list-style: none;
 }
 .end-product-spec__item {
-    font-size: 12px;
+    font-size: 14px;
     padding-bottom: 3px;
-    line-height: 16px;
+    line-height: 18px;
     text-transform: uppercase;
 }
 .end-product-spec__price {
@@ -1199,7 +1199,7 @@ ul {
 *******maximum value*****
 **************************/
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 /**** Content / END-PRODUCT-MODAL-WINDOW****/
@@ -1221,7 +1221,7 @@ ul {
     max-width: 550px;
 }
 .modal-window__contacts-link {
-    color: #fff;
+    color: #d78e36;
 }
 .modal-window__list {
     padding: 0;
@@ -1866,5 +1866,206 @@ ul {
     }
     .image-container__link-item:last-child {
         margin-right: 0px;
+    }
+}
+
+/* #####################
+####### Checkbox stars ####### 
+####################### */
+
+:root{
+    --primary-colour: #191919;
+    --secondary-colour: #fff;
+    --star-colour: hsl(38 90% 55%);
+  }
+
+/* .stars > * {
+    transition: .3s;
+}
+*{
+    
+    transition: .3s;
+} */
+  /* *{
+    margin: 0;
+    padding: 0;
+    
+    transition: .3s;
+    
+    box-sizing: border-box;
+  }
+  
+  body{
+    width: 100vw;
+    height: 100vh;
+    
+    overflow: hidden;
+    
+    background: var(--primary-colour);
+    
+    font-family: sans-serif;
+    color: #fff;
+  } */
+  
+  .stars{
+    /* position: relative;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 20%;
+    transform: translate(-50%, -50%) rotateY(180deg); */
+    display: flex;
+    /* align-items: flex-start; */
+    align-content: flex-start;
+    transform: rotateY(180deg);
+  }
+  .stars--mar-top {
+    margin-top: 5px;
+  }
+  
+  .stars .stars__items{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 0 .5em;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .stars .stars__items input{
+    display: none;
+  }
+  
+  .stars .stars__items label{
+    width: 24px;
+    aspect-ratio: 1;
+    cursor: pointer;
+  }
+  .stars__items--no-pointer {
+    cursor: auto !important; 
+  }
+  .stars .stars__items label .star-stroke{
+    display: grid;
+    place-items: center;
+    width: 25px;
+    height: 25px;
+    background: var(--secondary-colour);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    transition: .4s;
+  }
+  
+  .stars .stars__items label .star-stroke .star-fill{
+    width: 15px;
+    aspect-ratio: 1;
+    background: var(--primary-colour);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  
+  .stars .stars__items input:hover ~ label .star-stroke,.stars .stars__items input:checked ~ label .star-stroke{
+    background: var(--star-colour);
+  }
+  .star-stroke--background-col {
+    background: var(--star-colour)!important;
+  }
+  .stars .stars__items input:checked ~ label .star-stroke .star-fill{
+    background: var(--star-colour);
+  }
+  .stars__items--align-item {
+    align-items: flex-start !important;
+  }
+  /* .container .container__items label:hover .label-description::after{
+    content: attr(data-content);
+    position: fixed;
+    left: 0;
+    right: 0;
+    
+    margin-top: 1em;
+    margin-inline: auto;
+    
+    width: 100%;
+    height: 2em;
+    
+    color: #fff;
+    
+    text-align: center;
+    font-size: 2rem;
+    
+    transform: rotateY(180deg);
+  } */
+
+.old-review {
+    display: flex;
+    margin-bottom: 25px;
+}
+.old-review:nth-last-child {
+    margin-bottom: 60px;
+}
+
+.old-review__text {
+    margin-left: 20px;
+    flex-grow: 1;
+}
+.old-review__name-date-star__block {
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 10px;
+}
+.old-review__name {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.old-review__date {
+    font-size: 14px;
+}
+.old-review__message {
+    font-size: 14px;
+    line-height: 22px;
+}
+.old-review__img {
+    width: 60px;
+}
+.review-form__input {
+    font-size: 16px;
+    margin-top: 5px;
+}
+.review-form__input--width {
+    width: 100%;
+    height: 100px;
+}
+.review-form__label {
+    font-size: 16px;
+}
+.review-form__label--mar-top {
+    margin-top: 15px;
+}
+.review-form__validation-prompt {
+    color: red;
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+    .stars .stars__items label{
+        width: 30px;
+    }
+    .old-review__name {
+        font-size: 24px;
+    }
+    .old-review__message {
+        font-size: 16px;
+    }
+    .old-review__date {
+        font-size: 12px;
+    }
+    .review-form__label {
+        font-size: 18px;
+    }
+    .old-review__img {
+        width: auto;
+    }
+    .stars .stars__items label .star-stroke{
+        width: 30px;
+        height: 30px;
+    }
+    .stars .stars__items label .star-stroke .star-fill{
+        width: 18px;
     }
 }

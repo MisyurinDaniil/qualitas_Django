@@ -179,3 +179,18 @@ class ProductImg(models.Model):
     class Meta:
         verbose_name = "Картинки для конечной страницы товара"
         verbose_name_plural = "2. Картинки для конечной страницы товара"
+
+class Review(models.Model):
+    stars = models.SmallIntegerField(default=0, verbose_name='Количество звезд рейтинга')
+    userName = models.CharField(max_length=255, verbose_name='Имя пользователся')
+    text = models.TextField(max_length=2000, verbose_name='Текст отзыва')
+    product = models.ForeignKey(ProductItem, on_delete=models.CASCADE, verbose_name='Товар')
+    date = models.DateTimeField(auto_now=True, verbose_name='Дата отзыва')
+    ip = models.CharField(verbose_name='Ip adress клиента', null=True, blank=True, max_length=15)
+    product_url = models.URLField(max_length=255, verbose_name='URL товара', default='https://qualitas.store/')
+
+    def __str__(self):
+        return f"{self.userName} - {self.product}"
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "9. Отзывы"

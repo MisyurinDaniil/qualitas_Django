@@ -18,13 +18,16 @@
     {% load get_debug_info %} - Подключаем наш simple tag "get_debug_info"
         из директории appProductItem/templatetags.
         get_debug_info - название директории, есть название тега.
-    {% getDebugInfo as debugInfo %} - вызываем функцию getDebugInfo
-        и помещаем результат работы функции в переменную debugInfo
+    {% getDebugInfo as isDebug %} - вызываем функцию getDebugInfo
+        и помещаем результат работы функции в переменную isDebug
 
     Имеется еще один вид тегов Django - Inclusion tags. Умеет рендерить шаблон.
 {% endcomment %}
 {% load get_debug_info %}
-{% getDebugInfo as debugInfo %}
+{% getDebugInfo as isDebug %}
+
+{% load check_is_subdomain %}
+{% is_this_a_subdomain as isSubdomain %}
 
 <html>
 <head>
@@ -78,7 +81,7 @@
 </head>
 
 <body>
-    {% if not debugInfo %}
+    {% if not isDebug and not isSubdomain %}
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript" >
             (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

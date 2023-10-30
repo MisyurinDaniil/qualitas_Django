@@ -72,19 +72,19 @@
                             </p>
                         </li>
                     </ul>
-                    <button data-fancybox="" data-src="#modal-window" class="main-button main-button-modal">
+                    <button data-fancybox="product-order-window" data-src="#modal-window-order" class="main-button main-button-modal">
                         Оформить заказ
                     </button>
                 </div>
             </div>
-            <div id="modal-window" class="modal-window">
-                <div class="modal-window__content">
+            <div id="modal-window-order" class="modal-window">
+                <div class="modal-window__content modal-window__order">
                     <p class="modal-window__text">
                         Укажите детали заказа и мы свяжимся с вами или воспользуйтесь удобным для вас способом и напишите нам. 
                         <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                     </p>
-                    <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form">
-                        {{ form.non_field_errors }}
+                    <form action="{% url 'makeorder' product.id %}" method="POST" class="modal-window__form" id="form-order">
+                        {% comment %} {{ form_order.non_field_errors }} {% endcomment %}
                         {% csrf_token %}
                         <ul class="modal-window__list">
                             <li class="modal-window__list-item">
@@ -98,32 +98,29 @@
                                     alt="{{ product.product_img_main_alt }}"
                                 />
                                 
-                                {{ form.order_product_url.errors }}
-                                {{ form.order_product_url }}
+                                {% comment %} {{ form_order.order_product_url.errors }} {% endcomment %}
+                                {{ form_order.order_product_url }}
 
-                                {{ form.captcha }}
+                                {{ form_order.captcha }}
                             </li>
                             <li class="modal-window__list-item">
-                                {{ form.order_customer_name.errors }}
-                                <label class="modal-window__input_title" for="{{ form.order_customer_name.id_for_label  }}"
+                                <label class="modal-window__input_title" for="{{ form_order.order_customer_name.id_for_label  }}"
                                     >Как вас зовут:</label
                                 >
-                                {{ form.order_customer_name }}
+                                {{ form_order.order_customer_name }}
                             </li>
                             <li class="modal-window__list-item">
-                                {{ form.order_customer_telephone.errors }}
-                                <label class="modal-window__input_title" for="{{ form.order_customer_telephone.id_for_label  }}"
+                                <label class="modal-window__input_title" for="{{ form_order.order_customer_telephone.id_for_label  }}"
                                     >Контактный телефон:
                                 </label>
-                                {{ form.order_customer_telephone }}
+                                {{ form_order.order_customer_telephone }}
                                 
                             </li>
                             <li class="modal-window__list-item">
-                                {{ form.order_customer_comment.errors }}
-                                <label class="modal-window__input_title" for="{{ form.order_customer_comment.id_for_label  }}"
+                                <label class="modal-window__input_title" for="{{ form_order.order_customer_comment.id_for_label  }}"
                                     >Комментарий к заказу:</label
                                 >
-                                {{ form.order_customer_comment }}
+                                {{ form_order.order_customer_comment }}
                             </li>
                             <li class="modal-window__list-item">
                                 <input
@@ -138,17 +135,130 @@
                 <div class="modal-window__order-true display-none">
                     <br />
                     Ваш заказ оформлен, мы свяжемся с Вами в ближайшее время. <br />
-                    Вы также можете написать нам в социальных сетях.<br />
+                    Вы также можете написать нам любым удовбным для Вас способом.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                 </div>
                 <div class="modal-window__order-false display-none">
                     <br />
                     Приносим извинения за временные неполадки. <br />
-                    Попробуйте оформить заказ подзднее или свяжитесь с нами в социальных сетях.<br />
+                    Попробуйте оформить заказ подзднее или свяжитесь с нами любым удовбным для Вас способом.<br />
                     <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
                 </div>
             </div>
             {% include 'includes/personalization.html' %}
+            {% load get_html_for_prod_stars %}
+            <div class="row-content">
+                <div class="row-content__colum1">
+                    <div class="h2">
+                        <h2 class="h2__title">Отзывы</h2>
+                        <span class="h2__title-underline"></span>
+                    </div>
+                    {% for review in product.review_set.all %}
+                        <div class="old-review">
+                            <div class="old-review__image-block">
+                                <img src="{% static 'img/user-icon-review.svg' %}" alt="" class="old-review__img">
+                            </div>
+                            <div class="old-review__text">
+                                <div class="old-review__name-date-star__block">
+                                    <div class="old-review__name-date__block">
+                                        <p class="old-review__name">{{ review.userName }}</p>
+                                        <p class="old-review__date">{{ review.date }}</p>
+                                    </div>
+                                    {% getHtmlForProdStars review.stars %}
+                                </div>
+                                <p class="old-review__message">
+                                    {{ review.text }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <form action="{% url 'add_review' product.id %}" class="review-form" id="form-review">
+                        {{ form_review.captcha }}
+                        {% csrf_token %}
+                        <span class="review-form__label">Оцените товар *:</span>
+                        <div class="stars stars--mar-top">
+                            <div class="stars__items">
+                                <input type="radio" required name="stars" id="st5" value="5">
+                                <label for="st5">
+                                    <div class="star-stroke">
+                                        <div class="star-fill"></div>
+                                    </div>
+                                </label>
+                                <input type="radio" name="stars" id="st4" value="4">
+                                <label for="st4">
+                                    <div class="star-stroke">
+                                        <div class="star-fill"></div>
+                                    </div>
+                                </label>
+                                <input type="radio" name="stars" id="st3" value="3">
+                                <label for="st3">
+                                    <div class="star-stroke">
+                                        <div class="star-fill"></div>
+                                    </div>
+                                </label>
+                                <input type="radio" name="stars" id="st2" value="2">
+                                <label for="st2">
+                                    <div class="star-stroke">
+                                        <div class="star-fill"></div>
+                                    </div>
+                                </label>
+                                <input type="radio" name="stars" id="st1" value="1">
+                                <label for="st1">
+                                    <div class="star-stroke">
+                                        <div class="star-fill"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <span class="review-form__validation-prompt review-form__validation-prompt--stars display-none">Обязательное поле. Укажите количество звезд для отзыва.</span>
+                        <div class="review-form__label--mar-top">
+                            <label for="review-form__name" class="review-form__label">Ваше имя *:</label>
+                            <br>
+                            <input type="text" required class="review-form__input" placeholder="Имя" id='review-form__name' name='userName'>
+                        </div>
+                        <div class="review-form__label--mar-top">
+                            <label for="review-form__text" class="review-form__label">Оставьте отызыв к изделию *:</label>
+                            <br>
+                            <textarea required class="review-form__input review-form__input--width" placeholder="Отзыв" id='review-form__text' name="text"></textarea>
+                        </div>
+                        <div class="review-form__label--mar-top display-none">
+                            <input type="text" required class="review-form__input display-none" id='review-form__product-url' name='product_url'>
+                        </div>
+                        <input
+                            class="main-button main-button__submit-review"
+                            type="submit"
+                            value="Отправить"
+                        />
+                    </form>
+                    <div id="modal-window-review-true" class="modal-window">
+                        <div class="modal-window__content">
+                            <div>
+                                Спасибо за оставленный отзыв, мы обязательно его учтем в совей работе.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal-window-review-false" class="modal-window">
+                        <div class="modal-window__content">
+                            <div>
+                                <br />
+                                Приносим извинения за временные неполадки. <br />
+                                Попробуйте оставить отзыв подзднее или свяжитесь с нами любым удовбным для Вас способом.<br />
+                                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal-window-review-al-ex-cl" class="modal-window">
+                        <div class="modal-window__content">
+                            <div>
+                                Для этого товара Вами ранее уже оставлен отзыв.<br />
+                                Для одного товара можно оставить только один отзыв.<br />
+                                Если у Вас есть вопросы, Вы можете связиться с нами любым удовбным для Вас способом.
+                                <a href="{% url 'contacts' %}" class="modal-window__contacts-link">Наши контакты.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
