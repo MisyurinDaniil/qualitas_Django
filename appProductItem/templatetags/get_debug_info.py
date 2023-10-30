@@ -10,3 +10,4 @@ register = template.Library()
 @register.simple_tag()
 def getDebugInfo():
     return DEBUG
+
