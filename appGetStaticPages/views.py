@@ -7,12 +7,6 @@ from django.shortcuts import render
 def home_page(request):
     return render(request, './index.html')
 
-def blog_page(request):
-    return render(request, './blog.html')
-
-def finalblogpage_page(request):
-    return render(request, './finalblogpage.html')
-
 def aboutus_page(request):
     return render(request, './aboutus.html')
 

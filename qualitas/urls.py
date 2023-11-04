@@ -28,8 +28,7 @@ from appProductItem import views as product
 urlpatterns = [
     path("", include("appGetStaticPages.urls")),
     path("", include("appProductItem.urls")),
-    # path('blog', getPage.blog_page, name='blog'),
-    # path('finalblogpage', getPage.finalblogpage_page, name='finalblogpage'),
+    path("", include("appBlog.urls")),
     path('makeorder/<int:pk>', Makeorder.as_view(), name='makeorder'),
     path('admin', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
