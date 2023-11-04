@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'appGetStaticPages.apps.AppgetstaticpagesConfig',
     'appProductItem.apps.AppproductitemConfig',
     'appOrders.apps.AppordersConfig',
+    'appBlog.apps.AppblogConfig',
     'ckeditor',
     'ckeditor_uploader',
     'snowpenguin.django.recaptcha3',
