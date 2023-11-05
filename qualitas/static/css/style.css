@@ -700,6 +700,12 @@ ul {
         display: flex;
         flex-direction: column;
     }
+    .nav__item:hover .nav__item-link {
+        color:#d78e36 !important;
+    }
+    .nav__item:hover .triangle {
+        border-top: 8px solid #d78e36;
+    }
     .nav__item-link {
         display: block;
     }
