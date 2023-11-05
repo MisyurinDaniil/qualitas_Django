@@ -27,7 +27,7 @@
       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       site_name: "{{ inventory_hostname }}"
       mail_for_certbot_ssl: "qualitas.store@yandex.ru"
-      use_git_branch: "productReview"
+      use_git_branch: "master"
   
   tasks:
     # Обновляем кеш репозитория
