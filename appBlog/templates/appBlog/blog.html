@@ -2,7 +2,7 @@
 
 {% load static %} 
 
-{% block title %} Мастерская кожаных изделий ручной работы "Qualitas leather" {% endblock %}
+{% block title %} Блог мастерской кожаных изделий ручной работы" {% endblock %}
 
 {% block mainContent %}
     <style>
@@ -28,6 +28,12 @@
         }
     </style>
     {% include 'includes/header_big.html' %}
+    <script>
+        let h1 = document.getElementById('header-title');
+        {% comment %} h1.textContent = '{{category.product_category_h1}}'; {% endcomment %}
+        h1.textContent = 'Блог мастерской кожаных изделий ручной работы';
+    </script>
+
     <section class="main">
         <div class="container">
             <div class="blog-items">

@@ -1,20 +1,17 @@
 from django.db import models
-
-# Create your models here.
-
 from django.urls import reverse
 
-# Create your models here.
 
-# Формирование модели "Категория товара" (сумки, кошельки и тд)
 class ProductCategory(models.Model):
+    '''
+        Формирование модели "Категория товара" (сумки, кошельки и тд)
+    '''
     # product_category_name - имя поля таблицы с типом CharField
     # max_length - максимальное количество симоволо
     # verbose_name - имя поля отображаемого в админ панеле
     product_category_name = models.CharField(max_length=255, verbose_name='Название категории товара для меню')
     product_category_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     product_category_is_published = models.BooleanField(default=True, verbose_name='Разрешить публикацию категории')
-
     # Убрал поле т.к. для формирования заголовка использую 
     # конструкция типа {{prodCategory.product_category_h1}} | Мастерская кожаных изделий ручной работы "Qualitas" 
     # product_category_title= models.CharField(verbose_name='Заголовок страницы браузера (<title>)', max_length=80)
@@ -117,18 +114,19 @@ class ProductMakeTime(models.Model):
         verbose_name = "Время изготовления"
         verbose_name_plural = "6. Время изготовления"  
 
-# Создаем класс (модел) для таблицы Товар
+
 class ProductItem(models.Model):
+    '''
+        Класс (модель) для таблицы Товар
+    '''
     product_name = models.CharField(max_length=255, verbose_name='Наименование товара')
     product_is_published = models.BooleanField(default=True, verbose_name='Разрешить публикацию')
     product_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL (формирует автоматически из "Наименование товара")')
-    
     # Убрал поле т.к. для формирования заголовка использую 
     # конструкция типа {{prodItem.product_name}} | Мастерская кожаных изделий ручной работы "Qualitas"
     # product_page_title= models.CharField(verbose_name='Заголовок страницы браузера (<title>)', max_length=80)
     product_page_description = models.TextField(verbose_name='Описание страницы SEO (description)', max_length=200)
     product_page_keywords = models.CharField(verbose_name='Ключевые слова SEO (keywordss)', max_length=255)
-    
     product_category = models.ForeignKey(ProductCategory, on_delete=models.PROTECT, verbose_name='Категория')
     product_group = models.ForeignKey(ProductGroup, on_delete=models.PROTECT, verbose_name='Группа')
     product_price = models.CharField(max_length=255, verbose_name='Цена')
