@@ -26,27 +26,31 @@ class BlogArticle(models.Model):
     is_active_big_header = models.BooleanField(default=False,
                                                verbose_name='Включить большую шапку сайта с большой картинкой')
     img_header_mobile = models.ImageField(upload_to='blog_img/',
-                                          verbose_name='Фото шапки - mobile 576х568 (не обяз. поле)',
+                                          verbose_name='Фото шапки - mobile 576х568 (необяз. поле)',
                                           default='',
                                           blank=True)
     img_header_mobile_horizontal = models.ImageField(upload_to='blog_img/',
-                                                     verbose_name='Фото шапки - mobile 768х568 (не обяз. поле)',
+                                                     verbose_name='Фото шапки - mobile 768х568 (необяз. поле)',
                                                      default='',
                                                      blank=True)
     img_header_tablet = models.ImageField(upload_to='blog_img/',
-                                          verbose_name='Фото шапки - tablet 1200х550 (не обяз. поле)',
+                                          verbose_name='Фото шапки - tablet 1200х550 (необяз. поле)',
                                           default='',
                                           blank=True)
     img_header_desktop = models.ImageField(upload_to='blog_img/',
-                                           verbose_name='Фото шапки - desktop 1440х760 (не обяз. поле)',
+                                           verbose_name='Фото шапки - desktop 1440х760 (необяз. поле)',
                                            default='',
                                            blank=True)
-    alt_img_header = models.CharField(verbose_name='Атрибут alt фото шапки (не обяз. поле)', max_length=80)
-    title_img_header = models.CharField(verbose_name='Атрибут title фото шапки (не обяз. поле)', max_length=80)
+    alt_img_header = models.CharField(verbose_name='Атрибут alt фото шапки (необяз. поле)',
+                                      max_length=80,
+                                      blank=True)
+    title_img_header = models.CharField(verbose_name='Атрибут title фото шапки (необяз. поле)',
+                                        max_length=80,
+                                        blank=True)
     text_aticle = models.TextField(verbose_name='Текст статьи')
 
     def __str__(self):
-        return self.product_name
+        return self.name
 
     def get_absolute_url(self):
         '''
@@ -55,5 +59,5 @@ class BlogArticle(models.Model):
         return reverse('product', kwargs={'productItemSlug': self.product_slug})
 
     class Meta:
-        verbose_name = "Товар"
-        verbose_name_plural = "1. Товары"
+        verbose_name = "Блог"
+        verbose_name_plural = "Статьи блога"
