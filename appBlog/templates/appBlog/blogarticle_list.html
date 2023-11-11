@@ -43,186 +43,38 @@
                 </div>
                 <div class="blog-wraper">
                     <ul class="blog-list">
-                        <li class="blog-item">
-                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
-                                <div class="blog-item__img-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-item (1).jpg' %}"
-                                        alt="Выбор кожи и фуринтуры"
-                                        class="blog-item__img"
-                                    />
-                                </div>
-                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
-                                <p class="product-item__aticle">
-                                    Имеется спорная точка зрения, гласящая примерно следующее:
-                                    тщательные исследования конкурентов освещают чрезвычайно
-                                    интересные особенности картины в целом...
-                                </p>
-                                <div class="blog-item__author-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-author.png' %}"
-                                        alt=""
-                                        class="blog-item__author-img"
-                                    />
-                                    <div class="blog-item__author-txt-wrap">
-                                        <p class="blog-item__author-name">
-                                            Скрипников Владислав
-                                        </p>
-                                        <p class="blog-item__date">03 Марта 2022</p>
+                        {% for blogArticle in blogarticles %}
+                            <li class="blog-item">
+                                <a href="{{ blogArticle.get_absolute_url }}" class="blog-item__link">
+                                    <div class="blog-item__img-wrap">
+                                        <img
+                                            src="{{ blogArticle.img_main_small.url}}"
+                                            alt="{{ blogArticle.img_main_small_alt }}"
+                                            title="{{ blogArticle.img_main_small_title }}"
+                                            class="blog-item__img"
+                                        />
                                     </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="blog-item">
-                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
-                                <div class="blog-item__img-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-item (2).jpg' %}"
-                                        alt="Выбор кожи и фуринтуры"
-                                        class="blog-item__img"
-                                    />
-                                </div>
-                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
-                                <p class="product-item__aticle">
-                                    Имеется спорная точка зрения, гласящая примерно следующее:
-                                    тщательные исследования конкурентов освещают чрезвычайно
-                                    интересные особенности картины в целом...
-                                </p>
-                                <div class="blog-item__author-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-author.png' %}"
-                                        alt=""
-                                        class="blog-item__author-img"
-                                    />
-                                    <div class="blog-item__author-txt-wrap">
-                                        <p class="blog-item__author-name">
-                                            Скрипников Владислав
-                                        </p>
-                                        <p class="blog-item__date">03 Марта 2022</p>
+                                    <p class="blog-item__title">{{ blogArticle.name }}</p>
+                                    <p class="product-item__aticle">
+                                        {{ blogArticle.description|truncatechars:100 }}
+                                    </p>
+                                    <div class="blog-item__author-wrap">
+                                        <img
+                                            src="{{ blogArticle.autor_photo.url }}"
+                                            alt="Фото автора"
+                                            titel="Фото автора"
+                                            class="blog-item__author-img"
+                                        />
+                                        <div class="blog-item__author-txt-wrap">
+                                            <p class="blog-item__author-name">
+                                                {{ blogArticle.autor }}
+                                            </p>
+                                            <p class="blog-item__date">{{ blogArticle.time_update.date }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="blog-item">
-                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
-                                <div class="blog-item__img-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-item (3).jpg' %}"
-                                        alt="Выбор кожи и фуринтуры"
-                                        class="blog-item__img"
-                                    />
-                                </div>
-                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
-                                <p class="product-item__aticle">
-                                    Имеется спорная точка зрения, гласящая примерно следующее:
-                                    тщательные исследования конкурентов освещают чрезвычайно
-                                    интересные особенности картины в целом...
-                                </p>
-                                <div class="blog-item__author-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-author.png' %}"
-                                        alt=""
-                                        class="blog-item__author-img"
-                                    />
-                                    <div class="blog-item__author-txt-wrap">
-                                        <p class="blog-item__author-name">
-                                            Скрипников Владислав
-                                        </p>
-                                        <p class="blog-item__date">03 Марта 2022</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="blog-item">
-                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
-                                <div class="blog-item__img-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-item (4).jpg' %}"
-                                        alt="Выбор кожи и фуринтуры"
-                                        class="blog-item__img"
-                                    />
-                                </div>
-                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
-                                <p class="product-item__aticle">
-                                    Имеется спорная точка зрения, гласящая примерно следующее:
-                                    тщательные исследования конкурентов освещают чрезвычайно
-                                    интересные особенности картины в целом...
-                                </p>
-                                <div class="blog-item__author-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-author.png' %}"
-                                        alt=""
-                                        class="blog-item__author-img"
-                                    />
-                                    <div class="blog-item__author-txt-wrap">
-                                        <p class="blog-item__author-name">
-                                            Скрипников Владислав
-                                        </p>
-                                        <p class="blog-item__date">03 Марта 2022</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="blog-item">
-                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
-                                <div class="blog-item__img-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-item (5).jpg' %}"
-                                        alt="Выбор кожи и фуринтуры"
-                                        class="blog-item__img"
-                                    />
-                                </div>
-                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
-                                <p class="product-item__aticle">
-                                    Имеется спорная точка зрения, гласящая примерно следующее:
-                                    тщательные исследования конкурентов освещают чрезвычайно
-                                    интересные особенности картины в целом...
-                                </p>
-                                <div class="blog-item__author-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-author.png' %}"
-                                        alt=""
-                                        class="blog-item__author-img"
-                                    />
-                                    <div class="blog-item__author-txt-wrap">
-                                        <p class="blog-item__author-name">
-                                            Скрипников Владислав
-                                        </p>
-                                        <p class="blog-item__date">03 Марта 2022</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="blog-item">
-                            <a href="{% url 'finalblogpage' %}" class="blog-item__link">
-                                <div class="blog-item__img-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-item (6).jpg' %}"
-                                        alt="Выбор кожи и фуринтуры"
-                                        class="blog-item__img"
-                                    />
-                                </div>
-                                <p class="blog-item__title">Выбор кожи и фуринтуры</p>
-                                <p class="product-item__aticle">
-                                    Имеется спорная точка зрения, гласящая примерно следующее:
-                                    тщательные исследования конкурентов освещают чрезвычайно
-                                    интересные особенности картины в целом...
-                                </p>
-                                <div class="blog-item__author-wrap">
-                                    <img
-                                        src="{% static 'img/blog/blog-author.png' %}"
-                                        alt=""
-                                        class="blog-item__author-img"
-                                    />
-                                    <div class="blog-item__author-txt-wrap">
-                                        <p class="blog-item__author-name">
-                                            Скрипников Владислав
-                                        </p>
-                                        <p class="blog-item__date">03 Марта 2022</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

@@ -1545,6 +1545,9 @@ ul {
 .blog-item__date {
     margin-top: 2px;
 }
+.blog-item__author-name {
+    margin-left: 10px;
+}
 .blog-item__link:hover .blog-item__img {
     transform: scale(1.2);
 }
@@ -1602,6 +1605,7 @@ ul {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        flex-grow: 1;
     }
     .blog-item__date {
         margin-left: 20px;

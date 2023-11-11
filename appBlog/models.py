@@ -6,7 +6,7 @@ class BlogArticle(models.Model):
     '''
         Класс модели статьи блога
     '''
-    name = models.CharField(max_length=255, verbose_name='Название статьи')
+    name = models.CharField(max_length=255, verbose_name='Название статьи (заголовок h1)')
     autor = models.CharField(max_length=255, verbose_name='Автор статьи')
     autor_photo = models.ImageField(upload_to='blog_img/',
                                     default='img/blog/blog-author.png',
@@ -56,7 +56,7 @@ class BlogArticle(models.Model):
         '''
             Генерируем динамическую ссылку для блога
         '''
-        return reverse('product', kwargs={'productItemSlug': self.product_slug})
+        return reverse('finalblogpage', kwargs={'blogPageSlug': self.slug})
 
     class Meta:
         verbose_name = "Блог"

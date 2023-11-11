@@ -62,19 +62,17 @@ class ProductsInCategoryList(ListView):
         context = super().get_context_data(**kwargs)
         context['category'] = ProductCategory.objects.get(product_category_slug = self.kwargs['productCategorySlug'])
         return context
-    
+
+
 class ProductDetail(DetailView):
     """
-        context - это данные которые передаются в шаблон. Представляет собой словарь.
-            В словаре имеются два поля (значения), к этим полям можно обращатся напрямую из шаблона.
-            Поля имеют следующие имена: 
-                'view' - экзкмпляр нашего класа представления, в данном случае "ProductsInCategoryList"
-                'object' или знчение из переменной context_object_name - это queryset объект полученный из модели данных,
-                    путем выполнения запроса из self.get_queryset() или self.queryset
-        При попытке просмотра какого-либо поста, возникает исключение «AttributeError». 
-            В чем проблема? Смотрите, вот этот класс DetailView по умолчанию пытается выбрать из указанной модели ProductItem запись, 
-            используя атрибут pk или slug. Но у нас формируется маршрут с параметром productItemSlug из-за этого и возникает такая ошибка.
-            Используем переменную slug_url_kwarg = 'productItemSlug' для обозначения своей переменной slug или ее нужно изменить в url.conf
+        Многие поля совподают с классом ListView
+        При попытке просмотра какого-либо поста, возникает исключение «AttributeError».
+            В чем проблема? Смотрите, вот этот класс DetailView по умолчанию пытается
+            выбрать из указанной модели ProductItem запись, используя атрибут pk или slug.
+            Но у нас формируется маршрут с параметром productItemSlug из-за этого и возникает такая ошибка.
+            Используем переменную slug_url_kwarg = 'productItemSlug' для обозначения своей переменной slug
+            или ее нужно изменить в url.conf
         slug_url_kwarg - имя перемонной содержащей slug из url.conf
         slug_field-  Имя поля в модели, которое содержит slug. По умолчанию slug_field - 'slug'.
 
@@ -94,7 +92,7 @@ class ProductDetail(DetailView):
             #     & Q(product_slug = self.kwargs['productItemSlug']) 
             #     & Q(product_is_published = True)))
             return product
-        except(ProductItem.DoesNotExist):
+        except (ProductItem.DoesNotExist):
             from django.http import Http404
             raise Http404()
 

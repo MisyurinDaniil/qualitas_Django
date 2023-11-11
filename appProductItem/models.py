@@ -33,7 +33,7 @@ class ProductCategory(models.Model):
         return self.product_category_name
     # get_absolute_url - позволяет получить канонический URL обьекта, при условии что этот метод определён.
     # Генерируем динамическую ссылку для категории товара
-    # На основнаии шаблона прописанного в url.py     path('category<slug:productCategorySlug>', getPage.category_page, name='category'),
+    # На основнаии шаблона прописанного в url.py path('category<slug:productCategorySlug>', name='category'),
     # будет формироваться ссылка. Вместо productCategorySlug подставится значение из БД product_category_slug
     # и получим category/product_category_slug
     def get_absolute_url(self):

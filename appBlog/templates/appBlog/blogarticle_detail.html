@@ -5,10 +5,13 @@
     {% include 'includes/header_small.html' %}
     <section class="main main_small-header">
         <div class="container">
-            <div class="information">
-                <div class="h1-block h1-block--narrow-header">
-                    <h1 class="h1-block__title h1-block__title--narrow-header">Данная страница будет добавлена в ближайшее время</h1>
-                </div>
+            <div class="h1-block h1-block--narrow-header">
+                <h1 class="h1-block__title h1-block__title--narrow-header">
+                    {{ blogarticle.name }}
+                </h1>
+            </div>
+            <div class="row-content">
+                {{ blogarticle.text_aticle|safe }}
             </div>
         </div>
     </section>

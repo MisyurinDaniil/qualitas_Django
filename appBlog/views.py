@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.db.models import Q
 from .models import BlogArticle
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 def blog_page(request):
-    return render(request, './appBlog/blog.html')
+    return render(request, './appBlog/blogarticle_list.html')
 
 
 def finalblogpage_page(request):
@@ -14,20 +15,22 @@ def finalblogpage_page(request):
 class BlogList(ListView):
     """
         https://proproprogs.ru/django/klassy-predstavleniy-listview-detailview-createview
-        model - сслылка на модель данных.
-        По умолчанию в контекст попадают все элементы модели BlogArticle,
-            эквивалента записи BlogArticle.objects.all(), если не указвать def get_queryset() или queryset
-        allow_empty = False - генерирует исключение 404 если список статей пуст 
-        template_name = 'appProductItem/productitem_list.html' - Шаблон в который передается контекст,
-            по умолчанию (если не указывать template_name) находится по пути <имя приложения>/<имя модели>_list.html
+        model = /MyModel Class for ListView/ - поле с сслылкой на модель данных.
+        По умолчанию в контекст попадают все элементы модели переданной в переменную model,
+            эквивалента записи MyModel.objects.all(), если не указвать def get_queryset() или queryset
+        allow_empty = False - генерирует исключение 404 если список статей пуст
+        template_name = Шаблон в который передается контекст, по умолчанию
+            (если не указывать поле template_name) находится по пути <имя приложения>/<имя модели>_list.html
         context - это данные которые передаются в шаблон. Представляет собой словарь.
             В словаре имеются два поля (значения), к этим полям можно обращатся напрямую из шаблона.
             Поля имеют следующие имена:
-                'view' - экзкмпляр нашего класа представления, в данном случае "ProductsInCategoryList"
-                'object_list' или знчение из переменной context_object_name - это queryset объект полученный
-                    из модели данных, путем выполнения запроса из self.get_queryset() или self.queryset.
+                'view' - экзкмпляр нашего класа представления MyClass(ListView)
+                'object_list' или можно поменять имя этой переменной через присвоение значения
+                    полю context_object_name (значение - строка в нижнем регистре).
+                    В поле object_list хранится queryset, который является
+                    значением возвращенным из запроса из метода self.get_queryset() или поля self.queryset.
                     Queryset - это последовательность в которой содержится результат выполнения запроса к БД,
-                    т.е. экземпляры класса model (BlogArticle)
+                    т.е. экземпляры класса model = /MyModel Class for ListView/
         Для передачи доплнительных данных в шаблон можно использовать следующие подходы, помимо get_queryset:
             1. Класс с методами, методы возвращают данные (например queryset).
                 затем этот класс подмешивается (mixin) к нашему представлению
@@ -35,31 +38,40 @@ class BlogList(ListView):
             2. Использовать get_context_data использование расписано ниже в классе
             3. Использовать simple tags (django_movie_shots  - 15)
             4. Определить метод в модели (django_movie_shots  - 10)
-        paginate_by включает пагинацию
+        paginate_by = 3 - включает пагинацию
     """
     model = BlogArticle
-    context_object_name = 'blogArticles'
+    context_object_name = 'blogarticles'
     allow_empty = False
-    # Отключаем пагинацию
-    # paginate_by = 3
-    # template_name = 'appProductItem/productitem_list.html'
 
     def get_queryset(self):
         """
             Для получения данных из модели для передачи в контекст используется переменная
-            queryset = BlogArticle.objects.all() 
-            или метод получения записей get_queryset()
+            queryset = MyModel.objects.all()
+            или метод получения записей def get_queryset()
         """
-        return (ProductItem.objects.select_related('product_category')
-            .filter(Q(product_category__product_category_is_published = True)
-            & Q(product_category__product_category_slug = self.kwargs['productCategorySlug'])
-            & Q(product_is_published = True)))
-    
-    def get_context_data(self, *, object_list=None, **kwargs):
-        """
-            Метод для передачи дополнительных данных в контекст.
-            Через переменную category в шаблоне доступен объект нужной категории.
-        """
-        context = super().get_context_data(**kwargs)
-        context['category'] = ProductCategory.objects.get(product_category_slug = self.kwargs['productCategorySlug'])
-        return context
+        return BlogArticle.objects.all().filter(Q(is_published=True))
+
+
+class BlogDetail(DetailView):
+    """
+        При попытке просмотра какого-либо поста, возникает исключение «AttributeError».
+            В чем проблема? Смотрите, вот этот класс DetailView по умолчанию пытается
+            выбрать из указанной модели ProductItem запись, используя атрибут pk или slug.
+            Но у нас формируется маршрут с параметром productItemSlug из-за этого и возникает такая ошибка.
+            Используем переменную slug_url_kwarg = 'productItemSlug' для обозначения своей переменной slug
+            или ее нужно изменить в url.conf
+        slug_url_kwarg - имя перемонной содержащей slug из url.conf
+        slug_field-  Имя поля в модели, которое содержит slug. По умолчанию slug_field - 'slug'.
+    """
+    model = BlogArticle
+    context_object_name = 'blogarticle'
+    slug_url_kwarg = 'blogPageSlug'
+    slug_field = 'slug'
+
+    def get_object(self):
+        try:
+            return BlogArticle.objects.get((Q(is_published=True)) & Q(slug=self.kwargs['blogPageSlug']))
+        except (BlogArticle.DoesNotExist):
+            from django.http import Http404
+            raise Http404()
