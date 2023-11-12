@@ -42,7 +42,7 @@ class BlogList(ListView):
     """
     model = BlogArticle
     context_object_name = 'blogarticles'
-    allow_empty = False
+    # allow_empty = False
 
     def get_queryset(self):
         """
