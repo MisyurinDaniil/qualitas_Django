@@ -1871,9 +1871,15 @@ ul {
         display: flex;
         justify-content: space-between;
     }
+    .image-container--blog {
+        justify-content: space-evenly;
+    }
     .image-container__link-item {
         margin-bottom: 0px;
         margin-right: 10px;
+    }
+    .image-container__link-item--blog {
+        margin-right: 30px;
     }
     .image-container__link-item:last-child {
         margin-right: 0px;
