@@ -8,9 +8,10 @@ class BlogArticle(models.Model):
     '''
     name = models.CharField(max_length=255, verbose_name='Название статьи (заголовок h1)')
     autor = models.CharField(max_length=255, verbose_name='Автор статьи')
-    autor_photo = models.ImageField(upload_to='blog_img/',
-                                    default='img/blog/blog-author.png',
-                                    verbose_name='Фото автора')
+    autor_photo = models.ImageField(upload_to='blog_img',
+                                    default='',
+                                    verbose_name='Фото автора (необяз. поле), имеется фото по умолчанию',
+                                    blank=True)
     description = models.TextField(verbose_name='Описание при выборе статьи')
     is_published = models.BooleanField(default=True, verbose_name='Разрешить публикацию')
     slug = models.SlugField(max_length=255, unique=True, db_index=True,

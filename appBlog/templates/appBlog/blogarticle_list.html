@@ -60,7 +60,13 @@
                                     </p>
                                     <div class="blog-item__author-wrap">
                                         <img
-                                            src="{{ blogArticle.autor_photo.url }}"
+                                            src="
+                                                {% if blogArticle.autor_photo %}
+                                                    {{ blogArticle.autor_photo.url }}
+                                                {% else %}
+                                                    {% static 'img/blog/author_deafaul_foto.jpg' %}
+                                                {% endif %}
+                                            "
                                             alt="Фото автора"
                                             titel="Фото автора"
                                             class="blog-item__author-img"
