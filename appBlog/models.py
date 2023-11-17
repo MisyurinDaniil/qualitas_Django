@@ -62,3 +62,18 @@ class BlogArticle(models.Model):
     class Meta:
         verbose_name = "Блог"
         verbose_name_plural = "Статьи блога"
+
+
+class BlogImage(models.Model):
+    '''
+        Класс модели картинки статьи блога
+    '''
+    blog_article = models.ForeignKey(BlogArticle, on_delete=models.CASCADE, verbose_name='Статья блога')
+    img_medium = models.ImageField(upload_to='blog_img/', verbose_name='Средное фото')
+    img_big = models.ImageField(upload_to='blog_img/', verbose_name='Большое фото')
+    # img_alt = models.CharField(verbose_name='Атрибут alt фото', max_length=80)
+    # img_title = models.CharField(verbose_name='Атрибут title фото', max_length=80)
+
+    class Meta:
+        verbose_name = "Картинка стать блога"
+        verbose_name_plural = "Картинки статей блога"
