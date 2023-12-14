@@ -120,7 +120,7 @@
     # Скачиваем код проекта из гитхаба
     - name: Download project code from Github
       git:
-        repo: https://github.com/MisyurinDaniil/qualitas_new_python_Django.git
+        repo: https://github.com/MisyurinDaniil/qualitas_Django.git
         dest: /home/{{ ansible_ssh_user }}/sites/{{ site_name }}
         force: true
       tags:
